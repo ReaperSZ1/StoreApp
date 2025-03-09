@@ -1,0 +1,125 @@
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+    .header {
+        height: auto;
+        background: linear-gradient(180deg, #000B24 0%, #00123B 100%);
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+        flex-wrap: nowrap; /* Impede que os elementos quebrem */    }
+    .logo {
+        color: white;
+        font-size: min(max(18px, 2.7vw), 36px);
+        font-family: 'Exo 2', sans-serif;
+        font-weight: 700;
+        text-decoration: none;
+        margin-right: 11.5%;
+    }
+   .container {
+        max-width: 100% !important; /* Garante que a largura seja sempre 100% */
+        padding-left:  min(100px, 7.5vw); 
+        padding-right:  min(100px, 7.5vw); 
+    }
+    .search-container{
+        width: min(550px, 42vw); 
+        height: min(40px, 7vw);
+        margin-right: min(7.5vw, 100px); 
+        display: flex;
+        align-items: center;
+        background: #FAFAFA;
+        border-radius: 15px;
+        padding: 0 15px;
+    }
+    #search-input{
+        width: 100%;
+        height: 90%;
+        background: #FAFAFA;
+        border: none; 
+        outline: none; 
+    }
+    #search-input::placeholder {
+        color: rgba(0, 0, 0, 0.70);
+        font-size: 22px;
+        font-size: min(max(14px, 2.7vw), 22px);
+        font-family: Calibri, sans-serif;
+        font-weight: 300;
+    }
+    .search-icon {
+        height: min(max(28px, 4vw), 34px); 
+        width: min(max(28px, 4vw), 34px);
+        fill: black;
+        transition: fill 0.3s ease;
+    }
+    .navbar-nav {
+        gap: min(max(14px, 2.7vw), 35px)
+    }
+    .icon {
+        height: min(max(28px, 2.7vw), 36px);
+        width: min(max(28px, 2.7vw), 36px); 
+        fill: white;
+        transition: fill 0.3s ease;
+    }
+    .search-icon:hover{
+        fill: #444444;
+        cursor: pointer;
+    }
+    .icon:hover {
+        fill: #BFBFBF     ;
+        cursor: pointer; /* Altera o cursor para o formato de dedo indicador */
+    }
+</style>
+
+<nav class="navbar navbar-expand-md navbar-dark header"> 
+    <div class="container">
+        {{!-- Home Button --}}
+        <a class=" logo" href="/">StoreApp</a>
+        {{!-- Search Input --}}
+        <div class="search-container">
+            <input 
+                type="search" 
+                id="search-input" 
+                placeholder="Search for Products" 
+                maxlength="100"
+                class="search-box"
+            >
+            {{!-- Search --}}
+            <svg  class="search-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.3605 0.0645909C6.85517 0.706566 0.844611 6.6331 0.0776388 14.1489C-0.744117 22.338 5.04731 29.8538 13.1866 31.1456C15.738 31.5449 18.125 31.357 20.5433 30.5584C22.1555 30.0339 23.5955 29.298 24.8477 28.3741L25.3173 28.0218L31.187 33.8779C37.6515 40.3368 37.3384 40.0628 38.2228 39.9688C39.5611 39.8358 40.375 38.4579 39.8272 37.2522C39.7098 36.9782 38.3402 35.569 33.8714 31.0908L28.0721 25.2895L28.6669 24.397C29.3087 23.4497 30.1539 21.7665 30.4748 20.8114C31.0226 19.1673 31.2339 17.9773 31.2809 16.1844C31.3592 13.413 30.9287 11.3148 29.7783 8.92699C27.3208 3.83033 22.4998 0.5265 16.8649 0.0645909C15.7693 -0.0215277 15.4171 -0.0215277 14.3605 0.0645909ZM17.8432 4.09651C20.1676 4.55059 22.2807 5.67796 23.9399 7.3377C25.3173 8.7156 26.233 10.1953 26.8356 12.0038C27.266 13.3112 27.4147 14.2663 27.4147 15.6834C27.4147 17.1004 27.266 18.0556 26.8356 19.3473C25.4816 23.4576 22.1007 26.4169 17.8041 27.2859C16.7397 27.4973 14.3997 27.4738 13.3588 27.2468C10.1187 26.5343 7.51258 24.7493 5.7595 22.0405C5.00035 20.8818 4.47599 19.6214 4.13164 18.1573C3.90467 17.1631 3.84989 14.9161 4.02989 13.8279C4.7186 9.6864 7.44997 6.28079 11.3083 4.73849C12.1066 4.4175 13.3118 4.09651 14.1258 3.9869C14.9162 3.8773 17.0528 3.93993 17.8432 4.09651Z"/>
+            </svg>
+        </div>
+        {{!-- icons --}}
+        <ul class="navbar-nav flex-row align-items-center">
+            {{!-- Shopping Car --}}
+            <li class="nav-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 -960 960 960"><path d="M286.79-81Q257-81 236-102.21t-21-51Q215-183 236.21-204t51-21Q317-225 338-203.79t21 51Q359-123 337.79-102t-51 21Zm400 0Q657-81 636-102.21t-21-51Q615-183 636.21-204t51-21Q717-225 738-203.79t21 51Q759-123 737.79-102t-51 21ZM235-741l110 228h288l125-228H235Zm-30-60h589.07q22.97 0 34.95 21 11.98 21-.02 42L694-495q-11 19-28.56 30.5T627-453H324l-56 104h491v60H277q-42 0-60.5-28t.5-63l64-118-152-322H51v-60h117l37 79Zm140 288h288-288Z"/></svg>
+            </li>
+            {{!-- favourite heart --}}
+            <li class="nav-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 -960 960 960"><path d="m480-121-41-37q-105.77-97.12-174.88-167.56Q195-396 154-451.5T96.5-552Q80-597 80-643q0-90.15 60.5-150.58Q201-854 290-854q57 0 105.5 27t84.5 78q42-54 89-79.5T670-854q89 0 149.5 60.42Q880-733.15 880-643q0 46-16.5 91T806-451.5Q765-396 695.88-325.56 626.77-255.12 521-158l-41 37Zm0-79q101.24-93 166.62-159.5Q712-426 750.5-476t54-89.14q15.5-39.13 15.5-77.72 0-66.14-42-108.64T670.22-794q-51.52 0-95.37 31.5T504-674h-49q-26-56-69.85-88-43.85-32-95.37-32Q224-794 182-751.5t-42 108.82q0 38.68 15.5 78.18 15.5 39.5 54 90T314-358q66 66 166 158Zm0-297Z"/></svg>
+            </li>
+            {{!-- Account --}}
+            <li class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="icon" ><path d="M222-255q63-44 125-67.5T480-346q71 0 133.5 23.5T739-255q44-54 62.5-109T820-480q0-145-97.5-242.5T480-820q-145 0-242.5 97.5T140-480q0 61 19 116t63 109Zm257.81-195q-57.81 0-97.31-39.69-39.5-39.68-39.5-97.5 0-57.81 39.69-97.31 39.68-39.5 97.5-39.5 57.81 0 97.31 39.69 39.5 39.68 39.5 97.5 0 57.81-39.69 97.31-39.68 39.5-97.5 39.5Zm.66 370Q398-80 325-111.5t-127.5-86q-54.5-54.5-86-127.27Q80-397.53 80-480.27 80-563 111.5-635.5q31.5-72.5 86-127t127.27-86q72.76-31.5 155.5-31.5 82.73 0 155.23 31.5 72.5 31.5 127 86t86 127.03q31.5 72.53 31.5 155T848.5-325q-31.5 73-86 127.5t-127.03 86Q562.94-80 480.47-80Zm-.47-60q55 0 107.5-16T691-212q-51-36-104-55t-107-19q-54 0-107 19t-104 55q51 40 103.5 56T480-140Zm0-370q34 0 55.5-21.5T557-587q0-34-21.5-55.5T480-664q-34 0-55.5 21.5T403-587q0 34 21.5 55.5T480-510Zm0-77Zm0 374Z"/></svg>
+            </li>
+        </ul>
+    </div>
+</nav>
+{{!-- 
+            {{!-- Quando o usuário está logado --}}
+            {{#if user}}
+            <li class="nav-item">
+                <a class="btn btn-outline-light" href="/usuarios/logout">Sair</a>
+            </li>
+            
+            {{!-- Quando o usuário NÃO está logado --}}
+            {{else}}
+            <li class="nav-item">
+                <a class="btn btn-outline-light" href="/usuarios/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-success" href="/usuarios/registro">Registro</a>
+            </li>
+            {{/if}} --}}    
