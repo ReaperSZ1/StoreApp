@@ -9,7 +9,8 @@
         display: flex;
         justify-content: space-between;
         padding: 10px 20px;
-        flex-wrap: nowrap; /* Impede que os elementos quebrem */    }
+        flex-wrap: nowrap; 
+    }
     .logo {
         color: white;
         font-size: min(max(18px, 2.7vw), 36px);
@@ -42,7 +43,6 @@
     }
     #search-input::placeholder {
         color: rgba(0, 0, 0, 0.70);
-        font-size: 22px;
         font-size: min(max(14px, 2.7vw), 22px);
         font-family: Calibri, sans-serif;
         font-weight: 300;
@@ -57,8 +57,8 @@
         gap: min(max(14px, 2.7vw), 35px)
     }
     .icon {
-        height: min(max(28px, 2.7vw), 36px);
-        width: min(max(28px, 2.7vw), 36px); 
+        height: min(max(26px, 2.7vw), 36px);
+        width: min(max(26px, 2.7vw), 36px); 
         fill: white;
         transition: fill 0.3s ease;
     }
@@ -67,12 +67,12 @@
         cursor: pointer;
     }
     .icon:hover {
-        fill: #BFBFBF     ;
-        cursor: pointer; /* Altera o cursor para o formato de dedo indicador */
+        fill: #BFBFBF;
+        cursor: pointer; 
     }
 </style>
 
-<nav class="navbar navbar-expand-md navbar-dark header"> 
+<nav class="navbar header"> 
     <div class="container">
         {{!-- Home Button --}}
         <a class=" logo" href="/">StoreApp</a>
@@ -107,14 +107,16 @@
         </ul>
     </div>
 </nav>
-{{!-- 
-            {{!-- Quando o usuário está logado --}}
+
+
+<!--
+            Quando o usuário está logado 
             {{#if user}}
             <li class="nav-item">
                 <a class="btn btn-outline-light" href="/usuarios/logout">Sair</a>
             </li>
             
-            {{!-- Quando o usuário NÃO está logado --}}
+             Quando o usuário NÃO está logado 
             {{else}}
             <li class="nav-item">
                 <a class="btn btn-outline-light" href="/usuarios/login">Login</a>
@@ -122,4 +124,5 @@
             <li class="nav-item">
                 <a class="btn btn-success" href="/usuarios/registro">Registro</a>
             </li>
-            {{/if}} --}}    
+            {{/if}}    
+-->

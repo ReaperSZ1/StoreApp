@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskApp</title>
-    <!-- Carregar Bootstrap diretamente da internet (CDN) -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <style>
-        body{
-            background-color: rgba(20, 18, 18, 1);
-        }
-    </style>
-</head>
-    <!-- Navbar-->
-    {{>_navbar}}
-    {{!----}}
-    <div class="container mt-4"> 
-        {{!-- Passport Error - Display error messages from Passport --}}
-        {{#if error}}
-            <div class="alert alert-danger">{{error}}</div>
-        {{else}}
-        {{/if}}
-        {{!-- Flash Messages - Display success or error messages --}}
-        {{>_msg}} 
-        {{!-- body - Main content of the page --}}
-        {{{body}}}
-    </div>
-    <!-- Bootstrap and dependency scripts -->
-    <script src="/js/bootstrap.bundle.min.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TaskApp</title>
+        <!-- Carregar Bootstrap diretamente da internet (CDN) -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <style>
+            body{
+                background-color: rgba(20, 18, 18, 1);
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navbar -->
+        {{>_navbar}}
+        <!-- Small Navbar -->
+        {{>_small_navbar}}
+        <!-- -->
+        <div class="container mt-4"> 
+            {{!-- Passport Error - Display error messages from Passport --}}
+            {{#if error}}
+                <div class="alert alert-danger">{{error}}</div>
+            {{else}}
+            {{/if}}
+            {{!-- Flash Messages - Display success or error messages --}}
+            {{>_msg}} 
+            {{!-- body --}}
+            {{{body}}}
+        </div>
+        <!-- Footer -->
+        {{>_footer}}
+        <!-- Bootstrap and dependency scripts -->
+        <script src="/js/bootstrap.bundle.min.js"></script>
 
-    {{!-- <script src="/js/bootstrap.js"></script> --}}
-    {{!-- shortcut: file:///c:/nodejs/taskApp/public/js/main/main.js --}}
-    <script>
+        {{!-- <script src="/js/bootstrap.js"></script> --}}
+        {{!-- shortcut: file:///c:/nodejs/taskApp/public/js/main/main.js --}}
+        <script>
 
-    </script>
-</body>
+        </script>
+    </body>
 </html>
