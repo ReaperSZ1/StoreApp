@@ -4,7 +4,20 @@ import prettier from 'eslint-config-prettier';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-	{ languageOptions: { globals: globals.node } },
+	{ 
+		languageOptions: { 
+			globals: {
+				...globals.node, // Mantém as variáveis globais do Node.js
+				// Adiciona variáveis do ambiente de navegador
+				document: 'readonly', 
+				window: 'readonly', 
+				console: 'readonly', 
+				navigator: 'readonly',
+				localStorage: 'readonly',
+				sessionStorage: 'readonly',
+			},
+		} 
+	},
 	pluginJs.configs.recommended,
 	prettier,
 	{

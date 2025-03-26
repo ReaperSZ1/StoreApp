@@ -1,0 +1,70 @@
+.footer-background {
+    width: 100%;
+    height: min(max(200px, 25vw), 300px);
+    background: linear-gradient(180deg, #000b24 0%, #00123b 100%), #d9d9d9;
+    position: fixed;
+    bottom: min(max(50px, 5.6vw), 75px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer {
+    position: relative;
+    bottom: 10px;
+    width: 85%;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.logo_Contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.contacts {
+    display: flex;
+    align-items: center;
+}
+.contacts svg {
+    width: min(max(16px, 1.8vw), 24px);
+    height: min(max(16px, 1.8vw), 24px);
+    fill: #EA3323
+}
+.contact {
+    margin-left: 4px;
+    margin-bottom: 0;
+    color: white;
+    width: min(max(123px, 11.9vw), 158px);
+    font-size: min(max(8px, 0.9vw), 12px);
+}
+.store-app {
+    color: white;
+    font-size: min(max(30px, 4vw), 52px);
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+.links {
+    margin-top: 10px;
+    width: 142px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.title {
+    margin: 0;
+    color: white;
+    font-size: min(max(14px, 1.8vw), 24px);
+    font-weight: 700;
+}
+.item {
+    color: white;
+    font-size: min(max(9px, 1.1vw), 13px);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.item:hover { 
+    color: #cfcdcd; 
+}

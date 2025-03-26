@@ -3,12 +3,34 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>TaskApp</title>
-        <!-- Carregar Bootstrap diretamente da internet (CDN) -->
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <title>StoreApp</title>
         <style>
             body{
                 background-color: rgba(20, 18, 18, 1);
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .container {
+                width: 90%; /* Ou um valor fixo, tipo 1200px */
+                margin: 0 auto; /* Centraliza */
+                padding: 0 15px; /* Espaço interno */
+            }
+            .dark-overlay {
+                background-color: rgba(0, 0, 0, 0.5); /* Começa transparente */
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 90%;
+                height: 100%;
+                position: fixed;
+                justify-content: center;
+                transition: background-color 0.3s ease-in-out; /* Anima a transição de cor de fundo */
             }
         </style>
     </head>
@@ -18,7 +40,7 @@
         <!-- Small Navbar -->
         {{>_small_navbar}}
         <!-- -->
-        <div class="container mt-4"> 
+        <div class="container content-wrapper"> 
             {{!-- Passport Error - Display error messages from Passport --}}
             {{#if error}}
                 <div class="alert alert-danger">{{error}}</div>
@@ -34,10 +56,9 @@
         <!-- Bootstrap and dependency scripts -->
         <script src="/js/bootstrap.bundle.min.js"></script>
 
-        {{!-- <script src="/js/bootstrap.js"></script> --}}
+       
         {{!-- shortcut: file:///c:/nodejs/taskApp/public/js/main/main.js --}}
-        <script>
-
-        </script>
+        
+        
     </body>
 </html>
