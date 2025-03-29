@@ -68,7 +68,7 @@
         display: flex;
         width: auto;
         justify-content: space-between;
-        gap: min(max(14px, 2.7vw), 35px)
+        gap: min(max(14px, 2.7vw), 35px);
     }
     .icon {
         height: min(max(22px, 3.7vw), 36px); 
@@ -110,7 +110,7 @@ body.modal-open {
     box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.6);
     align-items: center;
     justify-content: center;
-    width: 350px;
+    width: calc(275px + (350 - 275) * ((100vw - 500px) / (1370 - 500)));
     position: relative;
     display: flex;
     flex-direction: column;
@@ -118,63 +118,7 @@ body.modal-open {
 .modal-content h2 {
     color: white;
     align-self: flex-start;
-    font-size: 22px;
-}
-
-.Modal {
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    align-items: center;
-}
-
-.Modal_Inputs {
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 15px;
-    display: flex;
-    width: 100%;
-    gap: 10px;
-}
-.Modal_Inputs div {
-    width: 100%;
-    justify-content: left;
-    flex-direction: column;
-    display: flex;
-    gap: 2px;
-}
-.Modal_Inputs label {
-    color: white;
-    font-family: Calibri, sans-serif;
-    font-size: 20px;
-}
-.Modal_Inputs input {
-    width: 100%;
-    border-radius: 4px;
-    height: 26px;
-    border: none;
-    padding-left: 10px;
-    font-size: 14px;
-    outline: none; 
-}
-
-.Submit_button {
-    width: 100%;
-    height: 40px;
-    background-color: rgb(0, 59, 197);
-    align-items: center;
-    font-family: Calibri, sans-serif;
-    font-size: 18px;
-    color: white;
-    border-radius: 6px;
-    border-width: 1px; 
-    border-style: solid; 
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-.Submit_button:hover {
-    background-color: rgb(2, 69, 226);
+    font-size: calc(18px + (22 - 18) * ((100vw - 500px) / (1370 - 500)));
 }
 
 /* close bottom from both modals */
@@ -190,13 +134,70 @@ body.modal-open {
     justify-content: center;
 }
 .close-modal svg {
-    width: 24px;
-    height: 24px;
+    width: calc(20px + (24 - 20) * ((100vw - 500px) / (1370 - 500)));
+    height: calc(20px + (24 - 20) * ((100vw - 500px) / (1370 - 500)));
     fill: white;
     transition: fill 0.3s ease-in-out;
 }
 .close-modal svg:hover {
     fill: rgb(185, 185, 185);
+}
+
+.Modal {
+    width: 80%; 
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.Modal_Inputs {
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 15px;
+    display: flex;
+    width: 100%;
+    gap: calc(6px + (10 - 6) * ((100vw - 500px) / (1370 - 500)));
+
+}
+.Modal_Inputs div {
+    width: 100%;
+    justify-content: left;
+    flex-direction: column;
+    display: flex;
+    gap: 2px;
+}
+.Modal_Inputs label {
+    color: white;
+    font-family: Calibri, sans-serif;
+    font-size: calc(16px + (20 - 16) * ((100vw - 500px) / (1370 - 500)));
+}
+.Modal_Inputs input {
+    width: 100%;
+    border-radius: 4px;
+    height: calc(22px + (26 - 22) * ((100vw - 500px) / (1370 - 500)));
+    border: none;
+    padding-left: 10px;
+    font-size: calc(12px + (14 - 12) * ((100vw - 500px) / (1370 - 500)));
+    outline: none; 
+}
+
+.Submit_button {
+    width: 100%;
+    height: calc(35px + (40 - 35) * ((100vw - 500px) / (1370 - 500)));
+    background-color: rgb(0, 59, 197);
+    align-items: center;
+    font-family: Calibri, sans-serif;
+    font-size: calc(15px + (18 - 15) * ((100vw - 500px) / (1370 - 500)));
+    color: white;
+    border-radius: 6px;
+    border-width: 1px; 
+    border-style: solid; 
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+.Submit_button:hover {
+    background-color: rgb(2, 69, 226);
 }
 
 .Separator_OR {
@@ -215,7 +216,7 @@ body.modal-open {
 }
 .Separator_OR p {
     font-family: Calibri, sans-serif;
-    font-size: 14px;
+    font-size: calc(10px + (14 - 10) * ((100vw - 500px) / (1370 - 500)));
     color: white;
     white-space: nowrap; /* Evita quebra de linha */
 }
@@ -233,20 +234,24 @@ body.modal-open {
     border-radius: 4px;
     border-width: 1px; 
     border-style: solid; 
-    height: 34px;
+    height: calc(30px + (34 - 30) * ((100vw - 500px) / (1370 - 500)));
+
     align-items: center;
     display: flex;
     justify-content: center;
     gap: 3px;
 }
 .google_and_facebook svg {
-    width: 20px;
-    height: 20px;
+    width: calc(16px + (20 - 16) * ((100vw - 500px) / (1370 - 500)));
+    height: calc(16px + (20 - 16) * ((100vw - 500px) / (1370 - 500)));
     fill: black;
+}
+.google_and_facebook p {
+    font-size: calc(12px + (14 - 12) * ((100vw - 500px) / (1370 - 500)));
 }
 
 .haveAccount {
-    margin-top: 10px;
+    margin-top: calc(5px + (10 - 5) * ((100vw - 500px) / (1370 - 500)));
     width: 100%;
     display: flex;
     justify-content: center;
@@ -256,14 +261,14 @@ body.modal-open {
 .haveAccount p {
     color: white;
     font-family: Calibri, sans-serif;
-    font-size: 18px;
+    font-size: calc(14px + (18 - 14) * ((100vw - 500px) / (1370 - 500)));
 }
 .haveAccount button {
     background: none;
     border: none;
     color: rgba(0, 187, 255, 1);
     font-family: Calibri, sans-serif;
-    font-size: 21px;
+    font-size: calc(17px + (21 - 17) * ((100vw - 500px) / (1370 - 500)));
     cursor: pointer;
 }
 
