@@ -4,18 +4,21 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>StoreApp</title>
+        <link href="/tailwind/output.css" rel="stylesheet">
         <style>
-            body{
-                background-color: rgba(20, 18, 18, 1);
-                margin: 0;
-                font-family: Arial, sans-serif;
-            }
-            * {
+            html, body {
+                width: 100%;
+                overflow-x: hidden;
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
             }
-            .container {
+            body {
+                background-color: rgba(20, 18, 18, 1);
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+            .content {
                 width: 90%; /* Ou um valor fixo, tipo 1200px */
                 margin: 0 auto; /* Centraliza */
                 padding: 0 15px; /* Espaço interno */
@@ -40,10 +43,10 @@
         <!-- Small Navbar -->
         {{>_small_navbar}}
         <!-- -->
-        <div class="container content-wrapper"> 
+        <div class="content content-wrapper"> 
             {{!-- Passport Error - Display error messages from Passport --}}
             {{#if error}}
-                <div class="alert alert-danger">{{error}}</div>
+                <div class="">{{error}}</div>
             {{else}}
             {{/if}}
             {{!-- Flash Messages - Display success or error messages --}}

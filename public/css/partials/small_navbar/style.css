@@ -1,0 +1,38 @@
+.categories-link {
+    font-size: min(max(10px, 2.3vw), 28px);
+    font-family: Calibri;
+    font-weight: 400;
+    transition: color 0.2s ease-in-out;
+    text-decoration: none;
+    color: black;
+}
+.categories-link:hover {
+    color: rgba(0, 0, 0, 0.70);
+}
+.categories-list {
+    transition: color 0.2s ease-in-out;
+    align-items: center;
+    cursor: pointer;    
+    display: flex;
+    gap: 3px;
+}
+.categories-list:hover, .categories-list:hover p{
+    color: rgba(0, 0, 0, 0.70);
+}
+.categories-list p {
+    font-size: min(max(10px, 2.3vw), 28px);
+    font-family: Calibri;
+    font-weight: 400;
+    transition: color 0.2s ease-in-out;
+    text-decoration: none;
+    color: black;
+}
+.arrow-down {
+    transition: transform 0.2s ease-in-out;
+    height: min(max(10px, 2.3vw), 30px);
+    width: min(max(10px, 2.3vw), 30px);
+    opacity: 0.7;
+}
+.categories-list:hover .arrow-down, .rotated {
+    transform: rotate(180deg);
+}
