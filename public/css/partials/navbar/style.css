@@ -1,234 +1,82 @@
 @media (max-width: 500px) {
     .sm-text-sm {
-        font-size: 14px; /* ou outro tamanho desejado */
+        font-size: 12px; 
+    }
+    .search-container-responsive {
+        width: 160px;
+        height: 20px;
+        padding-inline: 8px;
+    }
+    .input-responsive {
+        font-size: 10px;
+    }
+    .search-icon-responsive {
+        width: 18px;
+        height: 18px;
+    }
+    .icon-responsive {
+        width: 18px;
+        height: 18px;
+    }
+    .navbar-icons-responsive {
+        width: 75px;
     }
 }
+@media (max-width: 400px) {
+    .search-container-responsive {
+        width: 130px;
+        height: 18px;
+        padding-inline: 6px;
+    }
+    .input-responsive {
+        font-size: 9px;
+    }
+    .icon-responsive {
+        width: 16px;
+        height: 16px;
+    }
+    .navbar-icons-responsive {
+        width: 64px;
+    }
+    /* tooltip */
+    .tooltip_account {
+        top: 130%;
+        padding: 2px;
+    }
+    .tooltip_account button {
+        font-size: 6px;
+    }
+    .separator_tooltip {
+        transform: scaleX(0.3);
+    }
+}
+@media (max-width: 350px) {
+    .sm-text-sm {
+        font-size: 10px; 
+    }
+    .search-container-responsive {
+        width: 110px;
+        height: 16px;
+    }
+    .input-responsive {
+        font-size: 8px;
+    }
+    .icon-responsive {
+        width: 14px;
+        height: 14px;
+    }
+    .search-icon-responsive {
+        width: 16px;
+        height: 16px;
+    }
+    
+}
 
-.search-input{
-    width: 100%;
-    height: 90%;
-    background: #FAFAFA;
-    border: none; 
-    outline: none; 
-    font-size: min(max(14px, 2.7vw), 20px);
-    font-family: Calibri, sans-serif;
-    font-weight: 300;
-}
-.search-icon {
-    height: min(max(22px, 4vw), 34px);
-    width: min(max(22px, 4vw), 34px);
-    fill: black;
-    transition: fill 0.3s ease;
-}
-.search-icon:hover{
-    fill: #444444;
-    cursor: pointer;
-}
-
-.navbar_icons {
-    display: flex;
-    width: auto;
-    justify-content: space-between;
-    gap: min(max(14px, 2.7vw), 35px);
-}
 .icon {
-    height: min(max(22px, 3.7vw), 36px);/* 16px */
-    width: min(max(22px, 3.7vw), 36px); 
-    fill: white;
+    fill: #ffffff;
     transition: fill 0.3s ease;
 }
 .icon:hover {
-    fill: #BFBFBF;
+    fill: #BFBFBF; 
     cursor: pointer; 
-}
-
-body.modal-open {
-overflow: hidden; /* Impede a rolagem do fundo */
-}
-.modal-overlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(255, 255, 255, 0.493); /* Aumenta a claridade do fundo */
-display: flex;
-align-items: center;
-justify-content: center;
-visibility: hidden;
-opacity: 0;
-transition: opacity 0.3s ease-in-out, visibility 0.3s;
-}
-.modal-overlay.show {
-visibility: visible;
-opacity: 1;
-}
-
-.modal-content {
-background: rgb(0, 0, 0);
-padding: 20px;
-border-radius: 8px;
-box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.6);
-align-items: center;
-justify-content: center;
-width: calc(275px + (350 - 275) * ((100vw - 500px) / (1370 - 500)));
-position: relative;
-display: flex;
-flex-direction: column;
-}
-.modal-content h2 {
-color: white;
-align-self: flex-start;
-font-size: calc(18px + (22 - 18) * ((100vw - 500px) / (1370 - 500)));
-}
-
-/* close bottom from both modals */
-.close-modal {
-position: absolute;
-top: 10px;
-right: 10px;
-cursor: pointer;
-background: none;
-border: none;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.close-modal svg {
-width: calc(20px + (24 - 20) * ((100vw - 500px) / (1370 - 500)));
-height: calc(20px + (24 - 20) * ((100vw - 500px) / (1370 - 500)));
-fill: white;
-transition: fill 0.3s ease-in-out;
-}
-.close-modal svg:hover {
-fill: rgb(185, 185, 185);
-}
-
-.Modal {
-width: 80%; 
-display: flex;
-flex-direction: column;
-gap: 4px;
-align-items: center;
-}
-
-.Modal_Inputs {
-justify-content: center;
-flex-direction: column;
-margin-top: 15px;
-display: flex;
-width: 100%;
-gap: calc(6px + (10 - 6) * ((100vw - 500px) / (1370 - 500)));
-
-}
-.Modal_Inputs div {
-width: 100%;
-justify-content: left;
-flex-direction: column;
-display: flex;
-gap: 2px;
-}
-.Modal_Inputs label {
-color: white;
-font-family: Calibri, sans-serif;
-font-size: calc(16px + (20 - 16) * ((100vw - 500px) / (1370 - 500)));
-}
-.Modal_Inputs input {
-width: 100%;
-border-radius: 4px;
-height: calc(22px + (26 - 22) * ((100vw - 500px) / (1370 - 500)));
-border: none;
-padding-left: 10px;
-font-size: calc(12px + (14 - 12) * ((100vw - 500px) / (1370 - 500)));
-outline: none; 
-}
-
-.Submit_button {
-width: 100%;
-height: calc(35px + (40 - 35) * ((100vw - 500px) / (1370 - 500)));
-background-color: rgb(0, 59, 197);
-align-items: center;
-font-family: Calibri, sans-serif;
-font-size: calc(15px + (18 - 15) * ((100vw - 500px) / (1370 - 500)));
-color: white;
-border-radius: 6px;
-border-width: 1px; 
-border-style: solid; 
-cursor: pointer;
-transition: background-color 0.3s ease-in-out;
-}
-.Submit_button:hover {
-background-color: rgb(2, 69, 226);
-}
-
-.Separator_OR {
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: center; /* Centraliza os elementos */
-gap: 32px; /* Espaçamento entre os elementos */
-}
-.Separator_OR hr {
-flex: 1; /* Faz as linhas ocuparem o máximo de espaço possível */
-height: 1px;
-border: none;
-background-color: white; /* Ajuste a cor conforme necessário */
-border-radius: 12px;
-}
-.Separator_OR p {
-font-family: Calibri, sans-serif;
-font-size: calc(10px + (14 - 10) * ((100vw - 500px) / (1370 - 500)));
-color: white;
-white-space: nowrap; /* Evita quebra de linha */
-}
-
-.google_and_facebook {
-width: 100%;
-display: flex;
-justify-content: space-between;
-cursor: pointer;
-}
-.google_and_facebook div {
-width: 42%;
-background-color: white ;
-border-color: #000000;
-border-radius: 4px;
-border-width: 1px; 
-border-style: solid; 
-height: calc(30px + (34 - 30) * ((100vw - 500px) / (1370 - 500)));
-
-align-items: center;
-display: flex;
-justify-content: center;
-gap: 3px;
-}
-.google_and_facebook svg {
-width: calc(16px + (20 - 16) * ((100vw - 500px) / (1370 - 500)));
-height: calc(16px + (20 - 16) * ((100vw - 500px) / (1370 - 500)));
-fill: black;
-}
-.google_and_facebook p {
-font-size: calc(12px + (14 - 12) * ((100vw - 500px) / (1370 - 500)));
-}
-
-.haveAccount {
-margin-top: calc(5px + (10 - 5) * ((100vw - 500px) / (1370 - 500)));
-width: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 6px;
-}
-.haveAccount p {
-color: white;
-font-family: Calibri, sans-serif;
-font-size: calc(14px + (18 - 14) * ((100vw - 500px) / (1370 - 500)));
-}
-.haveAccount button {
-background: none;
-border: none;
-color: rgba(0, 187, 255, 1);
-font-family: Calibri, sans-serif;
-font-size: calc(17px + (21 - 17) * ((100vw - 500px) / (1370 - 500)));
-cursor: pointer;
 }

@@ -1,0 +1,15 @@
+@layer utilities {
+    .modal-content-responsive {
+        @apply w-[275px] sm:w-[280px] md:w-[300px] lg:w-[325px] xl:w-[350px];
+    }
+    .h2-modal-responsive {
+        @apply text-[18px] sm:text-[19px] md:text-[20px] lg:text-[21px] xl:text-[22px];
+    }
+    .close-modal-responsive {
+        @apply w-[20px] h-[20px] 
+        sm:w-[21px] sm:h-[21px]
+        md:w-[22px] md:h-[22px]
+        lg:w-[23px] lg:h-[23px]
+        xl:w-[24px] xl:h-[24px];
+    }
+}

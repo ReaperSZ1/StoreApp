@@ -1,0 +1,33 @@
+@layer utilities {
+    .search-container-responsive {
+        @apply w-[200px] h-[25px] px-[10px] 
+               sm:w-[250px] sm:h-[25px] 
+               md:w-[325px] md:h-[30px] md:px-[12px] 
+               lg:w-[450px] lg:h-[35px] 
+               xl:w-[550px] xl:h-[40px] xl:px-[15px] ;
+    }
+    .logo-responsive {
+        @apply text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl;
+    }
+    .input-responsive {
+        @apply text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px];
+    }
+    .search-icon-responsive {
+        @apply w-[20px] h-[20px] 
+               sm:w-[22px] sm:h-[22px]
+               md:w-[24px] md:h-[24px]
+               lg:w-[28px] lg:h-[28px]
+               xl:w-[34px] xl:h-[34px];
+    }
+    .navbar-icons-responsive {
+        @apply w-[85px] sm:w-[110px] md:w-[135px] lg:w-[150px] xl:w-[175px];
+    }
+    .icon-responsive {
+        @apply w-[22px] h-[22px] 
+               sm:w-[24px] sm:h-[24px]
+               md:w-[28px] md:h-[28px]
+               lg:w-[30px] lg:h-[30px]
+               xl:w-[36px] xl:h-[36px];
+    }
+}
+
