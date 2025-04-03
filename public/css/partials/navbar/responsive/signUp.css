@@ -12,4 +12,53 @@
         lg:w-[23px] lg:h-[23px]
         xl:w-[24px] xl:h-[24px];
     }
+    .Modal-form-responsive {
+        @apply mt-[8px] h-[250px] 
+               sm:mt-[10px]
+               md:h-[260px]
+               lg:mt-[12px] lg:h-[275px]
+               xl:mt-[15px] xl:h-[300px];
+    }
+    .modal-label-responsive {
+        @apply text-[16px] sm:text-[17px] md:text-[18px] lg:text-[19px] xl:text-[20px];
+    }
+    .modal-input-responsive {
+        @apply h-[22px] 
+               sm:text-[12px] sm:h-[23px]
+               md:h-[24px]
+               lg:h-[25px]
+               xl:text-[14px] xl:h-[26px];
+    }
+    .form-submit-responsive {
+        @apply text-[14px] h-[34px] 
+               sm:text-[15px] 
+               md:text-[16px] 
+               lg:text-[17px] lg:h-[35px]
+               xl:text-[18px] xl:h-[40px];
+    }
+    .OR-responsive {
+        @apply text-[10px] sm:text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px];
+    }
+    .google-facebook-responsive {
+        @apply h-[30px] sm:h-[31px] md:h-[32px] lg:h-[33px] xl:h-[34px];
+    }
+    .g-f-svg-responsive {
+        @apply w-[16px] h-[26px] 
+               sm:w-[17px] sm:h-[17px]
+               md:w-[18px] md:h-[18px]
+               lg:w-[19px] lg:h-[19px]
+               xl:w-[20px] xl:h-[20px];
+    }
+    .g-f-text-responsive {
+        @apply text-[12px] md:text-[13px] xl:text-[14px];
+    }
+    .haveAccount-responsive {
+        @apply gap-[4px] mt-[6px] sm:mt-[7px] md:mt-[8px] lg:mt-[9px] xl:mt-[10px] xl:gap-[6px];
+    }
+    .haveAccount-text-responsive {
+        @apply text-[14px] sm:text-[15px] md:text-[16px] lg:text-[17px] xl:text-[18px];
+    }
+    .haveAccount-btn-responsive {
+        @apply text-[17px] sm:text-[18px] md:text-[19px] lg:text-[20px] xl:text-[21px];
+    }
 }
