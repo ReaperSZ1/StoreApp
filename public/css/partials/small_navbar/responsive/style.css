@@ -1,0 +1,21 @@
+@layer utilities {
+    .categories-link-responsive {
+        @apply text-[10px] sm:text-[14px] md:text-[18px] lg:text-[22px] xl:text-[28px];
+    }
+    .categories-p-responsive {
+        @apply text-[10px] sm:text-[14px] md:text-[18px] lg:text-[22px] xl:text-[28px];
+    }
+    .arrow-down-responsive {
+        @apply w-[10px] h-[10px] 
+               sm:w-[14px] sm:h-[14px]
+               md:w-[18px] md:h-[18px]
+               lg:w-[24px] lg:h-[24px]
+               xl:w-[30px] xl:h-[30px];
+    }
+    .tooltip-categories-responsive {   
+        @apply p-[4px] sm:p-[5px] md:p-[6px] lg:p-[8px] xl:p-[10px];       
+    }
+    .tooltip-a-responsive {
+        @apply text-[8px] sm:text-[10px] md:text-[12px] lg:text-[16px] xl:text-[18px];        
+    }
+}

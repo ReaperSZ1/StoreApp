@@ -1,4 +1,6 @@
 @import "tailwindcss";
 
 @import "../css/partials/navbar/responsive/style.css";
-@import "../css/partials/navbar/responsive/signUp.css"
+@import "../css/partials/navbar/responsive/signUp.css";
+
+@import "../css/partials/small_navbar/responsive/style.css"

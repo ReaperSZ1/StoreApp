@@ -1,38 +1,16 @@
-.categories-link {
-    font-size: min(max(10px, 2.3vw), 28px);
-    font-family: Calibri;
-    font-weight: 400;
-    transition: color 0.2s ease-in-out;
-    text-decoration: none;
-    color: black;
+@media (max-width: 350px) {
+    .tooltip-a-responsive {
+        font-size: 6px;
+    }
+    .tooltip-categories-responsive {
+        gap: 2px;
+    }
 }
-.categories-link:hover {
-    color: rgba(0, 0, 0, 0.70);
-}
-.categories-list {
-    transition: color 0.2s ease-in-out;
-    align-items: center;
-    cursor: pointer;    
-    display: flex;
-    gap: 3px;
-}
-.categories-list:hover, .categories-list:hover p{
-    color: rgba(0, 0, 0, 0.70);
-}
-.categories-list p {
-    font-size: min(max(10px, 2.3vw), 28px);
-    font-family: Calibri;
-    font-weight: 400;
-    transition: color 0.2s ease-in-out;
-    text-decoration: none;
-    color: black;
-}
-.arrow-down {
-    transition: transform 0.2s ease-in-out;
-    height: min(max(10px, 2.3vw), 30px);
-    width: min(max(10px, 2.3vw), 30px);
-    opacity: 0.7;
-}
-.categories-list:hover .arrow-down, .rotated {
+
+.categories-list:hover .arrow-down-responsive, .rotated{
     transform: rotate(180deg);
+}
+.categories-list:hover .tooltip-categories-responsive {
+    opacity: 100;
+    visibility: visible;
 }

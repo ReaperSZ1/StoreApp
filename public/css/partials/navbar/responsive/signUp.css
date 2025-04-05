@@ -7,10 +7,10 @@
     }
     .close-modal-responsive {
         @apply w-[20px] h-[20px] 
-        sm:w-[21px] sm:h-[21px]
-        md:w-[22px] md:h-[22px]
-        lg:w-[23px] lg:h-[23px]
-        xl:w-[24px] xl:h-[24px];
+               sm:w-[21px] sm:h-[21px]
+               md:w-[22px] md:h-[22px]
+               lg:w-[23px] lg:h-[23px]
+               xl:w-[24px] xl:h-[24px];
     }
     .Modal-form-responsive {
         @apply mt-[8px] h-[250px] 

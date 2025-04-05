@@ -1,30 +1,28 @@
 <head>
-    {{!-- shortcut: file:///c:\nodejs\StoreApp\public\css\partials\small_navbar\tooltip.css --}}
-    <link rel="stylesheet" href="/css/partials/small_navbar/tooltip.css">
     {{!-- shortcut: file:///c:\nodejs\StoreApp\public\css\partials\small_navbar\style.css --}}
     <link rel="stylesheet" href="/css/partials/small_navbar/style.css">
 </head>
 
-
 <nav class="sticky w-full max-w-full z-1 bg-white flex justify-center overflow-hidden">
     <div class="flex justify-between items-center whitespace-nowrap w-[90%]">
-        <div class="categories-list"> 
-            <p>Categories</p> 
-            <svg xmlns="http://www.w3.org/2000/svg" class="arrow-down" viewBox="0 -960 960 960" fill="#000000"><path d="M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z"/></svg>
-            <div class="tooltip_categories">
-                <a href="/">Mobile & Accessories</a>
-                    <hr class="separator_tooltip_categories">
-                <a href="/">Gaming</a>
-                    <hr class="separator_tooltip_categories">
-                <a href="/">Audio</a>
-                    <hr class="separator_tooltip_categories">
-                <a href="/">Computers</a>        
-            </div>
+        <div class="flex items-center cursor-pointer gap-[3px] transition-colors duration-200 ease-in-out categories-list"> 
+            <p class="font-[Calibri] font-normal text-black no-underline transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-p-responsive">
+                Categories
+            </p> 
+            <svg class="transition-transform duration-200 ease-in-out opacity-70 arrow-down-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000000"><path d="M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z"/></svg>
         </div>
-        <a href="/" class="categories-link">Mobile & Accessories</a>
-        <a href="/" class="categories-link">Gaming</a>
-        <a href="/" class="categories-link">Audio</a>
-        <a href="/" class="categories-link">Computers</a>
+        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
+            Mobile & Accessories
+        </a>
+        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
+            Gaming
+        </a>
+        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
+            Audio
+        </a>
+        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
+            Computers
+        </a>
     </div>
 </nav>
 {{!-- shortcut: file:///c:\nodejs\StoreApp\public\js\partials\small_navbar\tooltip.js --}}

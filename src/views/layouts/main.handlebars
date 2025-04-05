@@ -35,6 +35,9 @@
                 justify-content: center;
                 transition: background-color 0.3s ease-in-out; /* Anima a transição de cor de fundo */
             }
+            .tooltip-transition {
+                transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            }
         </style>
     </head>
     <body>
@@ -42,7 +45,24 @@
         {{>_navbar}}
         <!-- Small Navbar -->
         {{>_small_navbar}}
-        <!-- -->
+        {{!-- categories tooltip--}}
+        <div class="flex flex-col justify-between absolute items-center gap-[3px] top-[18%] left-[6%] rounded-lg bg-white opacity-0 z-10 shadow-lg border border-black invisible tooltip-transition tooltip-categories-responsive">
+                <a href="/" class="text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] tooltip-a-responsive">
+                    Mobile & Accessories
+                </a>
+                    <hr class="w-full rounded-xl outline-none">
+                <a href="/" class="text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] tooltip-a-responsive">
+                    Gaming
+                </a>
+                    <hr class="w-full rounded-xl outline-none">
+                <a href="/" class="text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] tooltip-a-responsive">
+                    Audio
+                </a>
+                    <hr class="w-full rounded-xl outline-none">
+                <a href="/" class="text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] tooltip-a-responsive">
+                    Computers
+                </a>        
+        </div>
         <div class="content content-wrapper"> 
             {{!-- Passport Error - Display error messages from Passport --}}
             {{#if error}}
@@ -55,13 +75,6 @@
             {{{body}}}
         </div>
         <!-- Footer -->
-        {{>_footer}}
-        <!-- Bootstrap and dependency scripts -->
-        <script src="/js/bootstrap.bundle.min.js"></script>
-
-       
-        {{!-- shortcut: file:///c:/nodejs/taskApp/public/js/main/main.js --}}
-        
-        
+        {{>_footer}}  
     </body>
 </html>

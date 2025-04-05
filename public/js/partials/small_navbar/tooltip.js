@@ -1,37 +1,82 @@
 document.addEventListener('DOMContentLoaded', function () {
     const categories = document.querySelector('.categories-list');
-    const tooltip = document.querySelector('.tooltip_categories');
-    const arrow = document.querySelector('.arrow-down');
-    const content = document.querySelector('.content'); // Aplica apenas ao conteúdo
+    const tooltip = document.querySelector('.tooltip-categories-responsive');
+    const arrow = document.querySelector('.arrow-down-responsive');
+    const content = document.querySelector('.content');
+
+    let tooltipOpenedByClick = false;
+
+    function positionTooltip() {
+        const rect = categories.getBoundingClientRect();
+        tooltip.style.top = `${rect.bottom + window.scrollY}px`;
+        tooltip.style.left = `${rect.left + window.scrollX}px`;
+    }
 
     categories.addEventListener('click', function (event) {
         event.stopPropagation();
-        tooltip.classList.toggle('show_tooltip');
-        arrow.classList.toggle('rotated');
-        content.classList.toggle('dark-overlay'); // Apenas no conteúdo
+        tooltipOpenedByClick = true;
+        positionTooltip();
+        tooltip.classList.remove('invisible', 'opacity-0');
+        tooltip.classList.add('visible', 'opacity-100');
+        arrow.classList.add('rotated');
+        content.classList.add('dark-overlay');
     });
 
-    categories.addEventListener('mouseover', function () {
-        if (!content.classList.contains('dark-overlay')) {
+    categories.addEventListener('mouseenter', () => {
+        if (!tooltipOpenedByClick) {
+            positionTooltip();
+            tooltip.classList.remove('invisible', 'opacity-0');
+            tooltip.classList.add('visible', 'opacity-100');
             content.classList.add('dark-overlay');
         }
     });
 
-    categories.addEventListener('mouseout', function (event) {
+    categories.addEventListener('mouseleave', (event) => {
         if (
-            !tooltip.contains(event.relatedTarget) &&
-            !categories.contains(event.relatedTarget) &&
-            !tooltip.classList.contains('show_tooltip')
+            !tooltipOpenedByClick &&
+            !tooltip.contains(event.relatedTarget)
         ) {
+            tooltip.classList.add('invisible', 'opacity-0');
+            tooltip.classList.remove('visible', 'opacity-100');
+            content.classList.remove('dark-overlay');
+        }
+    });
+
+    tooltip.addEventListener('mouseleave', (event) => {
+        if (
+            !tooltipOpenedByClick &&
+            !categories.contains(event.relatedTarget)
+        ) {
+            tooltip.classList.add('invisible', 'opacity-0');
+            tooltip.classList.remove('visible', 'opacity-100');
             content.classList.remove('dark-overlay');
         }
     });
 
     document.addEventListener('click', function (event) {
-        if (!tooltip.contains(event.target) && !categories.contains(event.target)) {
-            tooltip.classList.remove('show_tooltip');
+        if (
+            tooltipOpenedByClick &&
+            !tooltip.contains(event.target) &&
+            !categories.contains(event.target)
+        ) {
+            tooltip.classList.add('invisible', 'opacity-0');
+            tooltip.classList.remove('visible', 'opacity-100');
             arrow.classList.remove('rotated');
             content.classList.remove('dark-overlay');
+            tooltipOpenedByClick = false;
+        }
+    });
+
+    // 🆕 Atualiza posição em tempo real se necessário
+    window.addEventListener('resize', () => {
+        if (tooltipOpenedByClick) {
+            positionTooltip();
+        }
+    });
+
+    window.addEventListener('scroll', () => {
+        if (tooltipOpenedByClick) {
+            positionTooltip();
         }
     });
 });
