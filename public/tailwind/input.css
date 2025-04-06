@@ -5,4 +5,5 @@
 
 @import "../css/partials/small_navbar/responsive/style.css";
 
-@import "../css/partials/footer/responsive/style.css"
+@import "../css/partials/footer/responsive/footer.css";
+@import "../css/partials/footer/responsive/black_bar.css"
