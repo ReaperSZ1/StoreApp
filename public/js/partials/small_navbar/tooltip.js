@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const categories = document.querySelector('.categories-list');
+    const categories = document.getElementById('categories-list');
     const tooltip = document.querySelector('.tooltip-categories-responsive');
     const arrow = document.querySelector('.arrow-down-responsive');
     const content = document.querySelector('.content');
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         positionTooltip();
         tooltip.classList.remove('invisible', 'opacity-0');
         tooltip.classList.add('visible', 'opacity-100');
-        arrow.classList.add('rotated');
+        arrow.classList.add('rotate-180');
         content.classList.add('dark-overlay');
     });
 
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ) {
             tooltip.classList.add('invisible', 'opacity-0');
             tooltip.classList.remove('visible', 'opacity-100');
-            arrow.classList.remove('rotated');
+            arrow.classList.remove('rotate-180');
             content.classList.remove('dark-overlay');
             tooltipOpenedByClick = false;
         }

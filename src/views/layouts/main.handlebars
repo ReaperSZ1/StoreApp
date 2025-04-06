@@ -45,8 +45,11 @@
         {{>_navbar}}
         <!-- Small Navbar -->
         {{>_small_navbar}}
-        {{!-- categories tooltip--}}
-        <div class="flex flex-col justify-between absolute items-center gap-[3px] top-[18%] left-[6%] rounded-lg bg-white opacity-0 z-10 shadow-lg border border-black invisible tooltip-transition tooltip-categories-responsive">
+        {{!--
+          ⚠️ This tooltip is controlled by the `#categories-list` element in `small-navbar.hbs`
+          using hover and JavaScript (click/hover events).
+        --}}
+        <div class="flex flex-col justify-between absolute items-center gap-[3px] top-[18%] left-[6%] rounded-lg bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible z-10 shadow-lg border border-black tooltip-transition tooltip-categories-responsive">
                 <a href="/" class="text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] tooltip-a-responsive">
                     Mobile & Accessories
                 </a>
@@ -63,6 +66,7 @@
                     Computers
                 </a>        
         </div>
+        {{!-- content --}}
         <div class="content content-wrapper"> 
             {{!-- Passport Error - Display error messages from Passport --}}
             {{#if error}}

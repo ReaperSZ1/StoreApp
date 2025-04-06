@@ -1,0 +1,22 @@
+@layer utilities {
+    .tooltip-responsive {
+        @apply px-[4px] py-[2px] 
+               sm:px-[5px] sm:py-[3px]
+               md:px-[6px] md:py-[3px]
+               lg:px-[8px] lg:py-[4px]
+               xl:px-[10px] xl:py-[5px]
+               max-[400px]:top-[125%];
+    } 
+    .tooltip-btn-responsive {
+        @apply text-[8px] sm:text-[10px] md:text-[12px] lg:text-[13px] xl:text-[14px]
+               max-[400px]:text-[6px];
+    }
+    .account-tooltip-hr-responsive{
+        @apply h-[8px] mx-[1px] 
+               sm:h-[9px] sm:mx-[2px]
+               md:h-[9px] md:mx-[2px]
+               lg:h-[10px] lg:mx-[3px]
+               xl:h-[11px] xl:mx-[4px]
+               max-[400px]:h-[6px] max-[400px]:mx-0;
+    }
+}

@@ -13,9 +13,11 @@
                xl:w-[30px] xl:h-[30px];
     }
     .tooltip-categories-responsive {   
-        @apply p-[4px] sm:p-[5px] md:p-[6px] lg:p-[8px] xl:p-[10px];       
+        @apply p-[4px] sm:p-[5px] md:p-[6px] lg:p-[8px] xl:p-[10px]
+               max-[350px]:gap-[2px];       
     }
     .tooltip-a-responsive {
-        @apply text-[8px] sm:text-[10px] md:text-[12px] lg:text-[16px] xl:text-[18px];        
+        @apply text-[8px] sm:text-[10px] md:text-[12px] lg:text-[16px] xl:text-[18px]
+               max-[350px]:text-[6px];        
     }
 }
