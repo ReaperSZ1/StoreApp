@@ -1,70 +1,25 @@
-<head>
-    {{!-- shortcut: file:///c:\nodejs\StoreApp\public\css\partials\small_navbar\tooltip.css --}}
-    <link rel="stylesheet" href="/css/partials/small_navbar/tooltip.css">
-</head>
-<style>
-    .small-navbar {
-        padding-right: min(100px, 7.5vw); 
-        padding-left: min(100px, 7.5vw); 
-        background: #FAFAFA;
-        position: sticky;
-        z-index: 1
-    }
-    .categories {
-        justify-content: space-between; 
-        align-items: center;
-        white-space: nowrap;    
-        display: flex;
-    }
-    .categories-list {
-        transition: color 0.2s ease-in-out;
-        align-items: center;
-        cursor: pointer;    
-        display: flex;
-        gap: 3px;
-    }
-    .categories a, .categories-list p {
-        font-size: min(max(14px, 2.3vw), 28px);
-        font-family: Calibri;
-        font-weight: 400;
-        transition: color 0.2s ease-in-out;
-        text-decoration: none;
-        color: black;
-    }
-    .categories a:hover , .categories-list:hover {
-        color: rgba(0, 0, 0, 0.70);
-    }
-    .arrow-down {
-        transition: transform 0.2s ease-in-out;
-        height: min(max(14px, 2.3vw), 30px);
-        width: min(max(14px, 2.3vw), 30px);
-        opacity: 0.7;
-    }
-    .categories-list:hover .arrow-down, .rotated {
-        transform: rotate(180deg);
-    }
-</style>
-
-<nav class="small-navbar">
-    <div class="categories">
-        <div class="categories-list"> 
-            <p>Categories</p> 
-            <svg xmlns="http://www.w3.org/2000/svg" class="arrow-down"  viewBox="0 -960 960 960" fill="#000000"><path d="M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z"/></svg>
-            <div class="tooltip_categories">
-                <a href="/">Mobile & Accessories</a>
-                    <hr class="separator_tooltip_categories">
-                <a href="/">Gaming</a>
-                    <hr class="separator_tooltip_categories">
-                <a href="/">Audio</a>
-                    <hr class="separator_tooltip_categories">
-                <a href="/">Computers</a>        
-            </div>
+<nav class="sticky w-full max-w-full z-1 bg-white flex justify-center overflow-hidden">
+    <div class="flex justify-between items-center whitespace-nowrap w-[90%]">
+        <div id="categories-list" class="flex items-center cursor-pointer gap-[3px] transition-colors duration-200 ease-in-out relative group"> 
+            <p class="font-[Calibri] font-normal text-black no-underline transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-p-responsive">
+                Categories  
+            </p> 
+            <svg class="transition-transform duration-200 ease-in-out opacity-70 group-hover:rotate-180 arrow-down-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000000"><path d="M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z"/></svg>
         </div>
-        <a href="/">Mobile & Accessories</a>
-        <a href="/">Gaming</a>
-        <a href="/">Audio</a>
-        <a href="/">Computers</a>
+        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
+            Mobile & Accessories
+        </a>
+        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
+            Gaming
+        </a>
+        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
+            Audio
+        </a>
+        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
+            Computers
+        </a>
     </div>
 </nav>
 
+{{!-- shortcut: file:///c:\nodejs\StoreApp\public\js\partials\small_navbar\tooltip.js --}}
 <script src="/js/partials/small_navbar/tooltip.js"></script>

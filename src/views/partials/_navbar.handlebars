@@ -1,342 +1,87 @@
-<head>
-    {{!-- shortcut: file:///c:\nodejs\StoreApp\public\css\partials\navbar\tooltip.css --}}
-    <link rel="stylesheet" href="/css/partials/navbar/tooltip.css">
-</head>
-<style>
-    .header {
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(180deg, #000B24 0%, #00123B 100%);
-        display: flex;
-        flex-wrap: nowrap; 
-        position: sticky;
-        z-index: 2;
-    }
-    .navbar {
-        width: min(max(400px, 80.7vw), 1100px);
-        justify-content: space-between;
-        display: flex;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    .logo {
-        color: white;
-        font-size: min(max(18px, 2.7vw), 36px);
-        font-family: 'Exo 2', sans-serif;
-        font-weight: 700;
-        text-decoration: none;
-    }
-
-    .search-container{
-        width: min(max(174px, 36vw), 550px);
-        height: auto;
-        display: flex;
-        align-items: center;
-        background: #FAFAFA;
-        border-radius: 15px;
-        padding: 0 15px;
-    }
-    .search-input{
-        width: 100%;
-        height: 90%;
-        background: #FAFAFA;
-        border: none; 
-        outline: none; 
-        font-size: min(max(14px, 2.7vw), 20px);
-        font-family: Calibri, sans-serif;
-        font-weight: 400;
-    }
-    .search-input::placeholder {
-        color: rgba(0, 0, 0, 0.70);
-        font-size: min(max(14px, 2.7vw), 22px);
-        font-family: Calibri, sans-serif;
-        font-weight: 300;
-    }
-    .search-icon {
-        height: min(max(22px, 4vw), 34px);
-        width: min(max(22px, 4vw), 34px);
-        fill: black;
-        transition: fill 0.3s ease;
-    }
-    .search-icon:hover{
-        fill: #444444;
-        cursor: pointer;
-    }
-
-    .navbar_icons {
-        display: flex;
-        width: auto;
-        justify-content: space-between;
-        gap: min(max(14px, 2.7vw), 35px);
-    }
-    .icon {
-        height: min(max(22px, 3.7vw), 36px); 
-        width: min(max(22px, 3.7vw), 36px); 
-        fill: white;
-        transition: fill 0.3s ease;
-    }
-    .icon:hover {
-        fill: #BFBFBF;
-        cursor: pointer; 
-    }
-
-body.modal-open {
-    overflow: hidden; /* Impede a rolagem do fundo */
-}
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.493); /* Aumenta a claridade do fundo */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s;
-}
-.modal-overlay.show {
-    visibility: visible;
-    opacity: 1;
-}
-
-.modal-content {
-    background: rgb(0, 0, 0);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.6);
-    align-items: center;
-    justify-content: center;
-    width: calc(275px + (350 - 275) * ((100vw - 500px) / (1370 - 500)));
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-.modal-content h2 {
-    color: white;
-    align-self: flex-start;
-    font-size: calc(18px + (22 - 18) * ((100vw - 500px) / (1370 - 500)));
-}
-
-/* close bottom from both modals */
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.close-modal svg {
-    width: calc(20px + (24 - 20) * ((100vw - 500px) / (1370 - 500)));
-    height: calc(20px + (24 - 20) * ((100vw - 500px) / (1370 - 500)));
-    fill: white;
-    transition: fill 0.3s ease-in-out;
-}
-.close-modal svg:hover {
-    fill: rgb(185, 185, 185);
-}
-
-.Modal {
-    width: 80%; 
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    align-items: center;
-}
-
-.Modal_Inputs {
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 15px;
-    display: flex;
-    width: 100%;
-    gap: calc(6px + (10 - 6) * ((100vw - 500px) / (1370 - 500)));
-
-}
-.Modal_Inputs div {
-    width: 100%;
-    justify-content: left;
-    flex-direction: column;
-    display: flex;
-    gap: 2px;
-}
-.Modal_Inputs label {
-    color: white;
-    font-family: Calibri, sans-serif;
-    font-size: calc(16px + (20 - 16) * ((100vw - 500px) / (1370 - 500)));
-}
-.Modal_Inputs input {
-    width: 100%;
-    border-radius: 4px;
-    height: calc(22px + (26 - 22) * ((100vw - 500px) / (1370 - 500)));
-    border: none;
-    padding-left: 10px;
-    font-size: calc(12px + (14 - 12) * ((100vw - 500px) / (1370 - 500)));
-    outline: none; 
-}
-
-.Submit_button {
-    width: 100%;
-    height: calc(35px + (40 - 35) * ((100vw - 500px) / (1370 - 500)));
-    background-color: rgb(0, 59, 197);
-    align-items: center;
-    font-family: Calibri, sans-serif;
-    font-size: calc(15px + (18 - 15) * ((100vw - 500px) / (1370 - 500)));
-    color: white;
-    border-radius: 6px;
-    border-width: 1px; 
-    border-style: solid; 
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-.Submit_button:hover {
-    background-color: rgb(2, 69, 226);
-}
-
-.Separator_OR {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centraliza os elementos */
-    gap: 32px; /* Espaçamento entre os elementos */
-}
-.Separator_OR hr {
-    flex: 1; /* Faz as linhas ocuparem o máximo de espaço possível */
-    height: 1px;
-    border: none;
-    background-color: white; /* Ajuste a cor conforme necessário */
-    border-radius: 12px;
-}
-.Separator_OR p {
-    font-family: Calibri, sans-serif;
-    font-size: calc(10px + (14 - 10) * ((100vw - 500px) / (1370 - 500)));
-    color: white;
-    white-space: nowrap; /* Evita quebra de linha */
-}
-
-.google_and_facebook {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-}
-.google_and_facebook div {
-    width: 42%;
-    background-color: white ;
-    border-color: #000000;
-    border-radius: 4px;
-    border-width: 1px; 
-    border-style: solid; 
-    height: calc(30px + (34 - 30) * ((100vw - 500px) / (1370 - 500)));
-
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    gap: 3px;
-}
-.google_and_facebook svg {
-    width: calc(16px + (20 - 16) * ((100vw - 500px) / (1370 - 500)));
-    height: calc(16px + (20 - 16) * ((100vw - 500px) / (1370 - 500)));
-    fill: black;
-}
-.google_and_facebook p {
-    font-size: calc(12px + (14 - 12) * ((100vw - 500px) / (1370 - 500)));
-}
-
-.haveAccount {
-    margin-top: calc(5px + (10 - 5) * ((100vw - 500px) / (1370 - 500)));
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-}
-.haveAccount p {
-    color: white;
-    font-family: Calibri, sans-serif;
-    font-size: calc(14px + (18 - 14) * ((100vw - 500px) / (1370 - 500)));
-}
-.haveAccount button {
-    background: none;
-    border: none;
-    color: rgba(0, 187, 255, 1);
-    font-family: Calibri, sans-serif;
-    font-size: calc(17px + (21 - 17) * ((100vw - 500px) / (1370 - 500)));
-    cursor: pointer;
-}
-
-</style>
-
-<nav class="header"> 
-    <div class="navbar">
-        <a class="logo" href="/">StoreApp</a>
-
-        <div class="search-container">
-            {{!-- Input --}}
-            <input type="search" class="search-input" placeholder="Search for Products" maxlength="100">
-            {{!-- Search --}}
-            <svg  class="search-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+<nav class="w-full top-0 flex items-center justify-center flex-nowrap sticky z-2 bg-gradient-to-b from-[#000B24] to-[#00123B]"> 
+    <div class="w-[80%] flex items-center justify-between my-2 sm:my-3 lg:my-4">
+        <a class="text-white font-bold no-underline logo-responsive sm-text-sm" href="/">
+            StoreApp
+        </a>
+        <div class="flex items-center bg-white rounded-xl search-container-responsive">
+            <input type="search" class="w-full h-[90%] bg-white border-none outline-none font-light input-responsive" placeholder="Search for Products" maxlength="100">
+            <svg  class="fill-black transition-[fill] duration-300 ease-in-out hover:fill-[#444444] hover:cursor-pointer search-icon-responsive" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
             <path d="M14.3605 0.0645909C6.85517 0.706566 0.844611 6.6331 0.0776388 14.1489C-0.744117 22.338 5.04731 29.8538 13.1866 31.1456C15.738 31.5449 18.125 31.357 20.5433 30.5584C22.1555 30.0339 23.5955 29.298 24.8477 28.3741L25.3173 28.0218L31.187 33.8779C37.6515 40.3368 37.3384 40.0628 38.2228 39.9688C39.5611 39.8358 40.375 38.4579 39.8272 37.2522C39.7098 36.9782 38.3402 35.569 33.8714 31.0908L28.0721 25.2895L28.6669 24.397C29.3087 23.4497 30.1539 21.7665 30.4748 20.8114C31.0226 19.1673 31.2339 17.9773 31.2809 16.1844C31.3592 13.413 30.9287 11.3148 29.7783 8.92699C27.3208 3.83033 22.4998 0.5265 16.8649 0.0645909C15.7693 -0.0215277 15.4171 -0.0215277 14.3605 0.0645909ZM17.8432 4.09651C20.1676 4.55059 22.2807 5.67796 23.9399 7.3377C25.3173 8.7156 26.233 10.1953 26.8356 12.0038C27.266 13.3112 27.4147 14.2663 27.4147 15.6834C27.4147 17.1004 27.266 18.0556 26.8356 19.3473C25.4816 23.4576 22.1007 26.4169 17.8041 27.2859C16.7397 27.4973 14.3997 27.4738 13.3588 27.2468C10.1187 26.5343 7.51258 24.7493 5.7595 22.0405C5.00035 20.8818 4.47599 19.6214 4.13164 18.1573C3.90467 17.1631 3.84989 14.9161 4.02989 13.8279C4.7186 9.6864 7.44997 6.28079 11.3083 4.73849C12.1066 4.4175 13.3118 4.09651 14.1258 3.9869C14.9162 3.8773 17.0528 3.93993 17.8432 4.09651Z"/>
             </svg>
         </div>
 
-        <div class="navbar_icons">
+        <div class="flex justify-between navbar-icons-responsive">
             {{!-- Shopping Car --}}
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 -960 960 960"><path d="M286.79-81Q257-81 236-102.21t-21-51Q215-183 236.21-204t51-21Q317-225 338-203.79t21 51Q359-123 337.79-102t-51 21Zm400 0Q657-81 636-102.21t-21-51Q615-183 636.21-204t51-21Q717-225 738-203.79t21 51Q759-123 737.79-102t-51 21ZM235-741l110 228h288l125-228H235Zm-30-60h589.07q22.97 0 34.95 21 11.98 21-.02 42L694-495q-11 19-28.56 30.5T627-453H324l-56 104h491v60H277q-42 0-60.5-28t.5-63l64-118-152-322H51v-60h117l37 79Zm140 288h288-288Z"/></svg>
+                <svg class="fill-white transition-colors duration-300 ease-in-out hover:fill-[#BFBFBF] cursor-pointer icon-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M286.79-81Q257-81 236-102.21t-21-51Q215-183 236.21-204t51-21Q317-225 338-203.79t21 51Q359-123 337.79-102t-51 21Zm400 0Q657-81 636-102.21t-21-51Q615-183 636.21-204t51-21Q717-225 738-203.79t21 51Q759-123 737.79-102t-51 21ZM235-741l110 228h288l125-228H235Zm-30-60h589.07q22.97 0 34.95 21 11.98 21-.02 42L694-495q-11 19-28.56 30.5T627-453H324l-56 104h491v60H277q-42 0-60.5-28t.5-63l64-118-152-322H51v-60h117l37 79Zm140 288h288-288Z"/></svg>
             {{!-- favourite heart --}}
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 -960 960 960"><path d="m480-121-41-37q-105.77-97.12-174.88-167.56Q195-396 154-451.5T96.5-552Q80-597 80-643q0-90.15 60.5-150.58Q201-854 290-854q57 0 105.5 27t84.5 78q42-54 89-79.5T670-854q89 0 149.5 60.42Q880-733.15 880-643q0 46-16.5 91T806-451.5Q765-396 695.88-325.56 626.77-255.12 521-158l-41 37Zm0-79q101.24-93 166.62-159.5Q712-426 750.5-476t54-89.14q15.5-39.13 15.5-77.72 0-66.14-42-108.64T670.22-794q-51.52 0-95.37 31.5T504-674h-49q-26-56-69.85-88-43.85-32-95.37-32Q224-794 182-751.5t-42 108.82q0 38.68 15.5 78.18 15.5 39.5 54 90T314-358q66 66 166 158Zm0-297Z"/></svg>
+                <svg class="fill-white transition-colors duration-300 ease-in-out hover:fill-[#BFBFBF] cursor-pointer icon-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-121-41-37q-105.77-97.12-174.88-167.56Q195-396 154-451.5T96.5-552Q80-597 80-643q0-90.15 60.5-150.58Q201-854 290-854q57 0 105.5 27t84.5 78q42-54 89-79.5T670-854q89 0 149.5 60.42Q880-733.15 880-643q0 46-16.5 91T806-451.5Q765-396 695.88-325.56 626.77-255.12 521-158l-41 37Zm0-79q101.24-93 166.62-159.5Q712-426 750.5-476t54-89.14q15.5-39.13 15.5-77.72 0-66.14-42-108.64T670.22-794q-51.52 0-95.37 31.5T504-674h-49q-26-56-69.85-88-43.85-32-95.37-32Q224-794 182-751.5t-42 108.82q0 38.68 15.5 78.18 15.5 39.5 54 90T314-358q66 66 166 158Zm0-297Z"/></svg>
             {{!-- Account --}}
-            <div class="account">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="icon" ><path d="M222-255q63-44 125-67.5T480-346q71 0 133.5 23.5T739-255q44-54 62.5-109T820-480q0-145-97.5-242.5T480-820q-145 0-242.5 97.5T140-480q0 61 19 116t63 109Zm257.81-195q-57.81 0-97.31-39.69-39.5-39.68-39.5-97.5 0-57.81 39.69-97.31 39.68-39.5 97.5-39.5 57.81 0 97.31 39.69 39.5 39.68 39.5 97.5 0 57.81-39.69 97.31-39.68 39.5-97.5 39.5Zm.66 370Q398-80 325-111.5t-127.5-86q-54.5-54.5-86-127.27Q80-397.53 80-480.27 80-563 111.5-635.5q31.5-72.5 86-127t127.27-86q72.76-31.5 155.5-31.5 82.73 0 155.23 31.5 72.5 31.5 127 86t86 127.03q31.5 72.53 31.5 155T848.5-325q-31.5 73-86 127.5t-127.03 86Q562.94-80 480.47-80Zm-.47-60q55 0 107.5-16T691-212q-51-36-104-55t-107-19q-54 0-107 19t-104 55q51 40 103.5 56T480-140Zm0-370q34 0 55.5-21.5T557-587q0-34-21.5-55.5T480-664q-34 0-55.5 21.5T403-587q0 34 21.5 55.5T480-510Zm0-77Zm0 374Z"/></svg>
+                <div id="account" class="relative group cursor-pointer">
+                    <svg class="fill-white transition-colors duration-300 ease-in-out hover:fill-[#BFBFBF] icon-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                        <path 
+                        d="M222-255q63-44 125-67.5T480-346q71 0 133.5 23.5T739-255q44-54 62.5-109T820-480q0-145-97.5-242.5T480-820q-145 0-242.5 97.5T140-480q0 61 19 116t63 109Zm257.81-195q-57.81 0-97.31-39.69-39.5-39.68-39.5-97.5 0-57.81 39.69-97.31 39.68-39.5 97.5-39.5 57.81 0 97.31 39.69 39.5 39.68 39.5 97.5 0 57.81-39.69 97.31-39.68 39.5-97.5 39.5Zm.66 370Q398-80 325-111.5t-127.5-86q-54.5-54.5-86-127.27Q80-397.53 80-480.27 80-563 111.5-635.5q31.5-72.5 86-127t127.27-86q72.76-31.5 155.5-31.5 82.73 0 155.23 31.5 72.5 31.5 127 86t86 127.03q31.5 72.53 31.5 155T848.5-325q-31.5 73-86 127.5t-127.03 86Q562.94-80 480.47-80Zm-.47-60q55 0 107.5-16T691-212q-51-36-104-55t-107-19q-54 0-107 19t-104 55q51 40 103.5 56T480-140Zm0-370q34 0 55.5-21.5T557-587q0-34-21.5-55.5T480-664q-34 0-55.5 21.5T403-587q0 34 21.5 55.5T480-510Zm0-77Zm0 374Z"
+                        />
+                    </svg>
+                    <!-- Tooltip -->
+                    <div id="tooltip" class="absolute items-center top-[112%] left-1/2 -translate-x-1/2 w-auto flex justify-between gap-[3px] whitespace-nowrap text-center rounded-[10px] border border-black bg-white shadow-[0_4px_8px_rgba(0,0,0,0.1)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity transition-visibility duration-300 ease-in-out z-50 tooltip-responsive">
+                        <!-- black triangle -->
+                        <div class="absolute -top-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-black"></div>
 
-                <div class="tooltip_account">
-                    <button id="openSignUp">Sign Up</button>
-                        <hr class="separator_tooltip">
-                    <button id="openLogin">Login</button>
-                </div>
+                        <!-- white triangle -->
+                        <div class="absolute -top-[9px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[9px] border-l-transparent border-r-[9px] border-r-transparent border-b-[9px] border-b-white"></div>
 
-                <!-- Modal de Sign Up -->
-                <div id="modalSignUp" class="modal-overlay">
-                    <div class="modal-content">
-                        <button class="close-modal">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+                        <!-- Botões -->
+                        <button id="openSignUp" class="text-black cursor-pointer inline hover:text-neutral-600 tooltip-btn-responsive"> 
+                            Sign Up
                         </button>
-                        <h2>Sign Up</h2>
-                        <div class="Modal">
-                            <form class="Modal_Inputs" action="/" method="post">
-                                <div>
-                                    <label for="userName">Name</label>
-                                    <input type="text" name="userName" autocomplete="userName" required> 
+
+                        <hr class="w-[0.5px] bg-black rounded-full account-tooltip-hr-responsive">
+
+                        <button id="openLogin" class="text-black cursor-pointer inline hover:text-neutral-600 tooltip-btn-responsive">
+                            Login
+                        </button>
+                    </div>
+
+                <!-- Sign Up -->
+                <div id="modalSignUp" class="fixed inset-0 z-50 flex items-center justify-center bg-white/50 opacity-0 invisible transition-opacity duration-300 ease-in-out">
+                    <div class="flex justify-center relative items-center flex-col rounded-lg p-[20px] shadow-[0px_4px_11px_rgba(0,0,0,0.6)] bg-black modal-content-responsive">
+                        <button id="closeSignUpBtn" class="flex absolute cursor-pointer bg-none items-center justify-center border-none top-[10px] right-[10px]">
+                            <svg class="fill-white transition-colors duration-300 ease-in-out hover:fill-gray-400 close-modal-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+                        </button>
+                        <h2 class="text-white self-start h2-modal-responsive">Sign Up</h2>
+                        <div class="w-[80%] flex flex-col gap-[4px] items-center">
+                            <form class="flex flex-col w-full justify-between Modal-form-responsive" action="/" method="post">
+                                <div class="flex flex-col w-full justify-start gap-[2px]">
+                                    <label for="userName" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Name</label>
+                                    <input type="text" name="userName" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="userName" required> 
                                 </div>
-                                <div>
-                                    <label for="email">Email</label>
-                                    <input type="email" name="email" autocomplete="email" required> 
+                                <div class="flex flex-col w-full justify-start gap-[2px]">
+                                    <label for="email" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Email</label>
+                                    <input type="email" name="email" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="email" required> 
                                 </div>
-                                <div>
-                                    <label for="password">Password</label>
-                                    <input type="password" name="password" autocomplete="new-password"required>
+                                <div class="flex flex-col w-full justify-start gap-[2px]">
+                                    <label for="password" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Password</label>
+                                    <input type="password" name="password" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="new-password"required>
                                 </div>   
-                                <div>
-                                    <label for="password2">Repeat Password</label>
-                                    <input type="password" name="password2" autocomplete="new-password" required> 
+                                <div class="flex flex-col w-full justify-start gap-[2px]">
+                                    <label for="password2" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Repeat Password</label>
+                                    <input type="password" name="password2" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="new-password" required> 
                                 </div>
-                                <button type="submit" class="Submit_button">Sign</button>
+                                <button type="submit" class="w-full bg-[rgb(0,59,197)] text-white font-[Calibri,sans-serif] 
+                                flex items-center justify-center rounded-md border border-solid border-white cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[rgb(2,69,226)] form-submit-responsive">
+                                    Sign
+                                </button>
                             </form>
-                            <div class="Separator_OR">
-                                <hr>
-                                    <p>OR</p>
-                                <hr>
+                            <div class="w-full flex items-center justify-center gap-[32px]">
+                                <hr class="rounded-xl border-none h-[1px] bg-white flex-1">
+                                <p class="font-[Calibri,sans-serif] text-white whitespace-nowrap OR-responsive">
+                                    OR
+                                </p>
+                                <hr class="rounded-xl border-none h-[1px] bg-white flex-1">
                             </div>
-                            <div class="google_and_facebook">
-                                <div>
-                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-143 145 512 512" xml:space="preserve">
+                            <div class="flex w-full justify-between cursor-pointer">
+                                <div class="w-[42%] bg-white border border-black rounded-[4px] flex items-center justify-center gap-[3px] google-facebook-responsive">
+                                    <svg class="fill-black g-f-svg-responsive" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-143 145 512 512" xml:space="preserve">
                                     <g>
                                         <path d="M113,145c-141.4,0-256,114.6-256,256s114.6,256,256,256s256-114.6,256-256S254.4,145,113,145z M272.8,560.7
                                             c-20.8,20.8-44.9,37.1-71.8,48.4c-27.8,11.8-57.4,17.7-88,17.7c-30.5,0-60.1-6-88-17.7c-26.9-11.4-51.1-27.7-71.8-48.4
@@ -348,10 +93,12 @@ body.modal-open {
                                             />
                                     </g>
                                     </svg>
-                                    <p>Facebook</p>
+                                    <p class="g-f-text-responsive">
+                                        Facebook
+                                    </p>
                                 </div>
-                                <div>
-                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-143 145 512 512" xml:space="preserve">
+                                <div class="w-[42%] bg-white border border-black rounded-[4px] flex items-center justify-center gap-[3px] google-facebook-responsive">
+                                    <svg class="fill-black g-f-svg-responsive" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-143 145 512 512" xml:space="preserve">
                                         <g>
                                             <path d="M113,145c-141.4,0-256,114.6-256,256s114.6,256,256,256s256-114.6,256-256S254.4,145,113,145z M272.8,560.7
                                                 c-20.8,20.8-44.9,37.1-71.8,48.4c-27.8,11.8-57.4,17.7-88,17.7c-30.5,0-60.1-6-88-17.7c-26.9-11.4-51.1-27.7-71.8-48.4
@@ -369,26 +116,28 @@ body.modal-open {
                                                 c0.6,2.7,1,5.4,1,8.2C128.3,497.6,113.4,515.6,70.7,515.6z"/>
                                         </g>
                                     </svg>
-                                    <p>Google</p>
+                                    <p class="g-f-text-responsive">
+                                        Google
+                                    </p>
                                 </div>
                             </div>
-                            <div class="haveAccount">
-                                <p>Have an Account?</p>
-                                <button id="accountOpenLogin">Log In</button>
+                            <div class="w-full flex justify-center items-center haveAccount-responsive">
+                                <p class="text-white font-[Calibri,sans-serif] haveAccount-text-responsive">
+                                    Have an Account?
+                                </p>
+                                <button id="accountOpenLogin" class="bg-transparent border-none text-[#00BBFF] font-[Calibri,sans-serif] cursor-pointer haveAccount-btn-responsive">
+                                    Log In
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Modal de Login -->
-                <div id="modalLogin" class="modal-overlay">
-                    <div class="modal-content">
-                        <h2>Login</h2>
-                        <p>Formulário de login aqui...</p>
-                        <button class="close-modal">Fechar</button>
+                <!-- Login -->
+                <div id="modalLogin" class="fixed inset-0 z-50 flex items-center justify-center bg-white/50 opacity-0 invisible transition-opacity duration-300 ease-in-out">
+                    <div class="flex justify-center relative items-center flex-col rounded-lg p-[20px] shadow-[0px_4px_11px_rgba(0,0,0,0.6)] bg-black modal-content-responsive">
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

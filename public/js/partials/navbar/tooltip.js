@@ -1,20 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
-	const accountIcon = document.querySelector('.account');
-	const tooltip = document.querySelector('.tooltip_account');
+	const accountIcon = document.getElementById('account');
+	const tooltip = document.getElementById('tooltip');
 
-	// Alterna a visibilidade ao clicar no ícone
 	accountIcon.addEventListener('click', function (event) {
-		event.stopPropagation(); // Impede que o clique se propague para o body
-		tooltip.classList.toggle('show_tooltip');
+		event.stopPropagation();
+		tooltip.classList.toggle('opacity-0');
+		tooltip.classList.toggle('invisible');
+		tooltip.classList.toggle('opacity-100');
+		tooltip.classList.toggle('visible');
 	});
 
-	// Fecha o tooltip ao clicar fora
 	document.addEventListener('click', function (event) {
 		if (
 			!tooltip.contains(event.target) &&
 			!accountIcon.contains(event.target)
 		) {
-			tooltip.classList.remove('show_tooltip');
+			tooltip.classList.add('opacity-0', 'invisible');
+			tooltip.classList.remove('opacity-100', 'visible');
 		}
 	});
 });

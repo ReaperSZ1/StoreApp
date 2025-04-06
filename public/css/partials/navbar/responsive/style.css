@@ -1,0 +1,71 @@
+@layer utilities {
+    .search-container-responsive {
+      @apply w-[200px] h-[25px] px-[10px] 
+             sm:w-[250px] sm:h-[25px] 
+             md:w-[325px] md:h-[30px] md:px-[12px] 
+             lg:w-[450px] lg:h-[35px] 
+             xl:w-[550px] xl:h-[40px] xl:px-[15px]
+             max-[500px]:w-[160px] max-[500px]:h-[20px] max-[500px]:px-[8px]
+             max-[400px]:w-[130px] max-[400px]:h-[18px] max-[400px]:px-[6px]
+             max-[350px]:w-[110px] max-[350px]:h-[16px];
+    }
+  
+    .logo-responsive {
+      @apply text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl
+             max-[500px]:text-[12px] max-[350px]:text-[10px];
+    }
+
+    .input-responsive {
+      @apply text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]
+             max-[500px]:text-[10px]
+             max-[400px]:text-[9px]
+             max-[350px]:text-[8px];
+    }
+  
+    .search-icon-responsive {
+      @apply w-[20px] h-[20px] 
+             sm:w-[22px] sm:h-[22px]
+             md:w-[24px] md:h-[24px]
+             lg:w-[28px] lg:h-[28px]
+             xl:w-[34px] xl:h-[34px]
+             max-[500px]:w-[18px] max-[500px]:h-[18px]
+             max-[350px]:w-[16px] max-[350px]:h-[16px];
+    }
+  
+    .icon-responsive {
+      @apply w-[22px] h-[22px] 
+             sm:w-[24px] sm:h-[24px]
+             md:w-[28px] md:h-[28px]
+             lg:w-[30px] lg:h-[30px]
+             xl:w-[36px] xl:h-[36px]
+             max-[500px]:w-[18px] max-[500px]:h-[18px]
+             max-[400px]:w-[16px] max-[400px]:h-[16px]
+             max-[350px]:w-[14px] max-[350px]:h-[14px];
+    }
+  
+    .navbar-icons-responsive {
+      @apply w-[85px] sm:w-[110px] md:w-[135px] lg:w-[150px] xl:w-[175px]
+             max-[500px]:w-[75px]
+             max-[400px]:w-[64px];
+    }
+  
+    .tooltip_account {
+      @apply top-[112%] p-[clamp(2px,0.4vw,5px)]
+             max-[400px]:top-[130%] max-[400px]:p-[2px];
+    }
+  
+    .tooltip_account-btn {
+      @apply text-black text-[clamp(8px,1.5vw,14px)] cursor-pointer inline hover:text-neutral-600
+             max-[400px]:text-[6px];
+    }
+  
+    .separator_tooltip {
+      @apply w-[0.5px] bg-black rounded-full 
+             h-[clamp(8px,1.6vw,11px)] 
+             mx-[clamp(1px,0.4vw,4px)] 
+             max-[400px]:scale-x-[0.3];
+    }
+  
+    
+  }
+  
