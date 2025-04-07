@@ -36,15 +36,14 @@
              max-[400px]:h-[20px]
              max-[350px]:h-[18px];
     }
-  
+    
     .Modal-form-responsive {
-      @apply mt-[8px] h-[250px]
-             sm:mt-[10px]
-             md:h-[260px]
-             lg:mt-[12px] lg:h-[275px]
-             xl:mt-[15px] xl:h-[300px]
-             max-[400px]:mt-[6px] max-[400px]:h-[225px]
-             max-[350px]:mt-[4px] max-[350px]:h-[200px];
+      @apply mt-[8px] gap-[7px]
+             sm:mt-[10px] sm:gap-[9px]
+             lg:mt-[12px] lg:gap-[11px]
+             xl:mt-[15px] xl:gap-[13px]
+             max-[400px]:mt-[6px]
+             max-[350px]:mt-[4px];
     }
   
     .form-submit-responsive {
