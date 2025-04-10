@@ -7,4 +7,7 @@
 @import "../css/partials/small_navbar/responsive/style.css";
 
 @import "../css/partials/footer/responsive/footer.css";
-@import "../css/partials/footer/responsive/black_bar.css"
+@import "../css/partials/footer/responsive/black_bar.css";
+
+@import "../css/index/responsive/style.css";
+

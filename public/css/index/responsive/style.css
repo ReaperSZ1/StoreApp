@@ -1,0 +1,20 @@
+@layer utilities {
+    .products-title-responsive {
+        @apply text-[15px] sm:text-[18px] md:text-[20px] lg:text-[24px] xl:text-[26px]
+               max-[500px]:text-[12px]
+               max-[450px]:text-[10px]
+               max-[400px]:text-[8px];
+    }
+    .products-container-responsive {
+        @apply mb-4 mt-2 xl:mb-6 xl:mt-3
+               max-[450px]:mb-3 max-[450px]:mt-1
+               max-[400px]:mb-2;
+    }
+    .products-card-title-responsive {
+        @apply text-[9px] sm:text-[11px] md:text-[14px] lg:text-[17px] xl:text-[20px]
+               max-[500px]:text-[8px]
+               max-[450px]:text-[7px]
+               max-[400px]:text-[6px]
+               max-[350px]:text-[5px];
+    }
+}

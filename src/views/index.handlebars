@@ -1,12 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StoreApp</title>
-</head>
-<body>
-    
+{{!-- <h1 class="text-white">Produtos</h1>
 
-</body>
-</html>
+<ul>
+  {{#each produtos}}
+    <li class="text-white">
+      <strong>{{title}}</strong> - R$ {{price}}<br>
+      {{description}}<br>
+      Categoria: {{category.title}}<br>
+      {{#if onsale}}🔥 Em promoção!{{/if}}
+    </li>
+  {{/each}}
+</ul> --}}
+
+<div class="w-full flex items-center justify-center h-auto relative bg-gradient-to-b from-orange-300 to-rose-600 rounded-[10px] mt-[10px]">
+    <div class="w-[95%] h-auto flex items-center flex-col gap-[3px] products-container-responsive">
+        <h1 class="self-start text-black font-normal font-['Lato'] products-title-responsive">
+            Promotions 🔥
+        </h1>
+
+        <div class="w-[95%] h-auto flex justify-between">
+            {{#each products}}
+                {{#if onsale}}
+                    <div class="relative w-[21%] gap-[3px] h-auto flex flex-col items-center bg-white rounded-[10px]  max-[400px]:rounded-[6px] shadow-[0px_4px_10px_0px_rgba(0,0,0,0.25)] ">
+                        <img src="{{img.url}}" class="w-[77%] h-[58%] object-cover mt-1.5 rounded-2xl" alt="{{title}}" />
+                        <div class="flex flex-col justify-between w-[92%] h-full mb-2 gap-[3px] max-[450px]:mb-1">
+                            <p class="text-black font-normal font-['Calibri'] opacity-90 products-card-title-responsive">
+                                {{title}}
+                            </p>
+                            <p class="self-start text-black font-bold font-['Calibri'] products-card-title-responsive">
+                                ${{price}}
+                            </p>
+                        </div>
+                    </div>
+                {{/if}}
+            {{/each}}
+        </div>
+    </div>
+</div>
