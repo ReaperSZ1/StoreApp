@@ -1,38 +1,116 @@
-{{!-- <h1 class="text-white">Produtos</h1>
-
-<ul>
-  {{#each produtos}}
-    <li class="text-white">
-      <strong>{{title}}</strong> - R$ {{price}}<br>
-      {{description}}<br>
-      Categoria: {{category.title}}<br>
-      {{#if onsale}}🔥 Em promoção!{{/if}}
-    </li>
-  {{/each}}
-</ul> --}}
-
-<div class="w-full flex items-center justify-center h-auto relative bg-gradient-to-b from-orange-300 to-rose-600 rounded-[10px] mt-[10px]">
+<div class="w-full flex items-center justify-center h-auto relative bg-gradient-to-b from-orange-300 to-rose-600 rounded-[10px] my-[20px]">
     <div class="w-[95%] h-auto flex items-center flex-col gap-[3px] products-container-responsive">
         <h1 class="self-start text-black font-normal font-['Lato'] products-title-responsive">
             Promotions 🔥
         </h1>
 
         <div class="w-[95%] h-auto flex justify-between">
-            {{#each products}}
-                {{#if onsale}}
-                    <div class="relative w-[21%] gap-[3px] h-auto flex flex-col items-center bg-white rounded-[10px]  max-[400px]:rounded-[6px] shadow-[0px_4px_10px_0px_rgba(0,0,0,0.25)] ">
-                        <img src="{{img.url}}" class="w-[77%] h-[58%] object-cover mt-1.5 rounded-2xl" alt="{{title}}" />
-                        <div class="flex flex-col justify-between w-[92%] h-full mb-2 gap-[3px] max-[450px]:mb-1">
-                            <p class="text-black font-normal font-['Calibri'] opacity-90 products-card-title-responsive">
-                                {{title}}
-                            </p>
-                            <p class="self-start text-black font-bold font-['Calibri'] products-card-title-responsive">
-                                ${{price}}
-                            </p>
-                        </div>
+            {{#each onsale}}
+                <div 
+                    class="relative w-[21%] gap-[3px] h-auto flex flex-col items-center bg-white rounded-[10px] max-[400px]:rounded-[6px] shadow-[0px_4px_10px_0px_rgba(0,0,0,0.25)] border border-transparent hover:border-black transition-all duration-300 ease-in-out cursor-pointer group"
+                >
+                    <div
+                        class="product-card-favorite absolute top-0 right-0 bg-pink-500 p-1 rounded-[10px] max-[400px]:rounded-[6px] shadow-md opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-in-out hover:bg-pink-600 hover:shadow-lg hover:scale-110"
+                    >
+                        <!-- ícons inside -->
+                        <svg class="w-[24px] h-[24px] fill-white icon-outline block" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="m480-121-41-37q-105.77-97.12-174.88-167.56Q195-396 154-451.5T96.5-552Q80-597 80-643q0-90.15 60.5-150.58Q201-854 290-854q57 0 105.5 27t84.5 78q42-54 89-79.5T670-854q89 0 149.5 60.42Q880-733.15 880-643q0 46-16.5 91T806-451.5Q765-396 695.88-325.56 626.77-255.12 521-158l-41 37Zm0-79q101.24-93 166.62-159.5Q712-426 750.5-476t54-89.14q15.5-39.13 15.5-77.72 0-66.14-42-108.64T670.22-794q-51.52 0-95.37 31.5T504-674h-49q-26-56-69.85-88-43.85-32-95.37-32Q224-794 182-751.5t-42 108.82q0 38.68 15.5 78.18 15.5 39.5 54 90T314-358q66 66 166 158Zm0-297Z"/>
+                        </svg>
+
+                        <svg class="w-[24px] h-[24px] fill-white icon-filled hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"> 
+                            <path d="m480-121-41-37q-106-97-175-167.5t-110-126Q113-507 96.5-552T80-643q0-90 60.5-150.5T290-854q57 0 105.5 27t84.5 78q42-54 89-79.5T670-854q89 0 149.5 60.5T880-643q0 46-16.5 91T806-451.5q-41 55.5-110 126T521-158l-41 37Z"/>
+                        </svg>
                     </div>
-                {{/if}}
+                    <img src="{{img.url}}" class="w-[77%] h-[58%] object-cover mt-1.5 rounded-2xl" alt="{{title}}" />
+                    <div class="flex flex-col justify-between w-[92%] h-full mb-2 gap-[3px] max-[450px]:mb-1">
+                        <p class="text-black font-normal font-['Calibri'] opacity-90 products-card-title-responsive">
+                            {{title}}
+                        </p>
+                        <p class="self-start text-black font-bold font-['Calibri'] products-card-title-responsive">
+                            ${{price}}
+                        </p>
+                    </div>
+                </div>
             {{/each}}
         </div>
     </div>
 </div>
+
+<div class="w-full flex items-center justify-center h-auto relative bg-gradient-to-b from-emerald-200 to-gray-600 rounded-[10px] my-[20px]">
+    <div class="w-[95%] h-auto flex items-center flex-col gap-[3px] products-container-responsive">
+        <h1 class="self-start text-black font-normal font-['Lato'] products-title-responsive">
+            New Arrivals 🚀
+        </h1>
+
+        <div class="w-[95%] h-auto flex justify-between">
+            {{#each recents}}
+                <div 
+                    class="relative w-[21%] gap-[3px] h-auto flex flex-col items-center bg-white rounded-[10px] max-[400px]:rounded-[6px] shadow-[0px_4px_10px_0px_rgba(0,0,0,0.25)] border border-transparent hover:border-black transition-all duration-300 ease-in-out cursor-pointer group"
+                    >
+                    <div
+                        class="product-card-favorite absolute top-0 right-0 bg-pink-500 p-1 rounded-[10px] max-[400px]:rounded-[6px] shadow-md opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-in-out hover:bg-pink-600 hover:shadow-lg hover:scale-110"
+                    >
+                        <!-- ícons inside -->
+                        <svg class="w-[24px] h-[24px] fill-white icon-outline block" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="m480-121-41-37q-105.77-97.12-174.88-167.56Q195-396 154-451.5T96.5-552Q80-597 80-643q0-90.15 60.5-150.58Q201-854 290-854q57 0 105.5 27t84.5 78q42-54 89-79.5T670-854q89 0 149.5 60.42Q880-733.15 880-643q0 46-16.5 91T806-451.5Q765-396 695.88-325.56 626.77-255.12 521-158l-41 37Zm0-79q101.24-93 166.62-159.5Q712-426 750.5-476t54-89.14q15.5-39.13 15.5-77.72 0-66.14-42-108.64T670.22-794q-51.52 0-95.37 31.5T504-674h-49q-26-56-69.85-88-43.85-32-95.37-32Q224-794 182-751.5t-42 108.82q0 38.68 15.5 78.18 15.5 39.5 54 90T314-358q66 66 166 158Zm0-297Z"/>
+                        </svg>
+
+                        <svg class="w-[24px] h-[24px] fill-white icon-filled hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"> 
+                            <path d="m480-121-41-37q-106-97-175-167.5t-110-126Q113-507 96.5-552T80-643q0-90 60.5-150.5T290-854q57 0 105.5 27t84.5 78q42-54 89-79.5T670-854q89 0 149.5 60.5T880-643q0 46-16.5 91T806-451.5q-41 55.5-110 126T521-158l-41 37Z"/>
+                        </svg>
+                    </div>
+                    <img src="{{img.url}}" class="w-[77%] h-[58%] object-cover mt-1.5 rounded-2xl" alt="{{title}}" />
+                    <div class="flex flex-col justify-between w-[92%] h-full mb-2 gap-[3px] max-[450px]:mb-1">
+                        <p class="text-black font-normal font-['Calibri'] opacity-90 products-card-title-responsive">
+                            {{title}}
+                        </p>
+                        <p class="self-start text-black font-bold font-['Calibri'] products-card-title-responsive">
+                            ${{price}}
+                        </p>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+<div class="w-full flex items-center justify-center h-auto relative bg-gradient-to-b from-zinc-100 to-zinc-500 rounded-[10px] my-[20px]">
+    <div class="w-[95%] h-auto flex items-center flex-col gap-[3px] products-container-responsive">
+        <h1 class="self-start text-black font-normal font-['Lato'] products-title-responsive">
+            Featured Products 🌟
+        </h1>
+
+        <div class="w-[95%] h-auto flex flex-wrap justify-between gap-4">
+            {{#each comuns}}
+                <div 
+                    class="relative w-[21%] gap-[3px] h-auto flex flex-col items-center bg-white rounded-[10px] max-[400px]:rounded-[6px] shadow-[0px_4px_10px_0px_rgba(0,0,0,0.25)] border border-transparent hover:border-black transition-all duration-300 ease-in-out cursor-pointer group"
+                >
+                    <div
+                        class="product-card-favorite absolute top-0 right-0 bg-pink-500 p-1 rounded-[10px] max-[400px]:rounded-[6px] shadow-md opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-in-out hover:bg-pink-600 hover:shadow-lg hover:scale-110"
+                    >
+                        <!-- ícons inside -->
+                        <svg class="w-[24px] h-[24px] fill-white icon-outline block" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="m480-121-41-37q-105.77-97.12-174.88-167.56Q195-396 154-451.5T96.5-552Q80-597 80-643q0-90.15 60.5-150.58Q201-854 290-854q57 0 105.5 27t84.5 78q42-54 89-79.5T670-854q89 0 149.5 60.42Q880-733.15 880-643q0 46-16.5 91T806-451.5Q765-396 695.88-325.56 626.77-255.12 521-158l-41 37Zm0-79q101.24-93 166.62-159.5Q712-426 750.5-476t54-89.14q15.5-39.13 15.5-77.72 0-66.14-42-108.64T670.22-794q-51.52 0-95.37 31.5T504-674h-49q-26-56-69.85-88-43.85-32-95.37-32Q224-794 182-751.5t-42 108.82q0 38.68 15.5 78.18 15.5 39.5 54 90T314-358q66 66 166 158Zm0-297Z"/>
+                        </svg>
+
+                        <svg class="w-[24px] h-[24px] fill-white icon-filled hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"> 
+                            <path d="m480-121-41-37q-106-97-175-167.5t-110-126Q113-507 96.5-552T80-643q0-90 60.5-150.5T290-854q57 0 105.5 27t84.5 78q42-54 89-79.5T670-854q89 0 149.5 60.5T880-643q0 46-16.5 91T806-451.5q-41 55.5-110 126T521-158l-41 37Z"/>
+                        </svg>
+                    </div>
+                    <img src="{{img.url}}" class="w-[77%] h-[58%] object-cover mt-1.5 rounded-2xl" alt="{{title}}" />
+                    <div class="flex flex-col justify-between w-[92%] h-full mb-2 gap-[3px] max-[450px]:mb-1">
+                        <p class="text-black font-normal font-['Calibri'] opacity-90 products-card-title-responsive">
+                            {{title}}
+                        </p>
+                        <p class="self-start text-black font-bold font-['Calibri'] products-card-title-responsive">
+                            ${{price}}
+                        </p>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+{{!-- shortcut: file:///c:\nodejs\StoreApp\public\js\index\toggleFavorite.js --}}
+<script src="/js/index/toggleFavorite.js"></script>

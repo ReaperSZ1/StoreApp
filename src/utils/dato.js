@@ -11,12 +11,9 @@ const query = `
         description
         price
         onsale
-        category {
-            title
-        }
-        img {
-            url
-        }
+        category { title }
+        img { url }
+        _createdAt
     }
   }
 `;
