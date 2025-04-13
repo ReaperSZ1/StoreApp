@@ -1,0 +1,12 @@
+@layer utilities {
+    .msg-responsive {
+        @apply text-[10px] p-[10px]
+               sm:text-[12px] sm:p-[12px] 
+               md:text-[14px] md:p-[14px] 
+               lg:text-[16px] lg:p-[16px] 
+               xl:text-[18px] xl:p-[16px]
+               max-[400px]:text-[8px] max-[400px]:p-[8px]
+               max-[350px]:text-[7px] max-[350px]:p-[7px];
+    }
+    
+}

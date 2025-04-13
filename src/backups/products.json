@@ -1,0 +1,302 @@
+[
+  {
+    "id": "FY84tfmORpC7D2hJym-mLg",
+    "title": "RTX 4060 Graphics Card",
+    "slug": "rtx-4060-graphics-card",
+    "description": "Powerful graphics card for gaming and rendering.",
+    "price": 1899,
+    "onsale": false,
+    "category": {
+      "title": "Computers"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744398189-rtx-4060-graphics-card.png"
+    },
+    "_createdAt": "2025-04-09T21:43:50+01:00"
+  },
+  {
+    "id": "BR336zhmRY-UuymKzzAPug",
+    "title": "Mechanical Gaming Keyboard",
+    "slug": "mechanical-gaming-keyboard",
+    "description": "RGB keyboard with mechanical switches for better precision.",
+    "price": 279.5,
+    "onsale": true,
+    "category": {
+      "title": "Gaming"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744320281-mechanical-gaming-keyboard.png"
+    },
+    "_createdAt": "2025-04-09T21:47:49+01:00"
+  },
+  {
+    "id": "VA0Hm_KqTeyXbVllHwQYWA",
+    "title": "Tempered Glass Screen Protector",
+    "slug": "tempered-glass-screen-protector",
+    "description": "Maximum screen protection for your phone.",
+    "price": 29.9,
+    "onsale": false,
+    "category": {
+      "title": "Mobile & Acessories"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744309706-tempered-glass-screen-protector.png"
+    },
+    "_createdAt": "2025-04-10T19:28:44+01:00"
+  },
+  {
+    "id": "cZivW_OoRLG1FiEmdmvBbQ",
+    "title": "16GB DDR4 RAM",
+    "slug": "16gb-ddr4-ram",
+    "description": "Fast memory module for heavy multitasking.",
+    "price": 329,
+    "onsale": false,
+    "category": {
+      "title": "Computers"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744309606-16gb-ddr4-ram.png"
+    },
+    "_createdAt": "2025-04-10T19:26:59+01:00"
+  },
+  {
+    "id": "S7fRpZiHTa6GWt3rJybHOw",
+    "title": "Pro Gaming Steering Wheel",
+    "slug": "pro-gaming-steering-wheel",
+    "description": "Wheel with pedals and feedback for realistic racing.",
+    "price": 799,
+    "onsale": false,
+    "category": {
+      "title": "Gaming"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744309514-pro-gaming-steering-wheel.png"
+    },
+    "_createdAt": "2025-04-10T19:25:24+01:00"
+  },
+  {
+    "id": "MWNmhBJlR6WyVk2_Tt4t1Q",
+    "title": "Wireless Charging Pad",
+    "slug": "wireless-charging-pad",
+    "description": "Inductive charger compatible with multiple devices.",
+    "price": 119,
+    "onsale": false,
+    "category": {
+      "title": "Mobile & Acessories"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744309412-wireless-charging-pad.png"
+    },
+    "_createdAt": "2025-04-10T19:23:49+01:00"
+  },
+  {
+    "id": "XLbGEp2CRaKsXZqoYBMB5w",
+    "title": "Smartwatch with Silicone Band",
+    "slug": "smartwatch-with-silicone-band",
+    "description": "Smartwatch with health monitoring features.",
+    "price": 299.99,
+    "onsale": true,
+    "category": {
+      "title": "Mobile & Acessories"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744309299-smartwatch-with-silicone-band.png"
+    },
+    "_createdAt": "2025-04-10T19:22:09+01:00"
+  },
+  {
+    "id": "YlZEJnxuQ86RdqwwQtNolQ",
+    "title": "USB 3.0 Hub",
+    "slug": "usb-3-0-hub",
+    "description": "4-port USB 3.0 hub for maximum connectivity.",
+    "price": 79,
+    "onsale": false,
+    "category": {
+      "title": "Computers"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744309120-usb-3-0-hub.png"
+    },
+    "_createdAt": "2025-04-10T19:18:53+01:00"
+  },
+  {
+    "id": "a8_ZzepqQJKvJJ51CfZK5w",
+    "title": "Gaming Headset with Mic",
+    "slug": "gaming-headset-with-mic",
+    "description": "Spatial audio headset with retractable mic.",
+    "price": 229.9,
+    "onsale": false,
+    "category": {
+      "title": "Audio"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744308979-gaming-headset-with-mic.png"
+    },
+    "_createdAt": "2025-04-10T19:16:39+01:00"
+  },
+  {
+    "id": "TMU-3DmyTVi2t-45csjgYA",
+    "title": "1TB NVMe SSD",
+    "slug": "1tb-nvme-ssd",
+    "description": "Ultra-fast storage with NVMe technology.",
+    "price": 599,
+    "onsale": false,
+    "category": {
+      "title": "Computers"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744308846-1tb-nvme-ssd.png"
+    },
+    "_createdAt": "2025-04-10T19:14:17+01:00"
+  },
+  {
+    "id": "H3H5RwpnQBq9Hf55k3U2rQ",
+    "title": "Silicone iPhone Case",
+    "slug": "silicone-iphone-case",
+    "description": "Protective silicone case for iPhones.",
+    "price": 49.9,
+    "onsale": false,
+    "category": {
+      "title": "Mobile & Acessories"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744308729-silicone-iphone-case.png"
+    },
+    "_createdAt": "2025-04-10T19:12:21+01:00"
+  },
+  {
+    "id": "PLvdY-MGQhyPH_7HQ93yqA",
+    "title": "Wireless Gamepad",
+    "slug": "wireless-gamepad",
+    "description": "Ergonomic controller compatible with PC and consoles.",
+    "price": 189.9,
+    "onsale": false,
+    "category": {
+      "title": "Gaming"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744232906-wireless-gamepad-case.png"
+    },
+    "_createdAt": "2025-04-09T22:08:39+01:00"
+  },
+  {
+    "id": "KPxddVrETEGl06x0zOYqHw",
+    "title": "RGB LED PC Case",
+    "slug": "rgb-led-pc-case",
+    "description": "Spacious case with modern design and RGB LEDs.",
+    "price": 399,
+    "onsale": false,
+    "category": {
+      "title": "Computers"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744232806-rgb-led-pc.png"
+    },
+    "_createdAt": "2025-04-09T22:06:56+01:00"
+  },
+  {
+    "id": "QgyHEN_hS5m7VvyOjBqwMw",
+    "title": "Bluetooth Speaker",
+    "slug": "bluetooth-speaker",
+    "description": "Powerful sound with long battery life.",
+    "price": 239.9,
+    "onsale": true,
+    "category": {
+      "title": "Audio"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744232639-bluetooth-speaker.png"
+    },
+    "_createdAt": "2025-04-09T22:04:51+01:00"
+  },
+  {
+    "id": "PqFNEVFBTtyxGlFjZFpllQ",
+    "title": "Reinforced Lightning Cable",
+    "slug": "reinforced-lightning-cable",
+    "description": "Durable cable for Apple devices.",
+    "price": 59,
+    "onsale": false,
+    "category": {
+      "title": "Mobile & Acessories"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744232517-reinforced-lightning-cable.png"
+    },
+    "_createdAt": "2025-04-09T22:02:16+01:00"
+  },
+  {
+    "id": "Rz-SIQzWQ3i-x1ePMRXNxw",
+    "title": "USB-C Turbo Charger",
+    "slug": "usb-c-turbo-charger",
+    "description": "Fast charging for smartphones and tablets.",
+    "price": 89.9,
+    "onsale": false,
+    "category": {
+      "title": "Mobile & Acessories"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744232357-usb-c-turbo-charger.png"
+    },
+    "_createdAt": "2025-04-09T22:00:25+01:00"
+  },
+  {
+    "id": "TyM0lkcgTi6oNv4rSe35_A",
+    "title": "Extended Gaming Mousepad",
+    "slug": "extended-gaming-mousepad",
+    "description": "Large surface mousepad with anti-slip base.",
+    "price": 59.99,
+    "onsale": false,
+    "category": {
+      "title": "Gaming"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744232153-extended-gaming-mousepad.png"
+    },
+    "_createdAt": "2025-04-09T21:57:48+01:00"
+  },
+  {
+    "id": "L6YozsJZQi2Dv5rP7QcRtQ",
+    "title": "Cooler Master CPU Cooler",
+    "slug": "cooler-master-cpu-cooler",
+    "description": "Efficient cooling system for your CPU.",
+    "price": 149,
+    "onsale": false,
+    "category": {
+      "title": "Computers"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744231952-cooler-master-cpu-cooler.png"
+    },
+    "_createdAt": "2025-04-09T21:54:38+01:00"
+  },
+  {
+    "id": "NHws83vhSYW6IHDq5ut_xQ",
+    "title": "Compact Bluetooth Earbuds",
+    "slug": "compact-bluetooth-earbuds",
+    "description": "Lightweight Bluetooth earbuds with great sound quality.",
+    "price": 129.9,
+    "onsale": false,
+    "category": {
+      "title": "Audio"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744231198-compact-bluetooth-earbuds.png"
+    },
+    "_createdAt": "2025-04-09T21:40:35+01:00"
+  },
+  {
+    "id": "XkGA8UrGSTuCCE4X4okYjA",
+    "title": "Noise Cancelling Headphones",
+    "slug": "noise-cancelling-headphones",
+    "description": "Noise-cancelling headphones for an immersive experience.",
+    "price": 299.99,
+    "onsale": true,
+    "category": {
+      "title": "Audio"
+    },
+    "img": {
+      "url": "https://www.datocms-assets.com/151453/1744230308-headphone.png"
+    },
+    "_createdAt": "2025-04-09T21:25:20+01:00"
+  }
+]

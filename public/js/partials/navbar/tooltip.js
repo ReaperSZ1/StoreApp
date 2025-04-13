@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 	const accountIcon = document.getElementById('account');
-	const tooltip = document.getElementById('tooltip');
+	const tooltip = document.getElementById('account_tooltip');
 
 	accountIcon.addEventListener('click', function (event) {
 		event.stopPropagation();

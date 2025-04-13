@@ -1,46 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html class="w-full overflow-x-hidden" lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>StoreApp</title>
         <link href="/tailwind/output.css" rel="stylesheet">
-        <style>
-            html, body {
-                width: 100%;
-                overflow-x: hidden;
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-            body {
-                background-color: rgba(20, 18, 18, 1);
-                margin: 0;
-                font-family: Arial, sans-serif;
-            }
-            .content {
-                width: 90%; /* Ou um valor fixo, tipo 1200px */
-                margin: 0 auto; /* Centraliza */
-                padding: 0 15px; /* Espaço interno */
-            }
-            .dark-overlay {
-                background-color: rgba(0, 0, 0, 0.5); /* Começa transparente */
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                width: 90%;
-                height: 100%;
-                position: fixed;
-                justify-content: center;
-                transition: background-color 0.3s ease-in-out; /* Anima a transição de cor de fundo */
-            }
-            .tooltip-transition {
-                transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-            }
-        </style>
     </head>
-    <body>
+    <body class="w-full overflow-x-hidden m-0 p-0 bg-[#141212] font-sans">
         <!-- Navbar -->
         {{>_navbar}}
         <!-- Small Navbar -->
@@ -49,36 +15,34 @@
           ⚠️ This tooltip is controlled by the `#categories-list` element in `small-navbar.hbs`
           using hover and JavaScript (click/hover events).
         --}}
-        <div class="flex flex-col justify-between absolute items-center gap-[3px] top-[18%] left-[6%] rounded-lg bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible z-10 shadow-lg border border-black tooltip-transition tooltip-categories-responsive">
-                <a href="/" class="text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] tooltip-a-responsive">
-                    Mobile & Accessories
-                </a>
-                    <hr class="w-full rounded-xl outline-none">
-                <a href="/" class="text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] tooltip-a-responsive">
-                    Gaming
-                </a>
-                    <hr class="w-full rounded-xl outline-none">
-                <a href="/" class="text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] tooltip-a-responsive">
-                    Audio
-                </a>
-                    <hr class="w-full rounded-xl outline-none">
-                <a href="/" class="text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] tooltip-a-responsive">
-                    Computers
-                </a>        
+        <div id="tooltip-overlay-container" class="relative z-50">
+            <div id="categories_tooltip"
+                class="absolute left-[6%] flex flex-col items-center gap-1 p-4 bg-white rounded-lg shadow-lg border border-black invisible opacity-0 transition-all duration-300 ease-in-out z-50 tooltip-categories-responsive"
+            >
+                <a href="/" class="text-black hover:text-black/70 tooltip-a-responsive">Mobile & Accessories</a>
+                <hr class="w-full">
+                <a href="/" class="text-black hover:text-black/70 tooltip-a-responsive">Gaming</a>
+                <hr class="w-full">
+                <a href="/" class="text-black hover:text-black/70 tooltip-a-responsive">Audio</a>
+                <hr class="w-full">
+                <a href="/" class="text-black hover:text-black/70 tooltip-a-responsive">Computers</a>
+            </div>
         </div>
-        {{!-- content --}}
-        <div class="content content-wrapper"> 
-            {{!-- Passport Error - Display error messages from Passport --}}
-            {{#if error}}
-                <div class="">{{error}}</div>
-            {{else}}
-            {{/if}}
-            {{!-- Flash Messages - Display success or error messages --}}
-            {{>_msg}} 
-            {{!-- body --}}
-            {{{body}}}
+        <!-- Content Section -->
+        <div class="relative">
+            <div id="overlay" class="absolute inset-0 bg-black/40 hidden transition-opacity duration-300 ease-in-out z-40"></div>
+            <!-- content -->
+            <div class="w-[90%] mx-auto px-[15px] z-0">
+                {{!-- Flash Messages - Display success or error messages --}}
+                {{>_msg}}
+                {{!-- body --}}
+                {{{body}}}
+            </div>
         </div>
         <!-- Footer -->
         {{>_footer}}  
     </body>
 </html>
+
+{{!-- shortcut: file:///c:\nodejs\StoreApp\public\js\main\msg.js --}}
+<script src="/js/main/msg.js"></script>

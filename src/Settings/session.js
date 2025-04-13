@@ -1,9 +1,10 @@
 import session from 'express-session';
 import { createRequire } from 'module';
 import Database from './Database.js';
-
 const require = createRequire(import.meta.url);
 const MySQLStore = require('express-mysql-session')(session);
+import dotenv from 'dotenv';
+dotenv.config();
 
 class Session {
     constructor() {
@@ -21,10 +22,10 @@ class Session {
         }
 
         return session({
-            secret: process.env.SESSION_SECRET || 'jooj',
+            secret: process.env.SESSION_SECRET,
             resave: false,
             saveUninitialized: false,
-            cookie: { httpOnly: true },
+            cookie: { httpOnly: true, maxAge: 3600000 },
             store: this.store
         });
     }
