@@ -11,6 +11,7 @@ export const signUp = async (req, res) => {
 			req.flash('errorMsg', 'User already exists'); // Mensagem de erro flash
 			return res.redirect('/'); // Redireciona de volta para a página inicial
 		}
+         
 		// Cria o novo usuário
 		const user = await User.create({ name, email, password });
 

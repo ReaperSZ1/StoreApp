@@ -66,7 +66,7 @@
                             <form class="flex h-auto flex-col w-full justify-between Modal-form-responsive" action="/api/auth/signup" method="post">
                                 <div class="flex flex-col w-full justify-start gap-[2px]">
                                     <label for="name" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Name</label>
-                                    <input type="text" name="name" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="name" required> 
+                                    <input type="text" id="name" name="name" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="name" required> 
                                 </div>
                                 <div class="flex flex-col w-full justify-start gap-[2px]">
                                     <label for="email" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Email</label>
@@ -78,7 +78,7 @@
                                 </div>   
                                 <div class="flex flex-col w-full justify-start gap-[2px]">
                                     <label for="password2" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Repeat Password</label>
-                                    <input type="password" name="password2" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="new-password" required> 
+                                    <input type="password" id="password2" name="password2" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="new-password" required> 
                                 </div>
                                 <button type="submit" 
                                     class="w-full bg-[rgb(0,59,197)] text-white font-[Calibri,sans-serif] flex items-center justify-center rounded-md border border-solid border-white cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[rgb(2,69,226)] form-submit-responsive">
@@ -153,14 +153,14 @@
                         </button>
                         <h2 class="text-white self-start h2-modal-responsive">Log In</h2>
                         <div class="w-[80%] flex flex-col gap-[4px] items-center">
-                            <form class="flex flex-col h-auto w-full justify-between Modal-form-responsive" action="/" method="post">
+                            <form class="flex flex-col h-auto w-full justify-between Modal-form-responsive" action="/api/auth/login" method="post">
                                 <div class="flex flex-col w-full justify-start gap-[2px]">
                                     <label for="email" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Email</label>
-                                    <input type="email" name="email" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="email" required> 
+                                    <input type="email" id="email" name="email" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="email" required> 
                                 </div>
                                 <div class="flex flex-col w-full justify-start gap-[2px]">
                                     <label for="password" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Password</label>
-                                    <input type="password" name="password" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="new-password"required>
+                                    <input type="password" id="password" name="password" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="new-password"required>
                                 </div>   
                                 <button type="submit" class="w-full bg-[rgb(0,59,197)] text-white font-[Calibri,sans-serif] 
                                 flex items-center justify-center rounded-md border border-solid border-white cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[rgb(2,69,226)] form-submit-responsive">

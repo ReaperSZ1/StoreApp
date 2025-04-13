@@ -15,14 +15,17 @@ const User = sequelize.define('User', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+            isEmail: true
+        }
     },
     password: {
         type: DataTypes.STRING,
         allowNull: false
     }
 }, {
-    timestamps: false // Adicione isso
+    timestamps: false
   });
 
 User.beforeCreate(async (user) => {
