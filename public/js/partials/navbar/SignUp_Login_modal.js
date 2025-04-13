@@ -49,4 +49,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.target === modalSignUp) closeModal(modalSignUp);
         if (event.target === modalLogin) closeModal(modalLogin);
     });
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const password = document.querySelector('input[name="password"]').value;
+        const password2 = document.querySelector('input[name="password2"]').value;
+
+        if (password !== password2) {
+            // eslint-disable-next-line no-undef
+            alert('Passwords do not match');
+            e.preventDefault();
+        }
+    });
 });

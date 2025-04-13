@@ -1,9 +1,9 @@
-import { buscarProdutos } from '../utils/dato.js';
+import { fetchProducts } from '../utils/products.js';
 
-class HomeController {
+export default class HomeController {
 	static async index(req, res) {
 		try {
-			const products = await buscarProdutos();
+			const products = await fetchProducts();
             const onsale = products.filter(prod => prod.onsale);
             const recents = products.filter(prod => !prod.onsale).slice(0, 4); // 4 primeiros mais recentes
             const comuns = products.filter(prod => {
@@ -18,4 +18,3 @@ class HomeController {
 	}
 }
 
-export default HomeController;
