@@ -2,6 +2,7 @@ import express from 'express';
 import flash from 'connect-flash';
 import dotenv from 'dotenv';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 
 // Load environment variables
@@ -9,6 +10,7 @@ dotenv.config();
 
 // Local helpers
 import GlobalMiddleware from './Middlewares/GlobalMiddleware.js';
+import checkAuth from './Middlewares/checkAuth.js'; 
 import helmetConfig from './Settings/helmet.js';
 import HandlebarsConfig from './Settings/Handlebars.js';
 import Session from './Settings/session.js';
@@ -43,6 +45,13 @@ class App {
 		const sessionMiddleware = await Session.getSessionMiddleware();
 		this.app.use(sessionMiddleware);
 
+        // Cookie Parser
+        this.app.use(cookieParser());
+
+        // Check auth
+        this.app.use(checkAuth);
+
+        // Flash
 		this.app.use(flash());
 
 		// Helmet

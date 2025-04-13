@@ -75,3 +75,9 @@ export const login = async (req, res) => {
 		return res.redirect('/'); // Redireciona para a página inicial em caso de erro
 	}
 };
+
+export const logout = async (req, res) => {
+    res.clearCookie('authToken'); 
+    req.flash('successMsg', 'You have been logged out');
+    res.redirect('/');
+};
