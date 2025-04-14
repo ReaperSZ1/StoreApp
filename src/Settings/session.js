@@ -1,6 +1,6 @@
 import session from 'express-session';
 import { createRequire } from 'module';
-import Database from './Database.js';
+import { getConnection } from '../database/connection.js';
 const require = createRequire(import.meta.url);
 const MySQLStore = require('express-mysql-session')(session);
 import dotenv from 'dotenv';
@@ -12,7 +12,7 @@ class Session {
     }
 
     async init() {
-        const db = await Database.getConnection(); // Aguarda conexão com o banco
+        const db = await getConnection(); 
         this.store = new MySQLStore({}, db);
     }
 

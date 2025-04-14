@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
+import passport from 'passport';
+import './Settings/passportGoogle.js';
 
 // Load environment variables
 dotenv.config();
@@ -14,9 +16,9 @@ import checkAuth from './Middlewares/checkAuth.js';
 import helmetConfig from './Settings/helmet.js';
 import HandlebarsConfig from './Settings/Handlebars.js';
 import Session from './Settings/session.js';
-import sequelize from './database/connection.js';
 
 // Routes
+import googleAuthRoutes from './Routes/googleAuth.js';
 import IndexRoutes from './Routes/IndexRoutes.js';
 import authRoutes from './Routes/authRoutes.js';
 
@@ -33,7 +35,6 @@ class App {
 	async init() {
 		await this.middlewares();
 		this.routes();
-		this.connectDatabase();
 	}
 
 	async middlewares() {
@@ -45,14 +46,21 @@ class App {
 		const sessionMiddleware = await Session.getSessionMiddleware();
 		this.app.use(sessionMiddleware);
 
+        // Passport
+        this.app.use(passport.initialize());
+        this.app.use(passport.session());
+        
         // Cookie Parser
         this.app.use(cookieParser());
-
+        
         // Check auth
         this.app.use(checkAuth);
-
+        
         // Flash
 		this.app.use(flash());
+        
+        // Google Auth
+        this.app.use(googleAuthRoutes);
 
 		// Helmet
 		this.app.use(helmetConfig);
@@ -72,12 +80,6 @@ class App {
 		this.app.use('/api/auth', authRoutes); // Auth routes
 	}
 
-	connectDatabase() {
-		sequelize
-			.authenticate()
-			.then(() => console.log('✅ MySQL connected'))
-			.catch((err) => console.error('❌ MySQL error:', err));
-	}
 }
 
 const appInstance = new App();
