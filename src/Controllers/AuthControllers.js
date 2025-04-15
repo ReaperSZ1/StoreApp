@@ -11,10 +11,10 @@ export const signUp = async (req, res) => {
         }
 		const userExists = await User.findOne({ where: { email } });
 		if (userExists) {
-			req.flash('errorMsg', 'User already exists'); // Mensagem de erro flash
-			return res.redirect('/'); // Redireciona de volta para a página inicial
+			req.flash('errorMsg', 'User Email already exists'); 
+			return res.redirect('/'); 
 		}
-         
+          
 		// Cria o novo usuário
 		const user = await User.create({ name, email, password });
 
@@ -64,6 +64,10 @@ export const login = async (req, res) => {
 			expiresIn: '1h'
 		});
 
+        if (password === 'google-login') {
+            req.flash('errorMsg', 'This user used google login'); 
+            return res.redirect('/');
+        }
 		// Envia o token como um cookie
 		res.cookie('authToken', token, {
 			httpOnly: true,

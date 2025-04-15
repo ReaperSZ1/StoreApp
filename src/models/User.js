@@ -23,6 +23,14 @@ const User = sequelize.define('User', {
     password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    provider: {
+        type: DataTypes.STRING,
+        defaultValue: 'local'
+    },
+    googleId: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 }, {
     timestamps: false
@@ -35,7 +43,10 @@ User.beforeCreate(async (user) => {
 });
 
 User.prototype.comparePassword = function(password) {
-  return bcrypt.compare(password, this.password);
+    if (password === 'google-login') {
+        return false; 
+    }
+    return bcrypt.compare(password, this.password);
 };
 
 export default User;

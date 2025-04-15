@@ -1,19 +1,50 @@
 import passport from 'passport';
 
-// Inicia a autenticação com o Google
-export const googleAuth = passport.authenticate('google', {
-  scope: ['profile', 'email']
+export const googleSignup = passport.authenticate('google-signup', {
+    scope: ['profile', 'email']
 });
 
-// Callback do Google após login
-export const googleCallback = passport.authenticate('google', {
-  failureRedirect: '/'
+export const googleSignupCallback = (req, res, next) => {
+    passport.authenticate('google-signup', (err, user, info) => {
+        if (err) { return next(err); }
+    
+        if (!user) {
+            req.flash('errorMsg', info.message);
+            return res.redirect('/');
+        }
+        if (user.provider === 'google') {
+            req.flash('errorMsg', 'This account was created with google');
+            return res.redirect('/');
+        }
+        
+        req.login(user, (err) => {
+            if (err) { return next(err); }
+            req.session.isLoggedIn = true;
+            req.flash('successMsg', 'Signed up successfully!');
+            return res.redirect('/');
+        });
+    })(req, res, next);
+};
+
+export const googleLogin = passport.authenticate('google-login', {
+    scope: ['profile', 'email']
 });
 
-// Após autenticação bem-sucedida
-export const redirectAfterLogin = (req, res) => {
-    req.session.isLoggedIn = true;  
-    req.flash('successMsg', 'Login successfully!'); 
-    res.redirect('/'); 
+export const googleLoginCallback = (req, res, next) => {
+    passport.authenticate('google-login', (err, user, info) => {
+        if (err) { return next(err); }
+    
+        if (!user) {
+            req.flash('errorMsg', info.message);
+            return res.redirect('/');
+        }
+        
+        req.login(user, (err) => {
+            if (err) { return next(err); }
+            req.session.isLoggedIn = true;
+            req.flash('successMsg', 'Signed up successfully!');
+            return res.redirect('/');
+        });
+    })(req, res, next);
 };
 

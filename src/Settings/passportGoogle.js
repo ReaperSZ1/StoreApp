@@ -5,36 +5,47 @@ import User from '../models/User.js';
 
 dotenv.config();
 
-passport.use(new GoogleStrategy({
+passport.use('google-signup', new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://localhost:8081/auth/google/callback',
-  },
-  async (token, tokenSecret, profile, done) => {
+    callbackURL: 'http://localhost:8081/auth/google/signup/callback'
+}, async (accessToken, refreshToken, profile, done) => {
     try {
-      // Verifica se o usuário já existe no banco de dados
-      let user = await User.findOne({ where: { email: profile.emails[0].value } });
-
-      if (!user) {
-        // Cria um novo usuário se não encontrar no banco de dados
-        user = await User.create({
-          name: profile.displayName,
-          email: profile.emails[0].value,
-          googleId: profile.id,
-        });
+      const existingUser = await User.findOne({ where: { email: profile.emails[0].value } });
+  
+      if (existingUser) {
+        return done(null, false, { message: 'User already exists.' });
       }
-      // Retorna o usuário para a sessão
+  
+      const user = await User.create({
+        name: profile.displayName,
+        email: profile.emails[0].value,
+        googleId: profile.id,
+        password: 'google-login',
+        provider: 'google'
+      });
+  
       return done(null, user);
     } catch (err) {
-      return done(err, null);
+      return done(err);
     }
-  }
-));
-
-passport.serializeUser((user, done) => done(null, user.id));
-
-passport.deserializeUser(async (id, done) => {
-  const user = await User.findByPk(id);
-  done(null, user);
-});
-
+}));
+  
+passport.use('google-login', new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: 'http://localhost:8081/auth/google/login/callback'
+}, async (accessToken, refreshToken, profile, done) => {
+    try {
+      const user = await User.findOne({ where: { email: profile.emails[0].value } });
+  
+      if (!user) {
+        return done(null, false, { message: 'User not found. Please sign up first.' });
+      }
+  
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
+}));
+  
