@@ -5,22 +5,29 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 import passport from 'passport';
-import './Settings/passportGoogle.js';
 
 // Load environment variables
 dotenv.config();
 
-// Local helpers
+// Strategies
+import './strategies/passportGoogle.js';
+import './strategies/passportFacebook.js';
+
+// Middlewares  
 import GlobalMiddleware from './Middlewares/GlobalMiddleware.js';
 import checkAuth from './Middlewares/checkAuth.js'; 
 import helmetConfig from './Settings/helmet.js';
+
+// Settings
 import HandlebarsConfig from './Settings/Handlebars.js';
 import Session from './Settings/session.js';
 
 // Routes
-import googleAuthRoutes from './Routes/googleAuth.js';
+import googleAuthRoutes from './Routes/googleAuth.js'; 
+import facebookAuthRoutes from './Routes/facebookAuth.js'; 
 import IndexRoutes from './Routes/IndexRoutes.js';
 import authRoutes from './Routes/authRoutes.js';
+
 
 // Path settings
 const __filename = fileURLToPath(import.meta.url);
@@ -61,6 +68,9 @@ class App {
         
         // Google Auth
         this.app.use(googleAuthRoutes);
+
+        // Facebook Auth
+        this.app.use(facebookAuthRoutes);
 
 		// Helmet
 		this.app.use(helmetConfig);

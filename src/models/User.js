@@ -43,7 +43,7 @@ User.beforeCreate(async (user) => {
 });
 
 User.prototype.comparePassword = function(password) {
-    if (password === 'google-login') {
+    if (password === 'google-login' || password === 'facebook-login') {
         return false; 
     }
     return bcrypt.compare(password, this.password);

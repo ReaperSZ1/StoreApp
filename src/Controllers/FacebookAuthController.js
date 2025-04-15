@@ -1,18 +1,18 @@
 import passport from 'passport';
 
-export const googleSignup = passport.authenticate('google-signup', {
-    scope: ['profile', 'email']
+export const facebookSignup = passport.authenticate('facebook-signup', {
+    scope: ['email']
 });
 
-export const googleSignupCallback = (req, res, next) => {
-    passport.authenticate('google-signup', (err, user, info) => {
+export const facebookSignupCallback = (req, res, next) => {
+    passport.authenticate('facebook-signup', (err, user, info) => {
         if (err) { return next(err); }
-    
+
         if (!user) {
             req.flash('errorMsg', info.message);
             return res.redirect('/');
         }
-      
+
         req.login(user, (err) => {
             if (err) { return next(err); }
             req.session.isLoggedIn = true;
@@ -22,19 +22,19 @@ export const googleSignupCallback = (req, res, next) => {
     })(req, res, next);
 };
 
-export const googleLogin = passport.authenticate('google-login', {
-    scope: ['profile', 'email']
+export const facebookLogin = passport.authenticate('facebook-login', {
+    scope: ['email']
 });
 
-export const googleLoginCallback = (req, res, next) => {
-    passport.authenticate('google-login', (err, user, info) => {
+export const facebookLoginCallback = (req, res, next) => {
+    passport.authenticate('facebook-login', (err, user, info) => {
         if (err) { return next(err); }
-    
+
         if (!user) {
             req.flash('errorMsg', info.message);
             return res.redirect('/');
         }
-        
+
         req.login(user, (err) => {
             if (err) { return next(err); }
             req.session.isLoggedIn = true;
@@ -43,4 +43,3 @@ export const googleLoginCallback = (req, res, next) => {
         });
     })(req, res, next);
 };
-
