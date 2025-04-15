@@ -11,23 +11,10 @@
         {{>_navbar}}
         <!-- Small Navbar -->
         {{>_small_navbar}}
-        {{!--
-          ⚠️ This tooltip is controlled by the `#categories-list` element in `small-navbar.hbs`
-          using hover and JavaScript (click/hover events).
-        --}}
-        <div id="tooltip-overlay-container" class="relative z-50">
-            <div id="categories_tooltip"
-                class="absolute left-[6%] flex flex-col items-center gap-1 p-4 bg-white rounded-lg shadow-lg border border-black invisible opacity-0 transition-all duration-300 ease-in-out z-50 tooltip-categories-responsive"
-            >
-                <a href="/" class="text-black hover:text-black/70 tooltip-a-responsive">Mobile & Accessories</a>
-                <hr class="w-full">
-                <a href="/" class="text-black hover:text-black/70 tooltip-a-responsive">Gaming</a>
-                <hr class="w-full">
-                <a href="/" class="text-black hover:text-black/70 tooltip-a-responsive">Audio</a>
-                <hr class="w-full">
-                <a href="/" class="text-black hover:text-black/70 tooltip-a-responsive">Computers</a>
-            </div>
-        </div>
+        {{!-- tooltip --}}
+        {{>_categories_tooltip}}
+        {{!-- modal --}}
+        {{>_sign_login_modal}}
         <!-- Content Section -->
         <div class="relative">
             <div id="overlay" class="absolute inset-0 bg-black/40 hidden transition-opacity duration-300 ease-in-out z-40"></div>

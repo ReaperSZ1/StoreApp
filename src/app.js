@@ -4,21 +4,30 @@ import dotenv from 'dotenv';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
+import passport from 'passport';
 
 // Load environment variables
 dotenv.config();
 
-// Local helpers
+// Strategies
+import './strategies/passportGoogle.js';
+import './strategies/passportFacebook.js';
+
+// Middlewares  
 import GlobalMiddleware from './Middlewares/GlobalMiddleware.js';
 import checkAuth from './Middlewares/checkAuth.js'; 
 import helmetConfig from './Settings/helmet.js';
+
+// Settings
 import HandlebarsConfig from './Settings/Handlebars.js';
 import Session from './Settings/session.js';
-import sequelize from './database/connection.js';
 
 // Routes
+import googleAuthRoutes from './Routes/googleAuth.js'; 
+import facebookAuthRoutes from './Routes/facebookAuth.js'; 
 import IndexRoutes from './Routes/IndexRoutes.js';
 import authRoutes from './Routes/authRoutes.js';
+
 
 // Path settings
 const __filename = fileURLToPath(import.meta.url);
@@ -33,7 +42,6 @@ class App {
 	async init() {
 		await this.middlewares();
 		this.routes();
-		this.connectDatabase();
 	}
 
 	async middlewares() {
@@ -45,14 +53,24 @@ class App {
 		const sessionMiddleware = await Session.getSessionMiddleware();
 		this.app.use(sessionMiddleware);
 
+        // Passport
+        this.app.use(passport.initialize());
+        this.app.use(passport.session());
+        
         // Cookie Parser
         this.app.use(cookieParser());
-
+        
         // Check auth
         this.app.use(checkAuth);
-
+        
         // Flash
 		this.app.use(flash());
+        
+        // Google Auth
+        this.app.use(googleAuthRoutes);
+
+        // Facebook Auth
+        this.app.use(facebookAuthRoutes);
 
 		// Helmet
 		this.app.use(helmetConfig);
@@ -72,12 +90,6 @@ class App {
 		this.app.use('/api/auth', authRoutes); // Auth routes
 	}
 
-	connectDatabase() {
-		sequelize
-			.authenticate()
-			.then(() => console.log('✅ MySQL connected'))
-			.catch((err) => console.error('❌ MySQL error:', err));
-	}
 }
 
 const appInstance = new App();

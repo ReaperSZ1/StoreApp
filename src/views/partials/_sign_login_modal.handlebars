@@ -1,0 +1,136 @@
+
+<!-- Sign Up -->
+<div id="modalSignUp" class="fixed inset-0 z-50 flex items-center justify-center bg-white/50 opacity-0 invisible transition-opacity duration-300 ease-in-out">
+    <div class="flex justify-center relative items-center flex-col rounded-lg p-[20px] shadow-[0px_4px_11px_rgba(0,0,0,0.6)] bg-black modal-content-responsive">
+        <button id="closeSignUpBtn" class="flex absolute cursor-pointer bg-none items-center justify-center border-none top-[10px] right-[10px]">
+            <svg class="fill-white transition-colors duration-300 ease-in-out hover:fill-gray-400 close-modal-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+        </button>
+        <h2 class="text-white self-start h2-modal-responsive">Sign Up</h2>
+        <div class="w-[80%] flex flex-col gap-[4px] items-center">
+            <form class="flex h-auto flex-col w-full justify-between Modal-form-responsive" action="/api/auth/signup" method="post">
+                <div class="flex flex-col w-full justify-start gap-[2px]">
+                    <label for="name" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Name</label>
+                    <input type="text" id="name" name="name" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="name" required> 
+                </div>
+                <div class="flex flex-col w-full justify-start gap-[2px]">
+                    <label for="email" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Email</label>
+                    <input type="email" name="email" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="email" required> 
+                </div>
+                <div class="flex flex-col w-full justify-start gap-[2px]">
+                    <label for="password" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Password</label>
+                    <input type="password" name="password" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="new-password"required>
+                </div>   
+                <div class="flex flex-col w-full justify-start gap-[2px]">
+                    <label for="password2" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Repeat Password</label>
+                    <input type="password" id="password2" name="password2" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="new-password" required> 
+                </div>
+                <button type="submit" 
+                    class="w-full bg-[rgb(0,59,197)] text-white font-[Calibri,sans-serif] flex items-center justify-center rounded-md border border-solid border-white cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[rgb(2,69,226)] form-submit-responsive">
+                    Sign
+                </button>
+            </form>
+
+            <div class="w-full flex items-center justify-center gap-[32px]">
+                <hr class="rounded-xl border-none h-[1px] bg-white flex-1">
+                <p class="font-[Calibri,sans-serif] text-white whitespace-nowrap OR-responsive">
+                    OR
+                </p>
+                <hr class="rounded-xl border-none h-[1px] bg-white flex-1">
+            </div>
+            {{!-- facebook and google --}}
+            <div class="flex w-full justify-between cursor-pointer">
+                <a href="/auth/facebook/signup" class="w-[42%] bg-white border border-black rounded-[4px] flex items-center justify-center gap-[3px] google-facebook-responsive">
+                    <svg class="fill-black g-f-svg-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                        <path fill="#1877F2" d="M24 2C11.8 2 2 11.8 2 24c0 10.7 7.7 19.6 17.7 21.6V29.5h-5.3V24h5.3v-4.1c0-5.3 3.1-8.2 7.8-8.2 2.3 0 4.6.4 4.6.4v5h-2.6c-2.6 0-3.4 1.6-3.4 3.3V24h5.8l-.9 5.5h-4.9v16.1C38.3 43.6 46 34.7 46 24c0-12.2-9.8-22-22-22z"/>
+                        <path fill="#fff" d="M33.1 29.5l.9-5.5h-5.8v-3.6c0-1.7.8-3.3 3.4-3.3h2.6v-5s-2.3-.4-4.6-.4c-4.7 0-7.8 2.9-7.8 8.2V24h-5.3v5.5h5.3v16.1c1.1.2 2.2.3 3.3.3s2.2-.1 3.3-.3V29.5h4.9z"/>
+                    </svg>
+                    <p class="g-f-text-responsive">Facebook</p>
+                </a>
+
+                                        
+                <a href="/auth/google/signup" class="w-[42%] bg-white border border-black rounded-[4px] flex items-center justify-center gap-[3px] google-facebook-responsive">
+                    <svg class="fill-black g-f-svg-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                        <path d="M44.5 20H24v8.5h11.7C34.3 33.4 29.8 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.2 4.3 29.4 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z" fill="#FFC107"/>
+                        <path d="M6.3 14.7l6.6 4.8C14.1 15.2 18.7 12 24 12c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.2 4.3 29.4 2 24 2 16.1 2 9.2 6.8 6.3 14.7z" fill="#FF3D00"/>
+                        <path d="M24 46c5.4 0 10.1-1.8 13.7-4.9l-6.4-5.2C28.9 37.9 26.5 39 24 39c-5.8 0-10.7-3.9-12.4-9.3l-6.6 5.1C9.2 41.2 16.1 46 24 46z" fill="#4CAF50"/>
+                        <path d="M44.5 20H24v8.5h11.7c-1.3 3.5-4 6.1-7.4 7.4l6.4 5.2c3.7-3.4 6.2-8.4 6.2-14.6 0-1.3-.2-2.7-.5-4z" fill="#1976D2"/>
+                    </svg>
+                    <p class="g-f-text-responsive">Google</p>
+                </a>
+                
+            </div>
+            <div class="w-full flex justify-center items-center haveAccount-responsive">
+                <p class="text-white font-[Calibri,sans-serif] haveAccount-text-responsive">
+                    Have an Account?
+                </p>
+                <button id="accountOpenLogin" class="bg-transparent border-none text-[#00BBFF] font-[Calibri,sans-serif] cursor-pointer haveAccount-btn-responsive">
+                    Log In
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login -->
+<div id="modalLogin" class="fixed inset-0 z-50 flex items-center justify-center bg-white/50 opacity-0 invisible transition-opacity duration-300 ease-in-out">
+    <div class="flex justify-center relative items-center flex-col rounded-lg p-[20px] shadow-[0px_4px_11px_rgba(0,0,0,0.6)] bg-black modal-content-responsive">
+        <button id="closeLoginBtn" class="flex absolute cursor-pointer bg-none items-center justify-center border-none top-[10px] right-[10px]">
+            <svg class="fill-white transition-colors duration-300 ease-in-out hover:fill-gray-400 close-modal-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+        </button>
+        <h2 class="text-white self-start h2-modal-responsive">Log In</h2>
+        <div class="w-[80%] flex flex-col gap-[4px] items-center">
+            <form class="flex flex-col h-auto w-full justify-between Modal-form-responsive" action="/api/auth/login" method="post">
+                <div class="flex flex-col w-full justify-start gap-[2px]">
+                    <label for="email" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Email</label>
+                    <input type="email" id="email" name="email" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="email" required> 
+                </div>
+                <div class="flex flex-col w-full justify-start gap-[2px]">
+                    <label for="password" class="text-white font-[Calibri,sans-serif] modal-label-responsive">Password</label>
+                    <input type="password" id="password" name="password" class="w-full rounded-sm border-none pl-[10px] outline-none bg-white modal-input-responsive" autocomplete="new-password"required>
+                </div>   
+                <button type="submit" class="w-full bg-[rgb(0,59,197)] text-white font-[Calibri,sans-serif] 
+                flex items-center justify-center rounded-md border border-solid border-white cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[rgb(2,69,226)] form-submit-responsive">
+                    Log In
+                </button>
+            </form>
+            <div class="w-full flex items-center justify-center gap-[32px]">
+                <hr class="rounded-xl border-none h-[1px] bg-white flex-1">
+                <p class="font-[Calibri,sans-serif] text-white whitespace-nowrap OR-responsive">
+                    OR
+                </p>
+                <hr class="rounded-xl border-none h-[1px] bg-white flex-1">
+            </div>
+            {{!-- facebook and google --}}
+            <div class="flex w-full justify-between cursor-pointer">
+                <a href="/auth/facebook/login" class="w-[42%] bg-white border border-black rounded-[4px] flex items-center justify-center gap-[3px] google-facebook-responsive">
+                    <svg class="fill-black g-f-svg-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                        <path fill="#1877F2" d="M24 2C11.8 2 2 11.8 2 24c0 10.7 7.7 19.6 17.7 21.6V29.5h-5.3V24h5.3v-4.1c0-5.3 3.1-8.2 7.8-8.2 2.3 0 4.6.4 4.6.4v5h-2.6c-2.6 0-3.4 1.6-3.4 3.3V24h5.8l-.9 5.5h-4.9v16.1C38.3 43.6 46 34.7 46 24c0-12.2-9.8-22-22-22z"/>
+                        <path fill="#fff" d="M33.1 29.5l.9-5.5h-5.8v-3.6c0-1.7.8-3.3 3.4-3.3h2.6v-5s-2.3-.4-4.6-.4c-4.7 0-7.8 2.9-7.8 8.2V24h-5.3v5.5h5.3v16.1c1.1.2 2.2.3 3.3.3s2.2-.1 3.3-.3V29.5h4.9z"/>
+                    </svg>
+                    <p class="g-f-text-responsive">Facebook</p>
+                </a>
+                                        
+                <a href="/auth/google/login" class="w-[42%] bg-white border border-black rounded-[4px] flex items-center justify-center gap-[3px] google-facebook-responsive">
+                    <svg class="fill-black g-f-svg-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                        <path d="M44.5 20H24v8.5h11.7C34.3 33.4 29.8 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.2 4.3 29.4 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z" fill="#FFC107"/>
+                        <path d="M6.3 14.7l6.6 4.8C14.1 15.2 18.7 12 24 12c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.2 4.3 29.4 2 24 2 16.1 2 9.2 6.8 6.3 14.7z" fill="#FF3D00"/>
+                        <path d="M24 46c5.4 0 10.1-1.8 13.7-4.9l-6.4-5.2C28.9 37.9 26.5 39 24 39c-5.8 0-10.7-3.9-12.4-9.3l-6.6 5.1C9.2 41.2 16.1 46 24 46z" fill="#4CAF50"/>
+                        <path d="M44.5 20H24v8.5h11.7c-1.3 3.5-4 6.1-7.4 7.4l6.4 5.2c3.7-3.4 6.2-8.4 6.2-14.6 0-1.3-.2-2.7-.5-4z" fill="#1976D2"/>
+                    </svg>
+                    <p class="g-f-text-responsive">Google</p>
+                </a>
+                
+            </div>
+            <div class="w-full flex justify-center items-center haveAccount-responsive">
+                <p class="text-white font-[Calibri,sans-serif] haveAccount-text-responsive">
+                    New Here?
+                </p>
+                <button id="accountOpenSignUp" class="bg-transparent border-none text-[#00BBFF] font-[Calibri,sans-serif] cursor-pointer haveAccount-btn-responsive">
+                    Sign Up
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- shortcut: file:///c:\nodejs\StoreApp\public\js\partials\sign&Login\SignUp_Login_modal.js --}}
+<script src="/js/partials/sign&Login/SignUp_Login_modal.js"></script>

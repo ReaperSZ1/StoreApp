@@ -3,7 +3,7 @@ import { fetchProducts } from '../utils/products.js';
 export default class HomeController {
 	static async index(req, res) {
 		try {
-            const isLoggedIn = req.user ? true : false;
+            const isLoggedIn = req.session.isLoggedIn ? true : false;
 			const products = await fetchProducts();
             const onsale = products.filter(prod => prod.onsale);
             const recents = products.filter(prod => !prod.onsale).slice(0, 4); // 4 primeiros mais recentes
