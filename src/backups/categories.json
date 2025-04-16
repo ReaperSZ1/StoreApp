@@ -1,0 +1,26 @@
+[
+  {
+    "id": "IWPNp41GTlKbdXPy0AEaJw",
+    "title": "Computers",
+    "slug": "computers",
+    "_createdAt": "2025-04-09T19:10:27+01:00"
+  },
+  {
+    "id": "Kru7olieQnqJL6KY8gN9Bw",
+    "title": "Audio",
+    "slug": "audio",
+    "_createdAt": "2025-04-09T19:10:15+01:00"
+  },
+  {
+    "id": "M09QQSauRWaF_syGNfpQEw",
+    "title": "Gaming",
+    "slug": "gaming",
+    "_createdAt": "2025-04-09T19:08:59+01:00"
+  },
+  {
+    "id": "BGcNP5rdRzWuX1IQDWLIYg",
+    "title": "Mobile & Acessories",
+    "slug": "mobile-acessories",
+    "_createdAt": "2025-04-09T19:08:27+01:00"
+  }
+]

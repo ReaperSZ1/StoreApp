@@ -6,18 +6,12 @@
             </p> 
             <svg class="transition-transform duration-200 ease-in-out opacity-70 group-hover:rotate-180 arrow-down-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000000"><path d="M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z"/></svg>
         </div>
-        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
-            Mobile & Accessories
-        </a>
-        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
-            Gaming
-        </a>
-        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
-            Audio
-        </a>
-        <a href="/" class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
-            Computers
-        </a>
+        {{#each categories}}
+            <a href="/category/{{this.slug}}" 
+            class="font-[Calibri] no-underline font-normal text-black transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-link-responsive">
+                {{this.title}}
+            </a>
+        {{/each}}
     </div>
 </nav>
 {{!-- shortcut: file:///c:\nodejs\StoreApp\public\js\partials\small_navbar\tooltip.js --}}

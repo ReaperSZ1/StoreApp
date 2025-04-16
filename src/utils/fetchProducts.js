@@ -15,7 +15,7 @@ const query = `
       description
       price
       onsale
-      category { title }
+      category { slug }
       img { url }
       _createdAt
     }
@@ -99,3 +99,5 @@ export async function fetchProducts({ forceUpdate = false } = {}) {
     }
   }
 }
+
+// await fetchProducts({ forceUpdate: true });

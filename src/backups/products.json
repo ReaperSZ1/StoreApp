@@ -7,7 +7,7 @@
     "price": 1899,
     "onsale": false,
     "category": {
-      "title": "Computers"
+      "slug": "computers"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744398189-rtx-4060-graphics-card.png"
@@ -22,7 +22,7 @@
     "price": 279.5,
     "onsale": true,
     "category": {
-      "title": "Gaming"
+      "slug": "gaming"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744320281-mechanical-gaming-keyboard.png"
@@ -37,7 +37,7 @@
     "price": 29.9,
     "onsale": false,
     "category": {
-      "title": "Mobile & Acessories"
+      "slug": "mobile-acessories"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744309706-tempered-glass-screen-protector.png"
@@ -52,7 +52,7 @@
     "price": 329,
     "onsale": false,
     "category": {
-      "title": "Computers"
+      "slug": "computers"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744309606-16gb-ddr4-ram.png"
@@ -67,7 +67,7 @@
     "price": 799,
     "onsale": false,
     "category": {
-      "title": "Gaming"
+      "slug": "gaming"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744309514-pro-gaming-steering-wheel.png"
@@ -82,7 +82,7 @@
     "price": 119,
     "onsale": false,
     "category": {
-      "title": "Mobile & Acessories"
+      "slug": "mobile-acessories"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744309412-wireless-charging-pad.png"
@@ -97,7 +97,7 @@
     "price": 299.99,
     "onsale": true,
     "category": {
-      "title": "Mobile & Acessories"
+      "slug": "mobile-acessories"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744309299-smartwatch-with-silicone-band.png"
@@ -112,7 +112,7 @@
     "price": 79,
     "onsale": false,
     "category": {
-      "title": "Computers"
+      "slug": "computers"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744309120-usb-3-0-hub.png"
@@ -127,7 +127,7 @@
     "price": 229.9,
     "onsale": false,
     "category": {
-      "title": "Audio"
+      "slug": "audio"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744308979-gaming-headset-with-mic.png"
@@ -142,7 +142,7 @@
     "price": 599,
     "onsale": false,
     "category": {
-      "title": "Computers"
+      "slug": "computers"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744308846-1tb-nvme-ssd.png"
@@ -157,7 +157,7 @@
     "price": 49.9,
     "onsale": false,
     "category": {
-      "title": "Mobile & Acessories"
+      "slug": "mobile-acessories"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744308729-silicone-iphone-case.png"
@@ -172,7 +172,7 @@
     "price": 189.9,
     "onsale": false,
     "category": {
-      "title": "Gaming"
+      "slug": "gaming"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744232906-wireless-gamepad-case.png"
@@ -187,7 +187,7 @@
     "price": 399,
     "onsale": false,
     "category": {
-      "title": "Computers"
+      "slug": "computers"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744232806-rgb-led-pc.png"
@@ -202,7 +202,7 @@
     "price": 239.9,
     "onsale": true,
     "category": {
-      "title": "Audio"
+      "slug": "audio"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744232639-bluetooth-speaker.png"
@@ -217,7 +217,7 @@
     "price": 59,
     "onsale": false,
     "category": {
-      "title": "Mobile & Acessories"
+      "slug": "mobile-acessories"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744232517-reinforced-lightning-cable.png"
@@ -232,7 +232,7 @@
     "price": 89.9,
     "onsale": false,
     "category": {
-      "title": "Mobile & Acessories"
+      "slug": "mobile-acessories"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744232357-usb-c-turbo-charger.png"
@@ -247,7 +247,7 @@
     "price": 59.99,
     "onsale": false,
     "category": {
-      "title": "Gaming"
+      "slug": "gaming"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744232153-extended-gaming-mousepad.png"
@@ -262,7 +262,7 @@
     "price": 149,
     "onsale": false,
     "category": {
-      "title": "Computers"
+      "slug": "computers"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744231952-cooler-master-cpu-cooler.png"
@@ -277,7 +277,7 @@
     "price": 129.9,
     "onsale": false,
     "category": {
-      "title": "Audio"
+      "slug": "audio"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744231198-compact-bluetooth-earbuds.png"
@@ -292,7 +292,7 @@
     "price": 299.99,
     "onsale": true,
     "category": {
-      "title": "Audio"
+      "slug": "audio"
     },
     "img": {
       "url": "https://www.datocms-assets.com/151453/1744230308-headphone.png"
