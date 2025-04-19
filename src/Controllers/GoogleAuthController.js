@@ -15,6 +15,7 @@ export const googleSignupCallback = (req, res, next) => {
       
         req.login(user, (err) => {
             if (err) { return next(err); }
+            req.session.user = user.id; 
             req.session.isLoggedIn = true;
             req.flash('successMsg', 'Signed up successfully!');
             return res.redirect('/');
@@ -37,6 +38,7 @@ export const googleLoginCallback = (req, res, next) => {
         
         req.login(user, (err) => {
             if (err) { return next(err); }
+            req.session.user = user.id;
             req.session.isLoggedIn = true;
             req.flash('successMsg', 'Signed up successfully!');
             return res.redirect('/');

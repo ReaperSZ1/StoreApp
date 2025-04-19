@@ -15,6 +15,7 @@
     --color-pink-600: oklch(0.592 0.249 0.584);
     --color-rose-600: oklch(0.586 0.253 17.585);
     --color-gray-400: oklch(0.707 0.022 261.325);
+    --color-gray-500: oklch(0.551 0.027 264.364);
     --color-gray-600: oklch(0.446 0.03 256.802);
     --color-zinc-100: oklch(0.967 0.001 286.375);
     --color-zinc-500: oklch(0.552 0.016 285.938);
@@ -332,6 +333,9 @@
   .h-full {
     height: 100%;
   }
+  .min-h-\[500px\] {
+    min-height: 500px;
+  }
   .w-0 {
     width: calc(var(--spacing) * 0);
   }
@@ -425,6 +429,9 @@
   }
   .gap-1 {
     gap: calc(var(--spacing) * 1);
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
@@ -588,6 +595,10 @@
     --tw-gradient-from: #000b24;
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
+  .from-\[\#8E2DE2\] {
+    --tw-gradient-from: #8E2DE2;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
   .from-emerald-200 {
     --tw-gradient-from: var(--color-emerald-200);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
@@ -598,6 +609,10 @@
   }
   .from-zinc-100 {
     --tw-gradient-from: var(--color-zinc-100);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .to-\[\#4A00E0\] {
+    --tw-gradient-to: #4A00E0;
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
   .to-\[\#00123B\] {
@@ -668,6 +683,10 @@
   .font-sans {
     font-family: var(--font-sans);
   }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
@@ -695,6 +714,9 @@
   }
   .text-black {
     color: var(--color-black);
+  }
+  .text-gray-500 {
+    color: var(--color-gray-500);
   }
   .text-white {
     color: var(--color-white);

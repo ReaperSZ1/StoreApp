@@ -27,6 +27,7 @@ import googleAuthRoutes from './Routes/googleAuth.js';
 import facebookAuthRoutes from './Routes/facebookAuth.js'; 
 import IndexRoutes from './Routes/IndexRoutes.js';
 import authRoutes from './Routes/authRoutes.js';
+import favoritesRoutes from './Routes/favoriteRoutes.js';
 
 
 // Path settings
@@ -65,12 +66,6 @@ class App {
         
         // Flash
 		this.app.use(flash());
-        
-        // Google Auth
-        this.app.use(googleAuthRoutes);
-
-        // Facebook Auth
-        this.app.use(facebookAuthRoutes);
 
 		// Helmet
 		this.app.use(helmetConfig);
@@ -87,7 +82,10 @@ class App {
 
 	routes() {
 		this.app.use('/', IndexRoutes);
-		this.app.use('/api/auth', authRoutes); // Auth routes
+		this.app.use('/api/auth', authRoutes); 
+        this.app.use(googleAuthRoutes);
+        this.app.use(facebookAuthRoutes);
+        this.app.use(favoritesRoutes);
 	}
 
 }
