@@ -31,6 +31,10 @@ const User = sequelize.define('User', {
     googleId: {
         type: DataTypes.STRING,
         allowNull: true
+    },
+    favorites: {
+        type: DataTypes.JSON,
+        defaultValue: []
     }
 }, {
     timestamps: false
