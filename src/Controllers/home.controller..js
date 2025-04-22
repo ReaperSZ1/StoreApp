@@ -6,7 +6,6 @@ import validator from 'validator';
 
 export const index = async (req, res) => {
     try {
-        const index = true;
         const isLoggedIn = req.session && req.session.isLoggedIn ? true : false;
 
         const categories = await fetchCategories(); 
@@ -36,9 +35,8 @@ export const index = async (req, res) => {
 
         const hasProducts = onsale.length > 0 || recents.length > 0 || comuns.length > 0;
 
-        res.render('index', { 
+        res.render('home/index', { 
             userId,
-            index,
             onsale, 
             recents, 
             comuns,
@@ -84,7 +82,7 @@ export const categories = async (req, res) => {
             .filter(prod => prod.category.slug === sanitizedSlug)
             .map(prod => ({ ...prod, isFavorited: favorites.includes(prod.slug), }));
 
-        res.render('index', {
+        res.render('home/categories', {
             userId,
             isLoggedIn,
             categories,
@@ -127,7 +125,7 @@ export const search = async (req, res) => {
             .filter(p => p.title.toLowerCase().includes(sanitizedQuery.toLowerCase()))
             .map(prod => ({ ...prod, isFavorited: favorites.includes(prod.slug), }));
 
-        res.render('index', {
+        res.render('home/search', {
             userId,
             isLoggedIn,
             categories,

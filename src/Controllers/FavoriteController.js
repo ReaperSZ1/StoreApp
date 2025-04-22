@@ -54,9 +54,8 @@ export const userFavorites = async (req, res) => {
             .filter(product => user.favorites.includes(product.slug))
             .map(p => ({ ...p, isFavorited: true }));
         
-        res.render('index', {
+        res.render('favorites', {
             userId,
-            favorites: true,
             favoriteProducts,
             categories,
         });
