@@ -5,6 +5,7 @@
         </a>
         <div class="flex items-center bg-white rounded-xl search-container-responsive">
             <form id="searchForm" class="w-full h-[90%] flex items-center gap-2">
+                <input type="hidden" name="_csrf" value="{{csrfToken}}">
                 <input id="searchInput"
                     type="search" 
                     value="{{searchQuery}}"

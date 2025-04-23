@@ -3,8 +3,8 @@ import { getFavorites, postFavorites, userFavorites } from '../Controllers/favor
 
 const router = express.Router();
 
-router.get('/favorites/:userId', getFavorites);
-router.post('/api/favorites/:userId', postFavorites);
+router.get('/favorites', getFavorites);
+router.post('/api/favorites', postFavorites);
 router.get('/my-favorites', userFavorites);
 
 export default router;

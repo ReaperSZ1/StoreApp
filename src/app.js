@@ -16,7 +16,7 @@ import './strategies/passport-facebook.js';
 
 // Middlewares  
 import GlobalMiddleware from './Middlewares/GlobalMiddleware.js';
-import checkAuth from './Middlewares/checkAuth.js'; 
+import { checkAuth } from './Middlewares/check-auth.middleware.js'; 
 import helmetConfig from './Settings/helmet.js';
 
 // Settings

@@ -1,18 +1,15 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const userId = document.body.dataset.userId;
     const isMyFavoritesPage = window.location.pathname === '/my-favorites';
     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-    if (!userId) return;
-
     const getFavoritesFromDB = async () => {
-        const res = await fetch(`/favorites/${userId}`);
+        const res = await fetch(`/favorites`);
         const data = await res.json();
         return data.favorites || [];
     };
 
     const saveFavoritesToDB = async (updatedFavorites) => {
-        await fetch(`/api/favorites/${userId}`, {
+        await fetch(`/api/favorites`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

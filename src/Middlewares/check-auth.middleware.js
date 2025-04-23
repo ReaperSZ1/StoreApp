@@ -1,23 +1,22 @@
 import jwt from 'jsonwebtoken';
 
-const checkAuth = (req, res, next) => {
-  const token = req.cookies.authToken; // ou de req.headers.authorization, dependendo de onde está o token
+export const checkAuth = (req, res, next) => {
+    const token = req.cookies.authToken; 
 
-  if (!token) {
-    req.user = null; // Não está logado
-    return next();
-  }
+    if (!token) {
+        req.user = null; // is not logged in
+        return next();
+    }
 
-  try {
-    // Verifica se o token é válido
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // Salva o user decodificado na requisição
-    next();
-  } catch (err) {
-    console.error('Invalid token', err);
-    req.user = null; // Em caso de erro, o usuário não está logado
-    next();
-  }
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded; 
+        next();
+    } catch (err) {
+        console.error('Invalid token', err);
+        req.user = null; 
+        next();
+    }
 };
 
-export default checkAuth;
+

@@ -1,6 +1,6 @@
 import { fetchProducts } from '../utils/fetch-products.js';
-import { fetchCategories } from '../utils/fetchCategories.js';
-import { fetchUserById } from '../utils/fetchUserById.js';
+import { fetchCategories } from '../utils/fetch-categories.js';
+import { fetchUserById } from '../utils/fetch-user-by-id.js';
 
 import validator from 'validator';
 
@@ -12,12 +12,13 @@ export const index = async (req, res) => {
 		const products = await fetchProducts();
 
 		let favorites = [];
-		let userId = null;
 
 		if (req.session?.user) {
 			const user = await fetchUserById(req.session.user);
-			userId = req.session.user;
-			favorites = user?.favorites || [];
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+			favorites = user?.favorites;
 		}
 
 		// Add the isFavorited flag to a product
@@ -44,7 +45,6 @@ export const index = async (req, res) => {
 			onsale.length > 0 || recents.length > 0 || comuns.length > 0;
 
 		res.render('home/index', {
-			userId,
 			onsale,
 			recents,
 			comuns,
@@ -82,11 +82,12 @@ export const categories = async (req, res) => {
 		}
 
 		let favorites = [];
-		let userId = null;
 
 		if (req.session?.user) {
 			const user = await fetchUserById(req.session.user);
-			userId = req.session.user;
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
 			favorites = user?.favorites || [];
 		}
 
@@ -95,7 +96,6 @@ export const categories = async (req, res) => {
 			.map((prod) => ({ ...prod, isFavorited: favorites.includes(prod.slug) }));
 
 		res.render('home/categories', {
-			userId,
 			isLoggedIn,
 			categories,
 			products,
@@ -109,12 +109,9 @@ export const categories = async (req, res) => {
 };
 
 export const search = async (req, res) => {
-	try {
-		const { query } = req.query;
-		const isValidQuery =
-			query &&
-			typeof query === 'string' &&
-			validator.isLength(query, { min: 1, max: 100 });
+    try {
+        const { query } = req.query;
+		const isValidQuery = query && typeof query === 'string' && validator.isLength(query.trim(), { min: 1, max: 100 });
 
 		if (!isValidQuery) {
 			req.flash('errorMsg', 'Invalid search query!');
@@ -127,24 +124,22 @@ export const search = async (req, res) => {
 		const allProducts = await fetchProducts();
 
 		let favorites = [];
-		let userId = null;
 
 		if (req.session?.user) {
 			const user = await fetchUserById(req.session.user);
-			userId = req.session.user;
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
 			favorites = user?.favorites || [];
 		}
 
 		const sanitizedQuery = validator.escape(query);
 
 		const filtered = allProducts
-			.filter((p) =>
-				p.title.toLowerCase().includes(sanitizedQuery.toLowerCase())
-			)
+			.filter((p) => p.title.toLowerCase().includes(sanitizedQuery.toLowerCase()))
 			.map((prod) => ({ ...prod, isFavorited: favorites.includes(prod.slug) }));
 
 		res.render('home/search', {
-			userId,
 			isLoggedIn,
 			categories,
 			products: filtered,
@@ -152,6 +147,7 @@ export const search = async (req, res) => {
 		});
 	} catch (err) {
 		console.error('Error searching for products:', err);
-		res.render('error', { message: 'Error searching for products' });
+		req.flash('errorMsg', 'Error loading category products!');
+		return res.redirect('/');
 	}
 };

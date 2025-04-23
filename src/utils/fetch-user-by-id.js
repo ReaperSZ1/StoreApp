@@ -2,10 +2,6 @@ import User from '../models/User.js';
 
 export const fetchUserById = async (userId) => {
     try {
-        if (!userId || typeof userId !== 'number') {
-            console.error('invalid userId!');
-            return null;
-        }
         const user = await User.findByPk(userId);
 
         if (!user) { return null; };
@@ -21,7 +17,7 @@ export const fetchUserById = async (userId) => {
 
 export const updateUserFavorites = async (userId, favorites) => {
     try {
-        if (!userId || typeof userId !== 'number') {
+        if (!userId) {
             console.error('invalid userId!');
             return null;
         }

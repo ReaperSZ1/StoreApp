@@ -1,18 +1,19 @@
-import { fetchUserById, updateUserFavorites } from '../utils/fetchUserById.js';
+import { fetchUserById, updateUserFavorites } from '../utils/fetch-user-by-id.js';
 import { fetchProducts } from '../utils/fetch-products.js';
-import { fetchCategories } from '../utils/fetchCategories.js';
+import { fetchCategories } from '../utils/fetch-categories.js';
 
-// Exemplo da rota que talvez esteja faltando ou errada
 export const getFavorites = async (req, res) => {
 	try {
-		const userId = req.params.userId;
-		const user = await fetchUserById(userId);
+        const userId = req.session.user;
+
+        const user = await fetchUserById(userId);
 
 		if (!user) {
 			return res.status(404).json({ error: 'User not found' });
 		}
 
 		const favorites = user.favorites || [];
+
 		return res.json({ favorites });
 	} catch (err) {
 		console.error('Error fetching favorites:', err);
@@ -22,14 +23,21 @@ export const getFavorites = async (req, res) => {
 
 export const postFavorites = async (req, res) => {
 	try {
-		const userId = req.params.userId;
+        const userId = req.session.user;
 		const { favorites } = req.body;
 
-		if (!userId || !Array.isArray(favorites)) {
-			return res.status(400).json({ error: 'Invalid request' });
+		if (!userId) {
+			req.flash('errorMsg', 'invalid userId!');
+			return res.redirect('/');
 		}
 
+        if(!Array.isArray(favorites)) {
+            req.flash('errorMsg', 'favorites must be an array!');
+            return res.redirect('/');
+        }
+
 		await updateUserFavorites(userId, favorites);
+
 		return res.json({ success: true });
 	} catch (err) {
 		console.error('Error while saving favorites:', err);
@@ -47,18 +55,14 @@ export const userFavorites = async (req, res) => {
 		}
 
 		const categories = await fetchCategories();
-		const user = await fetchUserById(userId);
 		const allProducts = await fetchProducts();
+		const user = await fetchUserById(userId);
 
 		const favoriteProducts = allProducts
 			.filter((product) => user.favorites.includes(product.slug))
 			.map((p) => ({ ...p, isFavorited: true }));
 
-		res.render('favorites', {
-			userId,
-			favoriteProducts,
-			categories
-		});
+		res.render('favorites', { favoriteProducts, categories });
 	} catch (err) {
 		console.error('Error rendering user favorites:', err);
 		res.status(500).send('Error loading favorites');
