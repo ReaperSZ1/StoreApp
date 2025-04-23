@@ -12,7 +12,7 @@ export const googleSignupCallback = (req, res, next) => {
             req.flash('errorMsg', info.message);
             return res.redirect('/');
         }
-      
+
         req.login(user, (err) => {
             if (err) { return next(err); }
             req.session.user = user.id; 

@@ -11,7 +11,3 @@ app.listen(PORT, () => {
 	}
 });
 
-// If(PORT == 8081 && process.env.NODE_ENV === 'development')
-//     Console.log('Server ON => LocalHost');
-// Else
-//     Console.log('Server ON => Remote');

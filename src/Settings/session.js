@@ -25,7 +25,10 @@ class Session {
             secret: process.env.SESSION_SECRET,
             resave: false,
             saveUninitialized: false,
-            cookie: { httpOnly: true, maxAge: 3600000 },
+            cookie: { 
+                httpOnly: true, 
+                maxAge: 3600000
+            },
             store: this.store
         });
     }

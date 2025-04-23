@@ -32,6 +32,10 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    facebookId: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     favorites: {
         type: DataTypes.JSON,
         defaultValue: []

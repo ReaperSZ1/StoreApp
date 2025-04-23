@@ -5,13 +5,14 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 import passport from 'passport';
+import csurf from 'csurf';
 
 // Load environment variables
 dotenv.config();
 
 // Strategies
-import './strategies/passportGoogle.js';
-import './strategies/passportFacebook.js';
+import './strategies/passport-google.js';
+import './strategies/passport-facebook.js';
 
 // Middlewares  
 import GlobalMiddleware from './Middlewares/GlobalMiddleware.js';
@@ -63,6 +64,9 @@ class App {
         
         // Check auth
         this.app.use(checkAuth);
+
+        // CSRF
+        this.app.use(csurf({ cookie: true }));
         
         // Flash
 		this.app.use(flash());

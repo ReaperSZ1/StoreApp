@@ -7,6 +7,7 @@ class GlobalMiddleware {
         res.locals.errorMsg = Array.isArray(error) ? error : [error];
         res.locals.isLoggedIn = req.session.isLoggedIn || false;
         res.locals.user = req.session.user || null;
+        res.locals.csrfToken = req.csrfToken();
         next();
     }
 }

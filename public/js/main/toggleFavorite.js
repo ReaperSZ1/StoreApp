@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const userId = document.body.dataset.userId;
     const isMyFavoritesPage = window.location.pathname === '/my-favorites';
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
     if (!userId) return;
 
@@ -14,7 +15,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         await fetch(`/api/favorites/${userId}`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'CSRF-Token': csrfToken
             },
             body: JSON.stringify({ favorites: updatedFavorites })
         });
