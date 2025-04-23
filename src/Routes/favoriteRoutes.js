@@ -1,5 +1,5 @@
 import express from 'express';
-import { getFavorites, postFavorites, userFavorites } from '../Controllers/FavoriteController.js';
+import { getFavorites, postFavorites, userFavorites } from '../Controllers/favorite.controller.js';
 
 const router = express.Router();
 
