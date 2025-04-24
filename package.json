@@ -6,6 +6,7 @@
   "scripts": {
     "start": "concurrently \"npm run tailwind\" \"node src/Server.js\"",
     "tailwind": "npx @tailwindcss/cli -i ./public/tailwind/input.css -o ./public/tailwind/output.css --watch",
+    "build:css": "npx @tailwindcss/cli -i ./public/tailwind/input.css -o ./public/tailwind/output.css --minify",
     "play": "concurrently \"npm run tailwind\" \"nodemon src/Server.js\""
   },
   "author": "",
@@ -17,10 +18,12 @@
     "bcrypt": "^5.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.7",
+    "csurf": "^1.11.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-handlebars": "^8.0.1",
     "express-mysql-session": "^3.0.3",
+    "express-rate-limit": "^7.5.0",
     "express-session": "^1.18.1",
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",

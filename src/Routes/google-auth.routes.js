@@ -4,7 +4,7 @@ import {
     googleSignupCallback,
     googleLogin,
     googleLoginCallback
-} from '../Controllers/GoogleAuthController.js';
+} from '../Controllers/google.controller.js';
 
 const router = express.Router();
 

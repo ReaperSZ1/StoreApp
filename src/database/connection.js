@@ -31,9 +31,9 @@ class Database {
                     connectionLimit: 10,
                     queueLimit: 0
                 });
-                console.log('✅ Conectado ao MySQL');
+                console.log('✅ MySQL connection successfully established');
             } catch (error) {
-                console.error('❌ Erro ao conectar ao banco de dados', error);
+                console.error('❌ MySQL database error connection', error);
                 throw error;
             }
         }
@@ -50,9 +50,19 @@ class Database {
     getSequelizeInstance() {
         return this.sequelize;
     }
+    
+    async close() {
+        if (this.connection) {
+            await this.connection.end();
+            console.log('🛑 MySQL pool closed');
+        }
+        await this.sequelize.close();
+        console.log('🛑 Sequelize connection closed');
+    }
 }
 
 const database = new Database();
+
 export default database;
 export const sequelize = database.getSequelizeInstance(); 
 export const getConnection = () => database.getConnection(); 

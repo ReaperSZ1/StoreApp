@@ -1,17 +1,20 @@
 import app from './app.js';
+import database from './Database/connection.js';
 
 const PORT = 8081;
 const ENV = process.env.NODE_ENV || 'development';
 
 app.listen(PORT, () => {
 	if (ENV === 'development') {
-		console.log(`🚀 Servidor rodando localmente em http://localhost:${PORT}`);
+		console.log(`🚀 Server running locally at http://localhost:${PORT}`);
 	} else {
-		console.log(`🌍 Servidor rodando em ambiente remoto`);
+		console.log(`🌍 Server running in remote environment`);
 	}
 });
 
-// If(PORT == 8081 && process.env.NODE_ENV === 'development')
-//     Console.log('Server ON => LocalHost');
-// Else
-//     Console.log('Server ON => Remote');
+// Close connection correctly when shutting down
+process.on('SIGINT', async () => {
+    console.log('\n🛑 App closed...');
+    await database.close(); 
+    process.exit(0);
+});
