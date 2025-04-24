@@ -19,7 +19,7 @@ const query = `
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const BACKUP_DIR = path.join(__dirname, '../backups');
+const BACKUP_DIR = path.join(__dirname, '../Backups');
 const BACKUP_PATH = path.join(BACKUP_DIR, 'categories.json');
 
 async function fetchFromDatoCMS() {

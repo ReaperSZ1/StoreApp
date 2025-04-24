@@ -1,6 +1,6 @@
 import express from 'express';
 import { index, categories, search } from '../Controllers/home.controller.js';
-import { limiter } from '../Middlewares/rateLimiter.middleware.js';
+import { limiter } from '../Middlewares/rate-limiter.middleware.js';
 
 const router = express.Router();
 

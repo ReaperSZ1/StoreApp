@@ -1,5 +1,5 @@
 import app from './app.js';
-import database from './database/connection.js';
+import database from './Database/connection.js';
 
 const PORT = 8081;
 const ENV = process.env.NODE_ENV || 'development';

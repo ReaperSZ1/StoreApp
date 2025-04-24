@@ -62,7 +62,9 @@ export const userFavorites = async (req, res) => {
 			.filter((product) => user.favorites.includes(product.slug))
 			.map((p) => ({ ...p, isFavorited: true }));
 
-		res.render('favorites', { favoriteProducts, categories });
+        const favorite = true;
+
+		res.render('favorites/index', { favoriteProducts, categories, favorite });
 	} catch (err) {
 		console.error('Error rendering user favorites:', err);
 		res.status(500).send('Error loading favorites');

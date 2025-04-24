@@ -14,22 +14,21 @@ dotenv.config();
 import './strategies/passport-google.js';
 import './strategies/passport-facebook.js';
 
-// Middlewares  
-import GlobalMiddleware from './Middlewares/GlobalMiddleware.js';
-import { checkAuth } from './Middlewares/check-auth.middleware.js'; 
-import helmetConfig from './Settings/helmet.js';
+// Middlewares
+import { setGlobals } from './Middlewares/global.middleware.js';
+import { checkAuth } from './Middlewares/check-auth.middleware.js';
+import { helmetMiddleware } from './Settings/helmet.config.js';
 
 // Settings
-import HandlebarsConfig from './Settings/Handlebars.js';
-import Session from './Settings/session.js';
+import { HandlebarsConfig } from './Settings/handlebars.config.js';
+import { getSessionMiddleware } from './Settings/session.config.js';
 
 // Routes
-import googleAuthRoutes from './Routes/googleAuth.js'; 
-import facebookAuthRoutes from './Routes/facebookAuth.js'; 
-import IndexRoutes from './Routes/IndexRoutes.js';
-import authRoutes from './Routes/authRoutes.js';
-import favoritesRoutes from './Routes/favoriteRoutes.js';
-
+import googleAuthRoutes from './Routes/google-auth.routes.js';
+import facebookAuthRoutes from './Routes/facebook-auth.routes.js';
+import IndexRoutes from './Routes/Index-routes.js';
+import authRoutes from './Routes/auth.routes.js';
+import favoritesRoutes from './Routes/favorite.routes.js';
 
 // Path settings
 const __filename = fileURLToPath(import.meta.url);
@@ -52,46 +51,45 @@ class App {
 		this.app.use(express.json());
 
 		// Session
-		const sessionMiddleware = await Session.getSessionMiddleware();
+		const sessionMiddleware = await getSessionMiddleware();
 		this.app.use(sessionMiddleware);
 
-        // Passport
-        this.app.use(passport.initialize());
-        this.app.use(passport.session());
-        
-        // Cookie Parser
-        this.app.use(cookieParser());
-        
-        // Check auth
-        this.app.use(checkAuth);
+		// Passport
+		this.app.use(passport.initialize());
+		this.app.use(passport.session());
 
-        // CSRF
-        this.app.use(csurf({ cookie: true }));
-        
-        // Flash
+		// Cookie Parser
+		this.app.use(cookieParser());
+
+		// Check auth
+		this.app.use(checkAuth);
+
+		// CSRF
+		this.app.use(csurf({ cookie: true }));
+
+		// Flash
 		this.app.use(flash());
 
 		// Helmet
-		this.app.use(helmetConfig);
+		this.app.use(helmetMiddleware);
 
 		// Handlebars
-		HandlebarsConfig.setup(this.app);
+		HandlebarsConfig(this.app);
 
 		// Static files
 		this.app.use(express.static(path.join(__dirname, '../public')));
 
 		// Global variables
-		this.app.use(GlobalMiddleware.setGlobals);
+		this.app.use(setGlobals);
 	}
 
 	routes() {
 		this.app.use('/', IndexRoutes);
-		this.app.use('/api/auth', authRoutes); 
-        this.app.use(googleAuthRoutes);
-        this.app.use(facebookAuthRoutes);
-        this.app.use(favoritesRoutes);
+		this.app.use('/api/auth', authRoutes);
+		this.app.use(googleAuthRoutes);
+		this.app.use(facebookAuthRoutes);
+		this.app.use(favoritesRoutes);
 	}
-
 }
 
 const appInstance = new App();
