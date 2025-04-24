@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchIcon.addEventListener('click', () => {
         const query = searchInput.value.trim();
         if (query.length > 0) {
-            window.location.href = `/search?q=${encodeURIComponent(query)}`;
+            window.location.href = `/search?query=${encodeURIComponent(query)}`;
         }
     });
 });

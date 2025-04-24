@@ -6,4 +6,4 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '/my-favorites';
       });
     }
-  });
+});

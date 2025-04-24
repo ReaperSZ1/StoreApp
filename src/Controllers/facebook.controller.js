@@ -40,7 +40,7 @@ export const facebookLoginCallback = (req, res, next) => {
             if (err) { return next(err); }
             req.session.user = user.id;
             req.session.isLoggedIn = true;
-            req.flash('successMsg', 'Signed up successfully!');
+            req.flash('successMsg', 'login successfully!');
             return res.redirect('/');
         });
     })(req, res, next);

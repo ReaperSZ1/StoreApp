@@ -4,7 +4,7 @@ import {
     facebookSignupCallback,
     facebookLogin,
     facebookLoginCallback
-} from '../Controllers/FacebookAuthController.js';
+} from '../Controllers/facebook.controller.js';
 
 const router = express.Router();
 

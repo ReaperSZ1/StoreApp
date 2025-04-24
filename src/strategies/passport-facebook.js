@@ -2,19 +2,21 @@ import passport from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import dotenv from 'dotenv';
 import User from '../models/User.js';
+import validator from 'validator';
 
 dotenv.config();
 
 passport.use('facebook-signup', new FacebookStrategy({
     clientID: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: 'http://localhost:8081/auth/facebook/signup/callback',
+    callbackURL: process.env.FACEBOOK_CALLBACK_SIGNUP_URL,
     profileFields: ['id', 'displayName', 'emails']
 }, async (accessToken, refreshToken, profile, done) => {
     try {
-        const existingUser = await User.findOne({
-            where: { email: profile.emails[0].value }
-        });
+        const name = validator.escape(profile.displayName || '');
+        const email = validator.normalizeEmail(profile.emails[0].value);
+        
+        const existingUser = await User.findOne({ where: { email: email } });
 
         if (existingUser) {
             if (existingUser.provider === 'facebook') {
@@ -24,9 +26,9 @@ passport.use('facebook-signup', new FacebookStrategy({
         }
 
         const user = await User.create({
-            name: profile.displayName,
-            email: profile.emails[0]?.value,
-            googleId: profile.id,
+            name: name,
+            email: email,
+            facebookId: profile.id,
             password: 'facebook-login',
             provider: 'facebook'
         });
@@ -40,11 +42,14 @@ passport.use('facebook-signup', new FacebookStrategy({
 passport.use('facebook-login', new FacebookStrategy({
     clientID: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: 'http://localhost:8081/auth/facebook/login/callback',
-    profileFields: ['id', 'displayName', 'emails']
+    callbackURL: process.env.FACEBOOK_CALLBACK_LOGIN_URL,
+    profileFields: ['id', 'displayName', 'emails'],
+    state: true 
 }, async (accessToken, refreshToken, profile, done) => {
     try {
-        const user = await User.findOne({ where: { email: profile.emails[0].value, provider: 'facebook' } });
+        const email = validator.normalizeEmail(profile.emails[0].value);
+
+        const user = await User.findOne({ where: { email: email, provider: 'facebook' } });
 
         if (!user) {
             return done(null, false, { message: 'User not found. Please sign up first.' });
