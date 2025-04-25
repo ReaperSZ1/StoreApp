@@ -1,0 +1,57 @@
+<head>
+    <style>
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+
+<div class="w-full h-[480px] flex items-center justify-between relative bg-black rounded-[10px] my-[20px] pl-[2%] pr-[4%]">
+
+    {{#each oneproduct}}
+        <div class="w-[40%] h-[100%] justify-center flex items-center bg-[#181818]">
+            <img src="{{img.url}}" class="w-[90%] h-[80%] object-cover rounded-lg" alt="{{title}}" />
+        </div>
+        <div class="w-[55%] h-[65%] flex flex-col justify-between">
+            <h1 class="text-white font-mono uppercase opacity-60 text-[14px]">
+                {{category.slug}}
+            </h1>
+            <h1 class="text-white font-bold font-['Helvetica'] text-[24px]">
+                {{title}}
+            </h1>
+            <h3 class="text-white font-normal font-['Helvetica'] text-[16px] opacity-60">
+                {{description}}
+            </h3>
+            <p class="text-white font-bold font-['Helvetica'] text-[24px]">
+                ${{price}}
+            </p>
+            <div class="w-[120px] flex items-center justify-between p-1 rounded-lg text-white">
+                <button id="decreaseBtn" class="w-[24px] h-[24px] text-[18px] flex justify-center items-center border border-white rounded-xs hover:bg-gray-900 text-xl">-</button>
+
+                <input id="quantityInput" type="number" value="1"
+                    class="appearance-none w-[50px] cursor-text text-center text-white bg-transparent border border-white rounded-xs focus:outline-none focus:ring-2"
+                />
+
+                <button id="increaseBtn" class="w-[24px] h-[24px] text-[18px] flex justify-center items-center border border-white rounded-xs hover:bg-gray-900 text-xl">+</button>
+            </div>  
+
+            <div class="w-full flex items-center justify-between">
+                <button class="w-[45%] h-[40px] flex justify-center items-center cursor-pointer text-white font-['Helvetica'] font-bold text-[16px] border border-[#ff0000] rounded-md hover:bg-[#0f0f0f] transition-colors duration-300 ease-in-out">
+                    Add To Cart
+                </button>
+                <button class="w-[45%] h-[40px] flex justify-center items-center cursor-pointer text-white font-['Helvetica'] font-bold text-[16px] bg-[#ff0000] rounded-md hover:bg-[#ff0000c5] transition-colors duration-300 ease-in-out">
+                    Buy Now
+                </button>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+{{!-- shortcut: file:///c:\nodejs\StoreApp\public\js\product\quantityInput.js --}}
+<script src="/js/product/quantityInput.js"></script>
