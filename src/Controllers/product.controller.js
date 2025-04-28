@@ -2,7 +2,18 @@ import { fetchProducts } from '../utils/fetch-products.js';
 import { fetchCategories } from '../utils/fetch-categories.js';
 import { fetchUserById } from '../utils/fetch-user-by-id.js';
 
+import validator from 'validator';
+
 export const product = async (req, res) => {
+    const { slug } = req.params;
+
+    const isSlugValid = slug && validator.isSlug(slug);
+    
+    if (!isSlugValid) {
+        req.flash('errorMsg', 'Invalid category slug!');
+        return res.redirect('/');
+    }
+
     try {
         const isLoggedIn = req.session && req.session.isLoggedIn ? true : false;
 
@@ -19,15 +30,19 @@ export const product = async (req, res) => {
             favorites = user?.favorites;
         }
 
-        const oneproduct = products
-            .filter((prod) => !prod.onsale)
-            .slice(0, 1)
+        const product = products
+            .filter((p) => p.slug.toLowerCase() === slug.toLowerCase())
             .map((prod) => ({ ...prod, isFavorited: favorites.includes(prod.slug) }));
+
         
-        console.log(oneproduct);
+        if (!product) {
+            return res.status(404).render('404', { message: 'product not found.' });
+        }
+            
+        console.log(product);
 
         res.render('product/index', {
-            oneproduct,
+            product,
             isLoggedIn,
             categories,
         });
