@@ -1,0 +1,111 @@
+@layer utilities {
+    .a-home-responsive {
+        @apply text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] xl:text-[24px]
+        max-[500px]:text-[14px]
+        max-[350px]:text-[9px];
+    }
+    .div-img-prod-responsive {
+        @apply w-[100%] h-[400px] sm:h-[100%] sm:w-[40%] 
+               max-[500px]:h-[320px]
+               max-[410px]:h-[280px]
+               max-[350px]:h-[230px];
+    }
+    .prod-svg-responsive {
+        @apply w-[24px] h-[24px]
+               max-[500px]:w-[20px] max-[500px]:h-[20px] 
+               max-[350px]:w-[16px] max-[350px]:h-[16px]
+    }
+    .product-background-responsive {
+        @apply sm:h-[225px] md:h-[300px] lg:h-[400px] xl:h-[480px]
+    }
+    .div-details-prod-responsive {
+        @apply w-[80%] h-[300px]
+               sm:w-[55%] sm:h-[65%] 
+               max-[500px]:w-[80%] max-[500px]:h-[240px]
+               max-[410px]:w-[80%] max-[410px]:h-[226px]
+               max-[350px]:w-[80%] max-[350px]:h-[200px];
+    }
+    .cat-prod-responsive {
+        @apply text-[14px] sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[14px]
+             max-[500px]:text-[10px]
+             max-[410px]:text-[9px]
+             max-[350px]:text-[8px];
+    }
+    .title-prod-responsive {
+        @apply text-[18px] sm:text-[14px] md:text-[20px] lg:text-[22px] xl:text-[24px]
+             max-[500px]:text-[12px]
+             max-[410px]:text-[10px]
+             max-[350px]:text-[9px];
+    }
+    .desc-prod-responsive {
+        @apply text-[12px] sm:text-[12px] md:text-[14px] lg:text-[15px] xl:text-[16px]
+             max-[500px]:text-[10px]
+             max-[410px]:text-[9px]
+             max-[350px]:text-[8px];
+    }
+    .price-prod-responsive {
+        @apply text-[18px] sm:text-[14px] md:text-[20px] lg:text-[22px] xl:text-[24px]
+                max-[500px]:text-[12px]
+                max-[410px]:text-[10px]
+                max-[350px]:text-[9px];
+    }
+    .div-btn-prod-responsive {
+        @apply mb-2 gap-2 sm:mb-0 sm:gap-0
+               max-[500px]:mb-2 max-[500px]:gap-2
+               max-[410px]:mb-2 max-[410px]:gap-2
+               max-[350px]:mb-2 max-[350px]:gap-2;
+    }
+    .btn-prod-responsive {
+        @apply text-[14px] h-[30px] w-full
+               sm:text-[10px] sm:h-[25px] sm:w-[45%]
+               md:text-[12px] md:h-[30px]
+               lg:text-[14px] lg:h-[35px]
+               xl:text-[16px] xl:h-[40px]
+               max-[500px]:text-[12px] max-[500px]:h-[25px]
+               max-[410px]:text-[10px] max-[410px]:h-[25px]
+               max-[350px]:text-[9px] max-[350px]:h-[25px];
+    }
+    .svg-cart-responsive {
+        @apply w-[14px] h-[14px] 
+               sm:w-[12px] sm:h-[12px]
+               md:w-[14px] md:h-[14px] md:font-normal
+               lg:w-[16px] lg:h-[16px]
+               xl:w-[20px] xl:h-[20px]
+               max-[500px]:w-[14px] max-[500px]:h-[14px]
+               max-[410px]:w-[12px] max-[410px]:h-[12px]
+               max-[350px]:w-[12px] max-[350px]:h-[12px]
+    }
+    .div-quantity-responsive{
+        @apply w-[85px] md:w-[98px] lg:w-[105px] xl:w-[112px]
+             max-[500px]:w-[83px]
+             max-[410px]:w-[72px]
+             max-[350px]:w-[65px];
+    }
+    .p-quantity-responsive {
+        @apply text-[12px] lg:text-[14px] xl:text-[16px]
+             max-[500px]:text-[10px]
+             max-[410px]:text-[9px]
+             max-[350px]:text-[8px];
+        
+    }
+    .btn-quantity-responsive {
+        @apply w-[20px] h-[20px] text-[13px]
+               sm:w-[20px] sm:h-[20px] 
+               md:w-[22px] md:h-[22px] 
+               lg:w-[24px] lg:h-[24px] lg:text-[15px]
+               xl:w-[25px] xl:h-[25px] xl:text-[18px]
+               max-[500px]:w-[18px] max-[500px]:h-[18px] 
+               max-[410px]:w-[16px] max-[410px]:h-[16px]
+               max-[350px]:w-[16px] max-[350px]:h-[16px] max-[350px]:text-[7px];
+    }
+    .input-quantity-responsive {
+        @apply text-[12px] w-[35px] 
+               sm:text-[12px] sm:w-[35px]
+               md:text-[14px] md:w-[40px]
+               lg:text-[14px] lg:w-[45px]
+               xl:text-[16px] xl:w-[50px]
+               max-[500px]:text-[11px] max-[500px]:w-[35px]
+               max-[410px]:text-[10px] max-[410px]:w-[30px]
+               max-[350px]:text-[10px] max-[350px]:w-[25px];
+    }
+}
