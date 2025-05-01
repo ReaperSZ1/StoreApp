@@ -38,13 +38,12 @@ export const product = async (req, res) => {
         if (!product) {
             return res.status(404).render('404', { message: 'product not found.' });
         }
-            
-        console.log(product);
-
+    
         res.render('product/index', {
             product,
             isLoggedIn,
             categories,
+            requestUrl: req.originalUrl
         });
     } catch (error) {
         console.error('Error loading home page:', error);

@@ -14,8 +14,12 @@
 
 <a href="/" class="text-white no-underline hover:text-[#cfcdcd] a-home-responsive"> Home </a>
 
-<div class="w-full mb-[20px] mt-[10px] flex flex-col sm:flex-row items-center justify-between relative bg-black rounded-[10px] sm:pl-[2%] sm:pr-[4%] product-background-responsive">
+<form action="/cart/addToCart" method="POST" class="w-full mb-[20px] mt-[10px] flex flex-col sm:flex-row items-center justify-between relative bg-black rounded-[10px] sm:pl-[2%] sm:pr-[4%] product-background-responsive">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <input type="hidden" name="redirectTo" value="{{requestUrl}}">
     {{#each product}}
+        <input type="hidden" name="slug" value="{{slug}}" />
+        <input type="hidden" id="quantityHidden" name="quantity" value="1" />
         <div class="justify-center flex items-center bg-[#181818] relative div-img-prod-responsive">
             <div class="h-[95%] sm:h-[85%] rounded-lg relative z-0">
                 <img src="{{img.url}}" class="h-[100%] object-cover rounded-lg relative z-0" alt="{{title}}" />
@@ -54,29 +58,31 @@
                     Quantity:
                 </p>
                 <div class="mx-auto flex items-center justify-between p-1 rounded-lg text-white div-quantity-responsive">
-                    <button id="decreaseBtn" class="flex justify-center items-center border border-white rounded-xs hover:bg-gray-900 text-xl btn-quantity-responsive">-</button>
+                    <button type="button" id="decreaseBtn" class="flex justify-center items-center border border-white rounded-xs hover:bg-gray-900 text-xl btn-quantity-responsive">-</button>
 
                     <input id="quantityInput" type="number" value="1"
-                        class="appearance-none cursor-text text-center text-white bg-transparent border border-white rounded-xs focus:outline-none focus:ring-2 input-quantity-responsive"
+                        class=" quantityInput appearance-none cursor-text text-center text-white bg-transparent border border-white rounded-xs focus:outline-none focus:ring-2 input-quantity-responsive"
                     />
 
-                    <button id="increaseBtn" class="flex justify-center items-center border border-white rounded-xs hover:bg-gray-900 text-xl btn-quantity-responsive">+</button>
+                    <button type="button" id="increaseBtn" class="flex justify-center items-center border border-white rounded-xs hover:bg-gray-900 text-xl btn-quantity-responsive">+</button>
                 </div>  
             </div>
             <div class="w-full flex-col sm:flex-row flex items-center justify-between div-btn-prod-responsive">
-                <button class="flex justify-center items-center cursor-pointer text-white font-['Helvetica'] font-bold border border-[#ff0000] rounded-md hover:bg-[#0f0f0f] transition-colors duration-300 ease-in-out btn-prod-responsive">
+                <button type="submit" class="flex justify-center items-center cursor-pointer text-white font-['Helvetica'] font-bold border border-[#ff0000] rounded-md hover:bg-[#0f0f0f] transition-colors duration-300 ease-in-out btn-prod-responsive">
                     <svg class="fill-white transition-colors duration-300 ease-in-out hover:fill-[#BFBFBF] cursor-pointer svg-cart-responsive" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                         <path d="M286.79-81Q257-81 236-102.21t-21-51Q215-183 236.21-204t51-21Q317-225 338-203.79t21 51Q359-123 337.79-102t-51 21Zm400 0Q657-81 636-102.21t-21-51Q615-183 636.21-204t51-21Q717-225 738-203.79t21 51Q759-123 737.79-102t-51 21ZM235-741l110 228h288l125-228H235Zm-30-60h589.07q22.97 0 34.95 21 11.98 21-.02 42L694-495q-11 19-28.56 30.5T627-453H324l-56 104h491v60H277q-42 0-60.5-28t.5-63l64-118-152-322H51v-60h117l37 79Zm140 288h288-288Z"/>
                     </svg>
                     Add To Cart
                 </button>
-                <button class="flex justify-center items-center cursor-pointer text-white font-['Helvetica'] font-bold bg-[#ff0000] rounded-md hover:bg-[#ff0000c5] transition-colors duration-300 ease-in-out btn-prod-responsive">
+                <button type="button" class="flex justify-center items-center cursor-pointer text-white font-['Helvetica'] font-bold bg-[#ff0000] rounded-md hover:bg-[#ff0000c5] transition-colors duration-300 ease-in-out btn-prod-responsive">
                     Buy Now
                 </button>
             </div>
         </div>
     {{/each}}
-</div>
+</form>
 
 {{!-- shortcut: file:///c:\nodejs\StoreApp\public\js\product\quantityInput.js --}}
 <script src="/js/product/quantityInput.js"></script>
+
+

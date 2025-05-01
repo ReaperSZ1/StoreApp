@@ -6,9 +6,9 @@ export const fetchUserById = async (userId) => {
 
         if (!user) { return null; };
 
-        const { id, favorites } = user;
-    
-        return { id, favorites };
+        const { id, favorites, cart } = user;
+
+        return { id, favorites, cart };
     } catch (err) {
         console.error('Erro ao buscar usuário por ID:', err);
         return null;

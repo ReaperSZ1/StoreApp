@@ -1,0 +1,79 @@
+<head>
+    <style>
+        /* Animação de deslizar para a direita */
+        @keyframes slideInRight {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Animação de deslizar para fora para a direita */
+        @keyframes slideOutRight {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.5s forwards;
+        }
+
+        .slide-out-right {
+            animation: slideOutRight 0.5s forwards;
+        }
+      
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+    </style>
+</head>
+
+ <div id="cartModal" class="fixed inset-0 z-50 bg-black/50 flex justify-end opacity-0 invisible transition-all duration-300">
+    <div id="modalContent" class="bg-gray-900 z-51 text-white w-96 h-full p-6 shadow-lg transform translate-x-full opacity-0 flex flex-col">
+        
+        <!-- Cabeçalho -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Shopping Cart</h2>
+            <button id="closeModal" class="text-white text-3xl font-bold hover:text-red-500">&times;</button>
+        </div>
+
+        <!-- Lista de produtos -->
+        <div id="cartItems" class="flex-1 overflow-y-auto space-y-4">
+            {{>cart-items cartProducts=cartProducts }}
+        </div>
+
+            <!-- Total e Finalizar Pedido -->
+        <div class="mt-6">
+            <div class="flex justify-between items-center text-lg mb-4">
+                <span>Total:</span>
+                <span id="cartTotal" class="font-bold">R$ 0,00</span>
+            </div>
+            <button id="checkoutButton" class="w-full py-3 bg-red-600 text-white font-semibold rounded hover:bg-red-700 transition">
+                finalize order
+            </button>
+        </div>
+
+    </div>
+</div>
+
+{{!-- shortcut: file:///c:\nodejs\StoreApp\public\js\cart\index.js --}}
+<script src="/js/cart/index.js"></script>
+
+{{!-- shortcut: file:///c:\nodejs\StoreApp\public\js\cart\quantityInput.js --}}
+<script src="/js/cart/quantityInput.js"></script>
+
+{{!-- shortcut: file:///c:\nodejs\StoreApp\public\js\cart\cartTotal.js --}}
+<script src="/js/cart/cartTotal.js"></script> 
