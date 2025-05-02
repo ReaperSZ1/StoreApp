@@ -14,3 +14,6 @@
 @import "../css/index/responsive/style.css";
 
 @import "../css/product/responsive/style.css";
+
+@import "../css/cart/responsive/style.css";
+@import "../css/cart/cart-items/responsive/style.css";

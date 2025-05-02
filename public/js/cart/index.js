@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(res => res.text())
             .then(html => {
                 cartItemsContainer.innerHTML = html;  
-                console.log(cartItemsContainer);    
                 window.setupCartItemQuantityHandlers(cartItemsContainer); 
                 /* eslint-disable no-undef */
                 updateCartTotal();

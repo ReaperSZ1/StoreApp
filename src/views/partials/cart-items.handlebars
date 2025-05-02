@@ -1,39 +1,39 @@
 {{#each cartProducts}}
-  <div class="flex items-start gap-4 border-b border-gray-700 pb-6 pt-4 cart-item">
+  <div class="flex items-start border-b border-gray-700 pb-3 pt-3 gap-2 cart-item">
     <!-- Imagem do produto -->
-    <img src="{{this.img.url}}" alt="{{this.title}}" class="w-20 h-20 object-cover rounded shadow-md" />
+    <img src="{{this.img.url}}" alt="{{this.title}}" class="cart-item-img-responsive object-cover rounded shadow-md" />
 
     <!-- Informações do produto -->
     <div class="flex-1">
-      <div class="flex justify-between items-start">
-        <h3 class="text-base sm:text-lg font-semibold text-white">{{this.title}}</h3>
-        <button class="remove-item text-red-500 text-2xl font-bold hover:text-red-600 transition" data-slug="{{this.slug}}">
+      <div class="flex justify-between items-center">
+        <h3 class="cart-item-title-responsive font-semibold text-white">{{this.title}}</h3>
+        <button class="remove-item cart-item-remove-responsive cursor-pointer text-red-500 font-bold hover:text-red-600 transition" data-slug="{{this.slug}}">
             &times;
         </button>
       </div>
 
       <!-- Controles de quantidade -->
-      <div class="mt-2 flex items-center gap-3">
-        <span class="text-sm text-gray-400">Qtd:</span>
+      <div class="cart-item-div-qty-responsive flex items-center ">
+        <span class="cart-item-qty-responsive text-gray-400">Qtd:</span>
 
-        <div class="quantity-wrapper flex items-center gap-2 bg-gray-800 px-3 py-2 rounded-lg border border-gray-600 shadow-inner" data-slug="{{this.slug}}">
+        <div class="quantity-wrapper flex items-center px-1 py-1 gap-1 bg-gray-800 rounded-lg border border-gray-600 shadow-inner" data-slug="{{this.slug}}">
             <button type="button"
-                class="btn-decrease w-8 h-8 flex items-center justify-center rounded-md bg-gray-700 text-white hover:bg-gray-600 active:scale-95 transition-transform duration-150">
+                class="btn-decrease cart-item-qty-btn-responsive cursor-pointer flex items-center justify-center bg-gray-700 text-white hover:bg-gray-600 active:scale-95 transition-transform duration-150">
                 &minus;
             </button>
 
             <input type="number" value="{{this.quantity}}" min="1"
-                class="input-quantity w-12 text-center text-white bg-gray-900 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+                class="input-quantity cart-item-qty-input-responsive text-center text-white bg-gray-900 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
 
             <button type="button"
-                class="btn-increase w-8 h-8 flex items-center justify-center rounded-md bg-gray-700 text-white hover:bg-gray-600 active:scale-95 transition-transform duration-150">
+                class="btn-increase cart-item-qty-btn-responsive cursor-pointer flex items-center justify-center rounded-md bg-gray-700 text-white hover:bg-gray-600 active:scale-95 transition-transform duration-150">
                 +
             </button>
         </div>
       </div>
 
       <!-- Preço -->
-      <p class="mt-2 text-sm font-bold text-white item-price">R$ {{this.price}}</p>
+      <p class="mt-2 font-bold text-white item-price cart-item-price-responsive">R$ {{this.price}}</p>
     </div>
   </div>
 {{/each}}
