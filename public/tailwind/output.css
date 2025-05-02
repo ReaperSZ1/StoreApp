@@ -227,6 +227,9 @@
   .inset-0 {
     inset: calc(var(--spacing) * 0);
   }
+  .-top-2 {
+    top: calc(var(--spacing) * -2);
+  }
   .-top-\[9px\] {
     top: calc(9px * -1);
   }
@@ -247,6 +250,9 @@
   }
   .top-\[112\%\] {
     top: 112%;
+  }
+  .-right-2 {
+    right: calc(var(--spacing) * -2);
   }
   .right-0 {
     right: calc(var(--spacing) * 0);
@@ -412,6 +418,9 @@
   }
   .w-auto {
     width: auto;
+  }
+  .w-fit {
+    width: fit-content;
   }
   .w-full {
     width: 100%;
@@ -1386,6 +1395,30 @@
     }
     @media (width >= 80rem) {
       width: 36px;
+    }
+  }
+  .cart-icon-qty-responsive {
+    height: calc(var(--spacing) * 4);
+    width: calc(var(--spacing) * 4);
+    font-size: 9px;
+    @media (width < 400px) {
+      height: calc(var(--spacing) * 3);
+    }
+    @media (width < 400px) {
+      width: calc(var(--spacing) * 3);
+    }
+    @media (width < 400px) {
+      font-size: 7px;
+    }
+    @media (width >= 40rem) {
+      height: calc(var(--spacing) * 5);
+    }
+    @media (width >= 40rem) {
+      width: calc(var(--spacing) * 5);
+    }
+    @media (width >= 40rem) {
+      font-size: var(--text-xs);
+      line-height: var(--tw-leading, var(--text-xs--line-height));
     }
   }
   .navbar-icons-responsive {

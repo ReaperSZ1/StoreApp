@@ -12,12 +12,14 @@ export const index = async (req, res) => {
 		const products = await fetchProducts();
 
 		let favorites = [];
+        let cartProducts = [];
 
 		if (req.session?.user) {
 			const user = await fetchUserById(req.session.user);
 			if (!user) {
 				return res.status(404).json({ error: 'User not found' });
 			}
+            cartProducts = user.cart;
 			favorites = user?.favorites;
 		}
 
@@ -45,6 +47,7 @@ export const index = async (req, res) => {
 			onsale.length > 0 || recents.length > 0 || comuns.length > 0;
 
 		res.render('home/index', {
+            cartProducts,
 			onsale,
 			recents,
 			comuns,

@@ -150,3 +150,7 @@ export const updateCartQuantity = async (req, res) => {
     }
 };
 
+export const checkout = async (req, res) => {
+    req.flash('successMsg', 'order completed! ;-)');
+    return res.redirect('/');
+};

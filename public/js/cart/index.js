@@ -72,6 +72,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }); 
     }
 
+    async function checkout() {
+        console.log('checkout');
+        await fetch('/cart/checkout')
+            .then(res => res.text())
+            .catch(err => {
+                console.error('Erro ao carregar carrinho:', err);
+            }); 
+    }
+
     document.getElementById('openModalIcon').addEventListener('click', openModal);
 
     modal.addEventListener('click', closeModal);
@@ -79,4 +88,5 @@ document.addEventListener('DOMContentLoaded', () => {
     modalContent.addEventListener('click', (event) => { event.stopPropagation(); });
     // Adicionando o evento para fechar o modal
     document.getElementById('closeModal').addEventListener('click', closeModal);
+    document.getElementById('checkoutButton').addEventListener('click', checkout);
 });
