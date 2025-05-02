@@ -41,6 +41,10 @@ const User = sequelize.define(
 		favorites: {
 			type: DataTypes.JSON,
 			defaultValue: []
+		},
+        cart: {
+			type: DataTypes.JSON,
+			defaultValue: [] 
 		}
 	},
 	{ timestamps: false }

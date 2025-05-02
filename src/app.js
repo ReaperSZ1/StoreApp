@@ -30,6 +30,7 @@ import IndexRoutes from './Routes/Index-routes.js';
 import authRoutes from './Routes/auth.routes.js';
 import favoritesRoutes from './Routes/favorite.routes.js';
 import productRoutes from './Routes/product.routes.js';
+import cartRoutes from './Routes/cart.routes.js';
 
 // Path settings
 const __filename = fileURLToPath(import.meta.url);
@@ -91,6 +92,7 @@ class App {
 		this.app.use(facebookAuthRoutes);
 		this.app.use(favoritesRoutes);
 		this.app.use(productRoutes);
+        this.app.use('/cart',cartRoutes);
 	}
 }
 

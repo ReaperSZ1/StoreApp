@@ -15,9 +15,9 @@ export const index = async (req, res) => {
 
 		if (req.session?.user) {
 			const user = await fetchUserById(req.session.user);
-            if (!user) {
-                return res.status(404).json({ error: 'User not found' });
-            }
+			if (!user) {
+				return res.status(404).json({ error: 'User not found' });
+			}
 			favorites = user?.favorites;
 		}
 
@@ -85,9 +85,9 @@ export const categories = async (req, res) => {
 
 		if (req.session?.user) {
 			const user = await fetchUserById(req.session.user);
-            if (!user) {
-                return res.status(404).json({ error: 'User not found' });
-            }
+			if (!user) {
+				return res.status(404).json({ error: 'User not found' });
+			}
 			favorites = user?.favorites || [];
 		}
 
@@ -109,9 +109,12 @@ export const categories = async (req, res) => {
 };
 
 export const search = async (req, res) => {
-    try {
-        const { query } = req.query;
-		const isValidQuery = query && typeof query === 'string' && validator.isLength(query.trim(), { min: 1, max: 100 });
+	try {
+		const { query } = req.query;
+		const isValidQuery =
+			query &&
+			typeof query === 'string' &&
+			validator.isLength(query.trim(), { min: 1, max: 100 });
 
 		if (!isValidQuery) {
 			req.flash('errorMsg', 'Invalid search query!');
@@ -127,16 +130,18 @@ export const search = async (req, res) => {
 
 		if (req.session?.user) {
 			const user = await fetchUserById(req.session.user);
-            if (!user) {
-                return res.status(404).json({ error: 'User not found' });
-            }
+			if (!user) {
+				return res.status(404).json({ error: 'User not found' });
+			}
 			favorites = user?.favorites || [];
 		}
 
 		const sanitizedQuery = validator.escape(query);
 
 		const filtered = allProducts
-			.filter((p) => p.title.toLowerCase().includes(sanitizedQuery.toLowerCase()))
+			.filter((p) =>
+				p.title.toLowerCase().includes(sanitizedQuery.toLowerCase())
+			)
 			.map((prod) => ({ ...prod, isFavorited: favorites.includes(prod.slug) }));
 
 		res.render('home/search', {
