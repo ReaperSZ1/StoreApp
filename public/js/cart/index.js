@@ -1,3 +1,5 @@
+const { updateCartTotal } = require('../cart/cartTotal');
+const { setupCartItemQuantityHandlers } = require('../cart/quantityInput');
 document.addEventListener('DOMContentLoaded', () => {
 	const modal = document.getElementById('cartModal');
     const modalContent = document.getElementById('modalContent');
@@ -62,8 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(res => res.text())
             .then(html => {
                 cartItemsContainer.innerHTML = html;  
-                window.setupCartItemQuantityHandlers(cartItemsContainer); 
-                /* eslint-disable no-undef */
+                setupCartItemQuantityHandlers(cartItemsContainer); 
                 updateCartTotal();
                 setupRemoveItemHandlers();
             })

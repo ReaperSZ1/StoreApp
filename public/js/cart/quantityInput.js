@@ -1,4 +1,5 @@
-window.setupCartItemQuantityHandlers = function (container) {
+const { updateCartTotal } = require('../cart/cartTotal');
+exports.setupCartItemQuantityHandlers = function (container) {
     container.querySelectorAll('.quantity-wrapper').forEach(wrapper => {
         const input = wrapper.querySelector('.input-quantity');
         const btnIncrease = wrapper.querySelector('.btn-increase');
@@ -22,7 +23,6 @@ window.setupCartItemQuantityHandlers = function (container) {
                 return res.json();
             })
             .then(() => {
-                // eslint-disable-next-line no-undef
                 if (typeof updateCartTotal === 'function') updateCartTotal();
             })
             .catch(err => {

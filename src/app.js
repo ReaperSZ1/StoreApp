@@ -31,6 +31,7 @@ import authRoutes from './Routes/auth.routes.js';
 import favoritesRoutes from './Routes/favorite.routes.js';
 import productRoutes from './Routes/product.routes.js';
 import cartRoutes from './Routes/cart.routes.js';
+import testRoutes from './Routes/test.routes.js';
 
 // Path settings
 const __filename = fileURLToPath(import.meta.url);
@@ -66,9 +67,9 @@ class App {
 		// Check auth
 		this.app.use(checkAuth);
 
-		// CSRF
-		this.app.use(csurf({ cookie: true }));
-
+       	// CSRF
+        this.app.use(csurf({ cookie: true }));        
+	
 		// Flash
 		this.app.use(flash());
 
@@ -93,6 +94,7 @@ class App {
 		this.app.use(favoritesRoutes);
 		this.app.use(productRoutes);
         this.app.use('/cart',cartRoutes);
+        this.app.use('/test',testRoutes);
 	}
 }
 

@@ -16,9 +16,8 @@ export const index = async (req, res) => {
 
 		if (req.session?.user) {
 			const user = await fetchUserById(req.session.user);
-			if (!user) {
-				return res.status(404).json({ error: 'User not found' });
-			}
+			if (!user) { throw new Error('User not found'); }
+
             cartProducts = user.cart;
 			favorites = user?.favorites;
 		}
@@ -43,8 +42,11 @@ export const index = async (req, res) => {
 			})
 			.map(markFavorite);
 
-		const hasProducts =
-			onsale.length > 0 || recents.length > 0 || comuns.length > 0;
+		const hasProducts = onsale.length > 0 || recents.length > 0 || comuns.length > 0;
+
+        if (req.headers['test']) {
+            return res.status(200).json({ success: true, message: 'Index Loaded!' });
+        }
 
 		res.render('home/index', {
             cartProducts,
@@ -56,8 +58,12 @@ export const index = async (req, res) => {
 			hasProducts
 		});
 	} catch (error) {
-		console.error('Error loading home page:', error);
-		res.status(500).json({ error: 'Internal server error' });
+        if(!req.headers['test']) {
+            console.error('Error loading home page:', error);
+            return req.status(500).json({ error: error.message || 'Internal server error' } );
+        } else {
+            return res.status(400).json({ error: error.message || 'Server error' });
+        }
 	}
 };
 

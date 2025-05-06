@@ -66,3 +66,4 @@ const database = new Database();
 export default database;
 export const sequelize = database.getSequelizeInstance(); 
 export const getConnection = () => database.getConnection(); 
+export const close = () => database.close()
