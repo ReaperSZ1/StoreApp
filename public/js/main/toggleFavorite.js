@@ -2,30 +2,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     const isMyFavoritesPage = window.location.pathname === '/my-favorites';
     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
+    const isLoggedIn = csrfToken ? true : false;
+
     const getFavoritesFromDB = async () => {
-        try {
-            const response = await fetch(`/favorites`);
-            const data = await response.json();
-            return data.favorites || [];
-        } catch (err) {
-            console.error('Error getting user favorites', err);
-            return [];
-        }
+        const response = await fetch(`/favorites`);
+        const data = await response.json();
+        return data.favorites || [];
     };
 
     const saveFavoritesToDB = async (updatedFavorites) => {
-        try {
-            await fetch(`/api/favorites`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'CSRF-Token': csrfToken
-                },
-                body: JSON.stringify({ favorites: updatedFavorites })
-            });
-        } catch (err) {
-            console.error('Error saving favorites:', err);
-        }
+        await fetch(`/api/favorites`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-token': csrfToken
+            },
+            body: JSON.stringify({ favorites: updatedFavorites })
+        });
     };
 
     const updateFavoriteIcons = (filled, outline, isFavorited) => {
@@ -51,7 +44,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (isMyFavoritesPage) { window.location.reload(); }
     };
 
-    let favorites = await getFavoritesFromDB();
+    let favorites = [];
+    
+    if (isLoggedIn) {
+        favorites = await getFavoritesFromDB();
+    }
 
     // add event listener to each favorite button
     document.querySelectorAll('.product-card-favorite').forEach(favBtn => {

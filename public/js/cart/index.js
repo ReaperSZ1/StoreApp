@@ -1,3 +1,5 @@
+import { updateCartTotal } from '../cart/cartTotal.js';
+import { setupCartItemQuantityHandlers } from '../cart/quantityInput.js';
 document.addEventListener('DOMContentLoaded', () => {
 	const modal = document.getElementById('cartModal');
     const modalContent = document.getElementById('modalContent');
@@ -40,12 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         method: 'DELETE',
                         headers: { 
                             'Content-Type': 'application/json', 
-                            'csrf-token': csrfToken, 
+                            'CSRF-token': csrfToken, 
                             'X-Requested-With': 'XMLHttpRequest' 
                         },
                     });
     
-                    console.log('jooj');
                     if (response.ok) {
                         await loadCartItems();
                     }
@@ -62,11 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(res => res.text())
             .then(html => {
                 cartItemsContainer.innerHTML = html;  
-                window.setupCartItemQuantityHandlers(cartItemsContainer); 
-                /* eslint-disable no-undef */
+                setupCartItemQuantityHandlers(cartItemsContainer); 
                 updateCartTotal();
                 setupRemoveItemHandlers();
             })
+            .catch(err => {
+                console.error('Erro ao carregar carrinho:', err);
+            }); 
+    }
+
+    async function checkout() {
+        console.log('checkout');
+        await fetch('/cart/checkout')
+            .then(res => res.text())
             .catch(err => {
                 console.error('Erro ao carregar carrinho:', err);
             }); 
@@ -79,4 +88,5 @@ document.addEventListener('DOMContentLoaded', () => {
     modalContent.addEventListener('click', (event) => { event.stopPropagation(); });
     // Adicionando o evento para fechar o modal
     document.getElementById('closeModal').addEventListener('click', closeModal);
+    document.getElementById('checkoutButton').addEventListener('click', checkout);
 });

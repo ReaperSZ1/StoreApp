@@ -15,13 +15,13 @@ export const getSessionMiddleware = async () => {
     const store = await initStore();
 
     return session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        httpOnly: true,
-        maxAge: 3600000
-    },
-    store: store
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true,
+            maxAge: 3600000
+        },
+        store: store
     });
 };

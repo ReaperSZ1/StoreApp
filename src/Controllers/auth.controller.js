@@ -3,34 +3,28 @@ import jwt from 'jsonwebtoken';
 import validator from 'validator';
 
 export const signUp = async (req, res) => {
-	const { name, email, password, password2 } = req.body;
-
-	if (password !== password2) {
-		req.flash('errorMsg', 'Passwords do not match');
-		return res.redirect('/');
-	}
-
-	if (!validator.isEmail(email)) {
-		req.flash('errorMsg', 'Invalid email');
-		return res.redirect('/');
-	}
-
-	if (!validator.isLength(password, { min: 6 })) {
-		req.flash('errorMsg', 'Password must be at least 6 characters');
-		return res.redirect('/');
-	}
-
 	try {
-		const userExists = await User.findOne({ where: { email } });
+        const { name, email, password, password2 } = req.body;
 
-		if (userExists) {
-			req.flash('errorMsg', 'User Email already exists');
-			return res.redirect('/');
-		}
+        const sanitizedName = validator.escape(name);
+        const sanitizedEmail = validator.normalizeEmail(email);  
+        const sanitizedPassword = validator.escape(password);
+        const sanitizedPassword2 = validator.escape(password2);
 
-		const user = await User.create({ name, email, password });
+        if (sanitizedPassword !== sanitizedPassword2) { throw new Error('Passwords do not match'); }
 
-		// token jwt generating
+        if (!validator.isEmail(sanitizedEmail)) { throw new Error('Invalid email'); }
+
+        if (!validator.isLength(sanitizedPassword, { min: 6 })) { 
+            throw new Error('Password must be at least 6 characters'); 
+        }
+
+		const userExists = await User.findOne({ where: { email: sanitizedEmail } });
+
+		if (userExists) { throw new Error('User Email already exists') };
+    
+        const user = await User.create({ name: sanitizedName, email: sanitizedEmail, password: sanitizedPassword });
+       
 		const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
 			expiresIn: '1h'
 		});
@@ -45,42 +39,43 @@ export const signUp = async (req, res) => {
 		req.session.user = user.id;
 		req.session.isLoggedIn = true;
 
+        if (req.headers['test']) {
+            await user.destroy(); 
+            return res.status(200).json({ success: true, message: 'User created and removed for test' });
+        }
+
 		req.flash('successMsg', 'User registered successfully!');
 		return res.redirect('/');
 	} catch (error) {
-		console.error(error);
-		req.flash('errorMsg', 'Server error');
-		return res.redirect('/');
+        if(!req.headers['test']) {
+            console.error(error);
+            req.flash('errorMsg', error.message || 'Server error');
+            return res.redirect('/');
+        } else {
+            return res.status(400).json({ error: error.message || 'Server error' });
+        }
 	}
 };
 
 export const login = async (req, res) => {
-	const { email, password } = req.body;
-
-	if (!validator.isEmail(email)) {
-		req.flash('errorMsg', 'Invalid email');
-		return res.redirect('/');
-	}
-
-	if (!validator.isLength(password, { min: 6 })) {
-		req.flash('errorMsg', 'Password must be at least 6 characters');
-		return res.redirect('/');
-	}
-
 	try {
-		const user = await User.findOne({ where: { email } });
+        const { email, password } = req.body;
+        const sanitizedEmail = validator.normalizeEmail(email);  
+        const sanitizedPassword = validator.escape(password);
 
-		if (!user) {
-			req.flash('errorMsg', 'User not found');
-			return res.redirect('/');
-		}
+        if (!validator.isEmail(sanitizedEmail)) { throw new Error('Invalid email'); }
+
+        if (!validator.isLength(sanitizedPassword, { min: 6 })) { 
+            throw new Error('Password must be at least 6 characters'); 
+        }
+
+		const user = await User.findOne({ where: { email: sanitizedEmail } });
+
+		if (!user) { throw new Error('User Not Found'); }
 
 		const isMatch = await user.comparePassword(password);
 
-		if (!isMatch) {
-			req.flash('errorMsg', 'Invalid credentials');
-			return res.redirect('/');
-		}
+		if (!isMatch) { throw new Error('Invalid credentials'); }
 
 		const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
 			expiresIn: '1h'
@@ -95,42 +90,63 @@ export const login = async (req, res) => {
 		req.session.user = user.id;
 		req.session.isLoggedIn = true;
 
+        if (req.headers['test']) {
+            return res.status(200).json({ success: true, message: 'Logged in successfully!' });
+        }
+
 		req.flash('successMsg', 'Logged in successfully!');
 		return res.redirect('/');
 	} catch (error) {
-		console.error('Error during login process:', error);
-		req.flash('errorMsg', 'Server error');
-		return res.redirect('/');
+        if(!req.headers['test']) {
+            console.error(error);
+            req.flash('errorMsg', error.message || 'Server error');
+            return res.redirect('/');
+        } else {
+            return res.status(400).json({ error: error.message || 'Server error' });
+        }
 	}
 };
 
 export const logout = (req, res) => {
-	const isOAuth = !!req.user; // If req.user exists, probably it was an OAuth login
+    try {
+        const isOAuth = !!req.user; // If req.user exists, probably it was an OAuth login
 
-	const logoutMsg = encodeURIComponent('You have been logged out'); // Success message
+        const logoutMsg = encodeURIComponent('You have been logged out'); // Success message
 
-	if (isOAuth && typeof req.logout === 'function') {
-		// OAuth logout
-		req.logout((err) => {
-			if (err) {
-				console.error('Logout error:', err);
-				const errorMsg = encodeURIComponent('Error logging out');
-				return res.redirect(`/?errorMsg=${errorMsg}`);
-			}
+        if (isOAuth && typeof req.logout === 'function') {
+            // OAuth logout
+            req.logout((err) => {
+                if (err) { throw new Error('Error logging out', err); }
 
-			// Remove session after OAuth logout
-			req.session.destroy(() => {
-				res.clearCookie('connect.sid');
-				res.clearCookie('authToken'); // Remove JWT token if exists
-				return res.redirect(`/?successMsg=${logoutMsg}`);
-			});
-		});
-	} else {
-		// Remove session after local logout
-		req.session.destroy(() => {
-			res.clearCookie('connect.sid');
-			res.clearCookie('authToken'); // Remove JWT token if exists
-			return res.redirect(`/?successMsg=${logoutMsg}`);
-		});
-	}
+                // Remove session after OAuth logout
+                req.session.destroy(() => {
+                    res.clearCookie('connect.sid');
+                    res.clearCookie('authToken'); // Remove JWT token if exists
+                    if (req.headers['test']) {
+                        return res.status(200).json({ success: true, message: 'You have been logged out!' });
+                    }
+                    return res.redirect(`/?successMsg=${logoutMsg}`);
+                });
+            });
+        } else {
+            // Remove session after local logout
+            req.session.destroy(() => {
+                res.clearCookie('connect.sid');
+                res.clearCookie('authToken');
+                if (req.headers['test']) {
+                    return res.status(200).json({ success: true, message: 'You have been logged out!' });
+                }
+                return res.redirect(`/?successMsg=${logoutMsg}`);
+            });
+        }
+    } catch(error) {
+        if(!req.headers['test']) {
+            console.error(error);
+            const errorMsg = encodeURIComponent('Error logging out');
+            return res.redirect(`/?errorMsg=${errorMsg}`);
+        } else {
+            return res.status(400).json({ error: error.message || 'Server error' });
+        }
+    }
+	
 };

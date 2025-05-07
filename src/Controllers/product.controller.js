@@ -5,40 +5,39 @@ import { fetchUserById } from '../utils/fetch-user-by-id.js';
 import validator from 'validator';
 
 export const product = async (req, res) => {
-    const { slug } = req.params;
+      try {
+        const { slug } = req.params;
 
-    const isSlugValid = slug && validator.isSlug(slug);
-    
-    if (!isSlugValid) {
-        req.flash('errorMsg', 'Invalid category slug!');
-        return res.redirect('/');
-    }
+        const isSlugValid = slug && validator.isSlug(slug);
+        
+        if (!isSlugValid) { throw new Error('Invalid category slug!'); }
 
-    try {
         const isLoggedIn = req.session && req.session.isLoggedIn ? true : false;
 
         const categories = await fetchCategories();
         const products = await fetchProducts();
 
-        let favorites = [];
+        let favorites = [];	
 
-        if (req.session?.user) {
+        if (req.session.user) {
             const user = await fetchUserById(req.session.user);
-            if (!user) {
-                return res.status(404).json({ error: 'User not found' });
-            }
+
+            if (!user) { throw new Error('User not found'); }
+
             favorites = user?.favorites;
         }
 
+        const sanitizedSlug = slug.trim();
         const product = products
-            .filter((p) => p.slug.toLowerCase() === slug.toLowerCase())
-            .map((prod) => ({ ...prod, isFavorited: favorites.includes(prod.slug) }));
+            .filter((p) => p.slug.toLowerCase() === sanitizedSlug.toLowerCase())
+            .map((prod) => ({ ...prod, isFavorited: favorites.includes(prod.sanitizedSlug) }));
 
-        
-        if (!product) {
-            return res.status(404).render('404', { message: 'product not found.' });
+        if (!product || product.length === 0) { throw new error('product not found.'); }
+
+        if (req.headers['test']) {
+            return res.status(200).json({ success: true, message: 'Product Found!', product });
         }
-    
+      
         res.render('product/index', {
             product,
             isLoggedIn,
@@ -46,7 +45,12 @@ export const product = async (req, res) => {
             requestUrl: req.originalUrl
         });
     } catch (error) {
-        console.error('Error loading home page:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        if (!req.headers['test']) {
+			console.error(error);
+			req.flash('errorMsg', error.message || 'Error while saving favorites');
+			return res.redirect('/');
+		} else {
+			return res.status(400).json({ error: error.message || 'Error while saving favorites' });
+		}
     }
 };
