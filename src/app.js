@@ -26,7 +26,7 @@ import { getSessionMiddleware } from './Settings/session.config.js';
 // Routes
 import googleAuthRoutes from './Routes/google-auth.routes.js';
 import facebookAuthRoutes from './Routes/facebook-auth.routes.js';
-import IndexRoutes from './Routes/Index-routes.js';
+import homeRoutes from './Routes/home-routes.js';
 import authRoutes from './Routes/auth.routes.js';
 import favoritesRoutes from './Routes/favorite.routes.js';
 import productRoutes from './Routes/product.routes.js';
@@ -67,9 +67,15 @@ class App {
 		// Check auth
 		this.app.use(checkAuth);
 
-       	// CSRF
-        this.app.use(csurf({ cookie: true }));        
-	
+       // Middleware CSRF, but only authenticated users
+        this.app.use((req, res, next) => {
+            if (req.session?.isLoggedIn) {
+                csurf({ cookie: true })(req, res, next);
+            } else {
+                next();
+            }
+        });       
+            
 		// Flash
 		this.app.use(flash());
 
@@ -87,7 +93,7 @@ class App {
 	}
 
 	routes() {
-		this.app.use('/', IndexRoutes);
+		this.app.use('/', homeRoutes);
 		this.app.use('/api/auth', authRoutes);
 		this.app.use(googleAuthRoutes);
 		this.app.use(facebookAuthRoutes);

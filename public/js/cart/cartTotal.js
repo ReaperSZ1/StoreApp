@@ -1,4 +1,4 @@
-exports.updateCartTotal = function () {
+export const updateCartTotal = function () {
     let total = 0;
     const items = document.querySelectorAll('#cartItems .cart-item');
     items.forEach(item => {

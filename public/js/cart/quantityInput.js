@@ -1,5 +1,5 @@
-const { updateCartTotal } = require('../cart/cartTotal');
-exports.setupCartItemQuantityHandlers = function (container) {
+import { updateCartTotal } from '../cart/cartTotal.js';
+export const setupCartItemQuantityHandlers = function (container) {
     container.querySelectorAll('.quantity-wrapper').forEach(wrapper => {
         const input = wrapper.querySelector('.input-quantity');
         const btnIncrease = wrapper.querySelector('.btn-increase');
@@ -9,14 +9,14 @@ exports.setupCartItemQuantityHandlers = function (container) {
 
         // Atualiza no back-end e front-end
         const updateCartItemQuantity = (slug, newQuantity) => {
-            fetch(`/cart/updateQuantity/${slug}`, {
+            fetch(`/cart/updateQuantity`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest',
                     'csrf-token': csrfToken
                 },
-                body: JSON.stringify({ quantity: newQuantity })
+                body: JSON.stringify({ quantity: newQuantity, slug })
             })
             .then(res => {
                 if (!res.ok) throw new Error('Erro ao atualizar quantidade');

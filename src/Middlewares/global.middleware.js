@@ -6,6 +6,7 @@ export const setGlobals = (req, res, next) => {
     res.locals.errorMsg = Array.isArray(error) ? error : [error];
     res.locals.isLoggedIn = req.session.isLoggedIn || false;
     res.locals.user = req.session.user || null;
-    res.locals.csrfToken = req.csrfToken();
+    // Only adds CSRF if the user is logged in
+    res.locals.csrfToken = req.session.isLoggedIn ? req.csrfToken() : null;
     next();
 };

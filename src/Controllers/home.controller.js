@@ -72,10 +72,7 @@ export const categories = async (req, res) => {
 		const { slug } = req.params;
 		const isSlugValid = slug && validator.isSlug(slug);
 
-		if (!isSlugValid) {
-			req.flash('errorMsg', 'Invalid category slug!');
-			return res.redirect('/');
-		}
+		if (!isSlugValid) { throw new Error('Invalid category slug!'); }
 
 		const isLoggedIn = req.session && req.session.isLoggedIn ? true : false;
 
@@ -85,24 +82,25 @@ export const categories = async (req, res) => {
 		const sanitizedSlug = slug.trim();
 		const category = categories.find((cat) => cat.slug === sanitizedSlug);
 
-		if (!category) {
-			req.flash('errorMsg', 'Category not found!');
-			return res.redirect('/');
-		}
+		if (!category) { throw new Error('Category not found!'); }
 
 		let favorites = [];
 
 		if (req.session?.user) {
 			const user = await fetchUserById(req.session.user);
-			if (!user) {
-				return res.status(404).json({ error: 'User not found' });
-			}
+
+			if (!user) { throw new Error('User not found!'); }
+
 			favorites = user?.favorites || [];
 		}
 
 		const products = allProducts
 			.filter((prod) => prod.category?.slug === sanitizedSlug)
 			.map((prod) => ({ ...prod, isFavorited: favorites.includes(prod.slug) }));
+
+        if (req.headers['test']) {
+            return res.status(200).json({ success: true, message: 'Categories Loaded!' });
+        }
 
 		res.render('home/categories', {
 			isLoggedIn,
@@ -111,9 +109,13 @@ export const categories = async (req, res) => {
 			selectedCategory: category.title
 		});
 	} catch (error) {
-		console.error('Error in category route:', error);
-		req.flash('errorMsg', 'Error loading category products!');
-		return res.redirect('/');
+        if(!req.headers['test']) {
+            console.error(error);
+            req.flash('errorMsg', error.message || 'Server error');
+            return res.redirect('/');
+        } else {
+            return res.status(400).json({ error: error.message || 'Server error' });
+        }
 	}
 };
 
@@ -125,10 +127,7 @@ export const search = async (req, res) => {
 			typeof query === 'string' &&
 			validator.isLength(query.trim(), { min: 1, max: 100 });
 
-		if (!isValidQuery) {
-			req.flash('errorMsg', 'Invalid search query!');
-			return res.redirect('/');
-		}
+		if (!isValidQuery) { throw new Error('Invalid search query!'); }
 
 		const isLoggedIn = req.session && req.session.isLoggedIn ? true : false;
 
@@ -139,19 +138,25 @@ export const search = async (req, res) => {
 
 		if (req.session?.user) {
 			const user = await fetchUserById(req.session.user);
-			if (!user) {
-				return res.status(404).json({ error: 'User not found' });
-			}
+            
+            if (!user) { throw new Error('User not found!'); }
+
 			favorites = user?.favorites || [];
 		}
 
 		const sanitizedQuery = validator.escape(query);
 
 		const filtered = allProducts
-			.filter((p) =>
-				p.title.toLowerCase().includes(sanitizedQuery.toLowerCase())
-			)
+			.filter((p) => p.title.toLowerCase().includes(sanitizedQuery.toLowerCase()) )
 			.map((prod) => ({ ...prod, isFavorited: favorites.includes(prod.slug) }));
+
+    
+        if (req.headers['test']) {
+            if(filtered.length === 0) {
+                return res.status(404).json({ success: true, message: 'No products found!' });
+            }
+            return res.status(200).json({ success: true, message: 'Product Found!' });
+        }
 
 		res.render('home/search', {
 			isLoggedIn,
@@ -159,9 +164,13 @@ export const search = async (req, res) => {
 			products: filtered,
 			searchQuery: sanitizedQuery
 		});
-	} catch (err) {
-		console.error('Error searching for products:', err);
-		req.flash('errorMsg', 'Error loading category products!');
-		return res.redirect('/');
+	} catch (error) {
+        if(!req.headers['test']) {
+            console.error(error);
+            req.flash('errorMsg', error.message || 'Server error');
+            return res.redirect('/');
+        } else {
+            return res.status(400).json({ error: error.message || 'Server error' });
+        }
 	}
 };

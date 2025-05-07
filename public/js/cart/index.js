@@ -1,5 +1,5 @@
-const { updateCartTotal } = require('../cart/cartTotal');
-const { setupCartItemQuantityHandlers } = require('../cart/quantityInput');
+import { updateCartTotal } from '../cart/cartTotal.js';
+import { setupCartItemQuantityHandlers } from '../cart/quantityInput.js';
 document.addEventListener('DOMContentLoaded', () => {
 	const modal = document.getElementById('cartModal');
     const modalContent = document.getElementById('modalContent');
@@ -42,12 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         method: 'DELETE',
                         headers: { 
                             'Content-Type': 'application/json', 
-                            'csrf-token': csrfToken, 
+                            'CSRF-token': csrfToken, 
                             'X-Requested-With': 'XMLHttpRequest' 
                         },
                     });
     
-                    console.log('jooj');
                     if (response.ok) {
                         await loadCartItems();
                     }
