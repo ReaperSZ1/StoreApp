@@ -2,21 +2,13 @@
 	class='sticky w-full max-w-full z-1 bg-white flex justify-center overflow-hidden'
 >
 	<div class='flex justify-between items-center whitespace-nowrap w-[90%]'>
-		<div
-			id='categories-list'
-			class='flex items-center cursor-pointer gap-[3px] transition-colors duration-200 ease-in-out relative group'
-		>
-			<p
-				class='font-[Calibri] font-normal text-black no-underline transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-p-responsive'
-			>
+		<div id='categories-list' class='flex items-center cursor-pointer gap-[3px] transition-colors duration-200 ease-in-out relative group'>
+			<p class='font-[Calibri] font-normal text-black no-underline transition-colors duration-200 ease-in-out hover:text-[rgba(0,0,0,0.7)] categories-p-responsive'>
 				Categories
 			</p>
-			<svg
-				class='transition-transform duration-200 ease-in-out opacity-70 group-hover:rotate-180 arrow-down-responsive'
-				xmlns='http://www.w3.org/2000/svg'
-				viewBox='0 -960 960 960'
-				fill='#000000'
-			><path d='M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z' /></svg>
+			<svg class='transition-transform duration-200 ease-in-out opacity-70 group-hover:rotate-180 arrow-down-responsive' xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' fill='#000000'>
+                <path d='M480-344 240-584l43-43 197 197 197-197 43 43-240 240Z' />
+            </svg>
 		</div>
 		{{#each categories}}
 			<a

@@ -5,10 +5,10 @@ import User from '../models/User.js';
 
 export const getUserCart = async (req, res) => {
 	try {
-		const userId = req.session?.user;
+		const userId = req.session.user;
 
 		if (!userId) {
-			throw new Error('User Not authenticated.');
+            throw new Error('User Not authenticated.');
 		}
 
 		const user = await fetchUserById(userId);
@@ -31,19 +31,13 @@ export const getUserCart = async (req, res) => {
 
 		return res.render('partials/cart-items', { layout: false, cartProducts });
 	} catch (error) {
-		if (!req.headers['test']) {
-			console.error(error);
-			req.flash('errorMsg', error.message || 'Error when searching for cart.');
-			return res.redirect(req.headers.referer || '/');
-		} else {
-			return res.status(400).json({ error: error.message || 'Error when searching for cart.' });
-		}
+        return res.status(400).json({ error: error.message || 'Error when searching for cart.' });
 	}
 };
 
 export const addToCart = async (req, res) => {
 	try {
-		const userId = req.session?.user;
+		const userId = req.session.user;
 		const redirectTo = req.body.redirectTo || req.headers.referer || '/';
         const { slug, quantity } = req.body;
 
@@ -97,15 +91,16 @@ export const addToCart = async (req, res) => {
 
 export const removeFromCart = async (req, res) => {
 	try {
-		const userId = req.session?.user;
+		const userId = req.session.user;
 		const { slug } = req.params;
         const sanitizedSlug = slug.trim();
 
-        const user = await fetchUserById(userId);
-        const isInCart = user.cart?.some((item) => item.slug === sanitizedSlug)
         const isAjax = req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest';
 
 		if (!userId) { throw new Error('User Not authenticated.'); }
+
+        const user = await fetchUserById(userId);
+        const isInCart = user.cart.some((item) => item.slug === sanitizedSlug)
 
 		if (!slug || !validator.isSlug(slug)) { throw new Error('Invalid slug.'); }
 
@@ -120,10 +115,9 @@ export const removeFromCart = async (req, res) => {
 		if (isAjax) return res.status(200).json({ success: true });
 
         if (req.headers['test']) {
-            return res.status(200).json({ success: true, message: 'Item removed from cart.', user: user.cart });
+            return res.status(200).json({ success: true, message: 'Product removed from cart.', user: user.cart });
         }
 
-		req.flash('successMsg', 'Item removed from cart.');
 		return res.redirect(req.headers.referer || '/');
 	} catch (error) {
         if (!req.headers['test']) {
@@ -142,19 +136,20 @@ export const removeFromCart = async (req, res) => {
 
 export const updateCartQuantity = async (req, res) => {
 	try {
-		const userId = req.session?.user;
+		const userId = req.session.user;
 		const { slug, quantity } = req.body;
-        
+
+        if(!userId) { throw new Error('User Not authenticated.'); }
+
         const user = await fetchUserById(userId);
+
+        if (!user) return res.status(404).json({ error: 'User not found.' });
+
         const parsedQuantity = parseInt(quantity, 10);
 
 		if (isNaN(parsedQuantity) || parsedQuantity < 1) { throw new Error('Invalid quantity.'); }
 
-        if(!userId) { throw new Error('User Not authenticated.'); }
-
         if (!slug || !validator.isSlug(slug)) { throw new Error('Invalid slug.'); }
-
-		if (!user) return res.status(404).json({ error: 'User not found.' });
 
 		const cart = user.cart.map((item) =>
 			item.slug === slug ? { ...item, quantity: parseInt(quantity) } : item
@@ -168,12 +163,8 @@ export const updateCartQuantity = async (req, res) => {
 
 		return res.status(200).json({ success: true });
 	} catch (error) {
-        if (req.headers['test']) {
-            return res.status(400).json({ error: error.message || 'Failed to update quantity.' });
-		} else {
-            console.error(error);
-		    return res.status(500).json({ error: 'Failed to update quantity.' });
-        }
+        console.error(error);
+        return res.status(400).json({ error: error.message || 'Failed to update quantity.' });
     }
 };
 
