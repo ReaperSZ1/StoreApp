@@ -50,4 +50,13 @@ describe('Sign Up tests', () => {
         cy.get('.msg-responsive').should('be.visible').and('contain.text', 'Password must be at least 6 characters');
         cy.url().should('include', '/');
     });
+
+    it('should show modal login when click in Login button', () => {
+        cy.visit('/');
+        cy.get('#account').click();
+        cy.get('#openSignUp').click();
+        cy.get('#modalSignUp').should('be.visible');
+        cy.get('#accountOpenLogin').click();
+        cy.get('#modalLogin').should('be.visible');
+    })
 });

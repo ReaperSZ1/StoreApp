@@ -70,4 +70,13 @@ describe('Login tests', () => {
             
         cy.url().should('include', '/');
     });
+
+    it('should show modal Sign when click in Sign button', () => {
+        cy.visit('/');
+        cy.get('#account').click();
+        cy.get('#openLogin').click();
+        cy.get('#modalLogin').should('be.visible');
+        cy.get('#accountOpenSignUp').click();
+        cy.get('#modalSignUp').should('be.visible');
+    })
 });
