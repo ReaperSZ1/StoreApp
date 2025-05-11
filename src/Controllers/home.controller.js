@@ -14,10 +14,10 @@ export const index = async (req, res) => {
 		let favorites = [];
         let cartProducts = [];
 
-		if (req.session?.user) {
+		if (req.session.user) {
 			const user = await fetchUserById(req.session.user);
 			if (!user) { throw new Error('User not found'); }
-
+            
             cartProducts = user.cart;
 			favorites = user?.favorites;
 		}
@@ -60,7 +60,7 @@ export const index = async (req, res) => {
 	} catch (error) {
         if(!req.headers['test']) {
             console.error('Error loading home page:', error);
-            return req.status(500).json({ error: error.message || 'Internal server error' } );
+            return res.status(500).json({ error: error.message || 'Internal server error' } );
         } else {
             return res.status(400).json({ error: error.message || 'Server error' });
         }
@@ -86,7 +86,7 @@ export const categories = async (req, res) => {
 
 		let favorites = [];
 
-		if (req.session?.user) {
+		if (req.session.user) {
 			const user = await fetchUserById(req.session.user);
 
 			if (!user) { throw new Error('User not found!'); }

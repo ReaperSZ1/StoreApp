@@ -8,6 +8,8 @@ import { fetchCategories } from '../utils/fetch-categories.js';
 export const getFavorites = async (req, res) => {
 	try {
 		const userId = req.session.user;
+        
+		if (!userId) { throw new Error('You need to be logged in'); }
 
 		const user = await fetchUserById(userId);
 
@@ -16,17 +18,13 @@ export const getFavorites = async (req, res) => {
 		const favorites = user.favorites || [];
 
 		if (req.headers['test']) {
-			return res
-				.status(200)
-				.json({ success: true, message: 'Favorites fetched', favorites });
+			return res.status(200).json({ success: true, message: 'Favorites fetched', favorites });
 		}
 
-		return res.json({ favorites });
+		return res.status(200).json({ favorites });
 	} catch (error) {
 		console.error('Error fetching favorites:', error);
-		return res
-			.status(400)
-			.json({ error: error.message || 'Error fetching favorites' });
+		return res.status(400).json({ error: error.message || 'Error fetching favorites' });
 	}
 };
 
@@ -36,7 +34,7 @@ export const postFavorites = async (req, res) => {
 		const { favorites } = req.body;
 
 		if (!favorites) {
-			throw new Error('cannot be empty');
+			throw new Error('body cannot be empty');
 		}
 
 		if (!userId) {
@@ -55,17 +53,10 @@ export const postFavorites = async (req, res) => {
 				.json({ success: true, message: 'Favorites saved' });
 		}
 
-		return res.json({ success: true });
+		return res.status(200).json({ success: true });
 	} catch (error) {
-		if (!req.headers['test']) {
-			console.error(error);
-			req.flash('errorMsg', error.message || 'Error while saving favorites');
-			return res.redirect('/');
-		} else {
-			return res
-				.status(400)
-				.json({ error: error.message || 'Error while saving favorites' });
-		}
+        console.error('Error saving favorites:', error);
+        return res.status(400).json({ error: error.message || 'Error while saving favorites' });
 	}
 };
 
@@ -100,16 +91,14 @@ export const userFavorites = async (req, res) => {
 				});
 		}
 
-		res.render('favorites/index', { favoriteProducts, categories });
+		return res.render('favorites/index', { favoriteProducts, categories });
 	} catch (error) {
 		if (!req.headers['test']) {
 			console.error(error);
 			req.flash('errorMsg', error.message || 'Error loading favorites');
 			return res.redirect('/');
 		} else {
-			return res
-				.status(400)
-				.json({ error: error.message || 'Error loading favorites' });
+			return res.status(400).json({ error: error.message || 'Error loading favorites' });
 		}
 	}
 };

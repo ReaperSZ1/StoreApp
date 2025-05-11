@@ -10,7 +10,7 @@ export const product = async (req, res) => {
 
         const isSlugValid = slug && validator.isSlug(slug);
         
-        if (!isSlugValid) { throw new Error('Invalid category slug!'); }
+        if (!isSlugValid) { throw new Error('Invalid product slug!'); }
 
         const isLoggedIn = req.session && req.session.isLoggedIn ? true : false;
 
@@ -26,13 +26,12 @@ export const product = async (req, res) => {
 
             favorites = user?.favorites;
         }
-
         const sanitizedSlug = slug.trim();
         const product = products
             .filter((p) => p.slug.toLowerCase() === sanitizedSlug.toLowerCase())
-            .map((prod) => ({ ...prod, isFavorited: favorites.includes(prod.sanitizedSlug) }));
+            .map((prod) => ({ ...prod, isFavorited: favorites.includes(prod.slug) }));
 
-        if (!product || product.length === 0) { throw new error('product not found.'); }
+        if (!product || product.length === 0) { throw new Error('product not found.'); }
 
         if (req.headers['test']) {
             return res.status(200).json({ success: true, message: 'Product Found!', product });
@@ -44,7 +43,7 @@ export const product = async (req, res) => {
             categories,
             requestUrl: req.originalUrl
         });
-    } catch (error) {
+    } catch(error) {
         if (!req.headers['test']) {
 			console.error(error);
 			req.flash('errorMsg', error.message || 'Error while saving favorites');

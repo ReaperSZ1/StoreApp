@@ -35,8 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
         openModal(modalSignUp);
     }
 
-    openSignUp.addEventListener("click", () => openModal(modalSignUp));
-    openLogin.addEventListener("click", () => openModal(modalLogin));
+    if(openSignUp){
+        openSignUp.addEventListener("click", () => openModal(modalSignUp));
+    }
+
+    if(openLogin){
+        openLogin.addEventListener("click", () => openModal(modalLogin));
+    }
 
     accountOpenLog.addEventListener("click", switchToLogin);
     accountOpenSignUp.addEventListener("click", switchToSignUp);
