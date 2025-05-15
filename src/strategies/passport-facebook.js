@@ -1,7 +1,7 @@
 import passport from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import dotenv from 'dotenv';
-import User from '../models/User.js';
+import User from '../Models/User.js';
 import validator from 'validator';
 
 dotenv.config();

@@ -1,7 +1,7 @@
 import { fetchProducts } from '../utils/fetch-products.js';
 import { fetchUserById } from '../utils/fetch-user-by-id.js';
 import validator from 'validator';
-import User from '../models/User.js';
+import User from '../Models/User.js';
 
 export const getUserCart = async (req, res) => {
 	try {
@@ -75,14 +75,20 @@ export const addToCart = async (req, res) => {
             return res.status(200).json({ success: true, message: 'Product added to cart.', user: user.cart });
         }
 
-		req.flash('successMsg', 'Product added to cart.');
-		return res.redirect(redirectTo);
+        req.flash('successMsg', 'Product added to cart.');
+        req.session.save((err) => {
+            if (err) { console.error('Error saving flash message:', err); }
+            return res.redirect(redirectTo);
+        });
 	} catch (error) {
         if (!req.headers['test']) {
             const redirectTo = req.body.redirectTo || req.headers.referer || '/';
 			console.error(error);
-			req.flash('errorMsg', error.message || 'Error when adding to cart.');
-			return res.redirect(redirectTo);
+            req.flash('errorMsg', error.message || 'Error when adding to cart.');
+            req.session.save((err) => {
+                if (err) { console.error('Error saving flash message:', err); }
+                return res.redirect(redirectTo);
+            });
 		} else {
 			return res.status(400).json({ error: error.message || 'Error when adding to cart.' });
 		}
@@ -123,7 +129,10 @@ export const removeFromCart = async (req, res) => {
         if (!req.headers['test']) {
 			console.error(error);
 			req.flash('errorMsg', error.message || 'Error to remove item.');
-			return res.redirect(req.headers.referer || '/');
+            req.session.save((err) => {
+                if (err) { console.error('Error saving flash message:', err); }
+                return res.redirect(req.headers.referer || '/');
+            });
 		} else {
             const isAjax = req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest';
             if(isAjax) {
@@ -171,7 +180,10 @@ export const updateCartQuantity = async (req, res) => {
 export const checkout = async (req, res) => {
     if (req.headers['test']) {
         return res.status(200).json({ success: true, message: 'order completed! ;-)' });
-    }
-	req.flash('successMsg', 'order completed! ;-)');
-	return res.redirect('/');
+    }   
+    req.flash('successMsg', 'order completed! ;-)');
+    req.session.save((err) => {
+        if (err) { console.error('Error saving flash message:', err); }
+        return res.redirect('/');
+    });
 };

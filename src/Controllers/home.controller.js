@@ -60,7 +60,10 @@ export const index = async (req, res) => {
 	} catch (error) {
         if(!req.headers['test']) {
             console.error('Error loading home page:', error);
-            return res.status(500).json({ error: error.message || 'Internal server error' } );
+            req.session.save((err) => {
+                if (err) { console.error('Error saving flash message:', err); }
+                return res.redirect('/');
+            });
         } else {
             return res.status(400).json({ error: error.message || 'Server error' });
         }
@@ -112,7 +115,10 @@ export const categories = async (req, res) => {
         if(!req.headers['test']) {
             console.error(error);
             req.flash('errorMsg', error.message || 'Server error');
-            return res.redirect('/');
+            req.session.save((err) => {
+                if (err) { console.error('Error saving flash message:', err); }
+                return res.redirect('/');
+            });
         } else {
             return res.status(400).json({ error: error.message || 'Server error' });
         }
@@ -168,7 +174,10 @@ export const search = async (req, res) => {
         if(!req.headers['test']) {
             console.error(error);
             req.flash('errorMsg', error.message || 'Server error');
-            return res.redirect('/');
+            req.session.save((err) => {
+                if (err) { console.error('Error saving flash message:', err); }
+                return res.redirect('/');
+            });
         } else {
             return res.status(400).json({ error: error.message || 'Server error' });
         }
