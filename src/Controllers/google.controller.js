@@ -10,15 +10,32 @@ export const googleSignupCallback = (req, res, next) => {
     
         if (!user) {
             req.flash('errorMsg', info.message);
-            return res.redirect('/');
+            req.session.save((err) => {
+                if (err) { console.error('Error saving flash message:', err); }
+                return res.redirect('/');
+            });
         }
 
         req.login(user, (err) => {
             if (err) { return next(err); }
             req.session.user = user.id; 
             req.session.isLoggedIn = true;
-            req.flash('successMsg', 'Signed up successfully!');
-            return res.redirect('/');
+
+            req.session.save((err) => {
+                if (err) {
+                    console.error('Error saving session:', err);
+                    req.flash('errorMsg', 'Error saving session');
+                    return res.redirect('/');
+                }
+                
+                req.flash('successMsg', 'Signed up successfully!');
+                req.session.save((err) => {
+                    if (err) {
+                        console.error('Error saving flash message:', err);
+                    }
+                    return res.redirect('/');
+                });
+            });
         });
     })(req, res, next);
 };
@@ -33,15 +50,32 @@ export const googleLoginCallback = (req, res, next) => {
     
         if (!user) {
             req.flash('errorMsg', info.message);
-            return res.redirect('/');
+            req.session.save((err) => {
+                if (err) { console.error('Error saving flash message:', err); }
+                return res.redirect('/');
+            });
         }
         
         req.login(user, (err) => {
             if (err) { return next(err); }
             req.session.user = user.id;
             req.session.isLoggedIn = true;
-            req.flash('successMsg', 'login successfully!');
-            return res.redirect('/');
+            
+            req.session.save((err) => {
+                if (err) {
+                    console.error('Error saving session:', err);
+                    req.flash('errorMsg', 'Error saving session');
+                    return res.redirect('/');
+                }
+                
+                req.flash('successMsg', 'login successfully!');
+                req.session.save((err) => {
+                    if (err) {
+                        console.error('Error saving flash message:', err);
+                    }
+                    return res.redirect('/');
+                });
+            });
         });
     })(req, res, next);
 };

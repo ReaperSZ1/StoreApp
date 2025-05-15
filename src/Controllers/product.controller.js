@@ -47,7 +47,10 @@ export const product = async (req, res) => {
         if (!req.headers['test']) {
 			console.error(error);
 			req.flash('errorMsg', error.message || 'Error while saving favorites');
-			return res.redirect('/');
+            req.session.save((err) => {
+                if (err) { console.error('Error saving flash message:', err); }
+                return res.redirect('/');
+            });
 		} else {
 			return res.status(400).json({ error: error.message || 'Error while saving favorites' });
 		}

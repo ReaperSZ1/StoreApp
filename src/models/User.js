@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { sequelize } from '../Database/connection.js';
 
 const User = sequelize.define(
-	'User',
+	'user',
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -42,9 +42,9 @@ const User = sequelize.define(
 			type: DataTypes.JSON,
 			defaultValue: []
 		},
-        cart: {
+		cart: {
 			type: DataTypes.JSON,
-			defaultValue: [] 
+			defaultValue: [] // mysql: cart JSON DEFAULT (JSON_ARRAY())
 		}
 	},
 	{ timestamps: false }

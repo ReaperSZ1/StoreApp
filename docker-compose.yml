@@ -1,0 +1,30 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: storeapp
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env.docker 
+    depends_on:
+      - mysql
+    volumes:
+      - .:/app  # Monta o diretório atual no diretório /app dentro do container
+    command: npm run start  
+    restart: always 
+
+  mysql:
+    image: mysql:8.0
+    container_name: storeapp-mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
