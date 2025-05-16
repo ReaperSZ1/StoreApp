@@ -38,13 +38,13 @@ jobs:
 
       - name: Wait for MySQL
         run: |
-          while ! mysqladmin ping -hlocalhost -P3306 -uroot -p${{ secrets.MYSQL_ROOT_PASSWORD }} --silent; do
+          while ! mysqladmin ping -hlocalhost -P3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} --silent; do
             echo "Waiting for MySQL..."
             sleep 5
           done
 
       - name: Create Database Schema
-        run: mysql -hlocalhost -P3306 -uroot -p${{ secrets.MYSQL_ROOT_PASSWORD }}  ${{ secrets.DB_NAME }} < sql/schema.sql
+        run: mysql -hlocalhost -P3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }}  ${{ secrets.DB_NAME }} < sql/schema.sql
 
       - name: Start local server
         run: npm run start &
