@@ -1,43 +1,43 @@
-name: Cypress Tests
+name: Cypress Tests 
 
 on:
   push:
-    branches: [ "main", "new-features", "CI-CD-Cypress" ]
+    branches: [ "main", "new-features", "CI-CD-Cypress" ] 
   pull_request:
-    branches: [ "main", "new-features", "CI-CD-Cypress" ]
-  workflow_dispatch:
+    branches: [ "main", "new-features", "CI-CD-Cypress" ] 
+  workflow_dispatch: 
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-24.04 # ubuntu-latest geralmente também é uma boa escolha
+     runs-on: ubuntu-24.04
     services:
-      mysql:
-        image: mysql:8.0
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-          MYSQL_DATABASE: ${{ secrets.DB_NAME }}
-        options: >- # Garante que o MySQL esteja saudável antes de prosseguir
-          --health-cmd "mysqladmin ping -h localhost -P 3306 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }}"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+        mysql:
+          image: mysql:8.0
+          ports:
+            - 3306:3306
+          env:
+            MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+            MYSQL_DATABASE: ${{ secrets.DB_NAME }}
+            options: >- # Garante que o MySQL esteja saudável antes de prosseguir
+              --health-cmd "mysqladmin ping -h localhost -P 3306 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }}"
+              --health-interval 10s
+              --health-timeout 5s
+              --health-retries 5
 
     steps:
-      - name: Checkout code
+      - name: Checkout code # Faz o checkout do seu código para o ambiente do runner
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js # Configura o ambiente Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.12.2'
+          node-version: '20.12.2' 
 
       - name: Install dependencies
         run: npm install
 
-      - name: Install Cypress dependencies 
-        run: npx cypress install 
+      - name: Install Cypress dependencies # Instala as dependências específicas do Cypress
+        run: npx cypress install
 
       - name: Wait for MySQL
         env:
@@ -56,8 +56,8 @@ jobs:
           done
           echo "O MySQL não ficou pronto a tempo."
           exit 1   
-   
-      - name: Create Database Schema 
+
+      - name: Create Database Schema
         env:
           MYSQL_PWD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
           DB_NAME_VAR: ${{ secrets.DB_NAME }} 
@@ -66,8 +66,10 @@ jobs:
           echo "Importando schema para o banco de dados ${DB_NAME_VAR}..."
           mysql -h127.0.0.1 -P3306 -uroot ${DB_NAME_VAR} < sql/schema.sql
           echo "Importação do schema completa."
-
+  
       - name: Start local server
+        run: npm run start &
+        - name: Start local server
         run: npm run start &
         env:
           MYSQL_URI: ${{ secrets.MYSQL_URI }} 
@@ -91,7 +93,7 @@ jobs:
         run: npx wait-on http://localhost:8081 --timeout 60000 
 
       - name: Cypress run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v6 
         with:
           browser: chrome
           # record: true # se você usar o Cypress Dashboard
