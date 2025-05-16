@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-24.04
     services:
         mysql:
-          image: mysql:8.0.42 
+          image: mysql:8.0
           ports:
             - 3306:3306
           env:
