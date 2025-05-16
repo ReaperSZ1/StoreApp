@@ -1,5 +1,5 @@
 import app from './app.js';
-import database from './Database/connection.js';
+import database from './database/connection.js';
 
 const PORT = 8081;
 const ENV = process.env.NODE_ENV || 'development';
@@ -14,7 +14,7 @@ app.listen(PORT, () => {
 
 // Close connection correctly when shutting down
 process.on('SIGINT', async () => {
-    console.log('\n🛑 App closed...');
-    await database.close(); 
-    process.exit(0);
+	console.log('\n🛑 App closed...');
+	await database.close();
+	process.exit(0);
 });

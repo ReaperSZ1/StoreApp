@@ -1,14 +1,14 @@
 import { fetchProducts } from '../utils/fetch-products.js';
 import { fetchUserById } from '../utils/fetch-user-by-id.js';
 import validator from 'validator';
-import User from '../Models/User.js';
+import User from '../models/User.js';
 
 export const getUserCart = async (req, res) => {
 	try {
 		const userId = req.session.user;
 
 		if (!userId) {
-            throw new Error('User Not authenticated.');
+			throw new Error('User Not authenticated.');
 		}
 
 		const user = await fetchUserById(userId);
@@ -26,12 +26,16 @@ export const getUserCart = async (req, res) => {
 			});
 
 		if (req.headers['test']) {
-			return res.status(200).json({ success: true, message: 'Products found', cartProducts });
+			return res
+				.status(200)
+				.json({ success: true, message: 'Products found', cartProducts });
 		}
 
 		return res.render('partials/cart-items', { layout: false, cartProducts });
 	} catch (error) {
-        return res.status(400).json({ error: error.message || 'Error when searching for cart.' });
+		return res
+			.status(400)
+			.json({ error: error.message || 'Error when searching for cart.' });
 	}
 };
 
@@ -39,26 +43,36 @@ export const addToCart = async (req, res) => {
 	try {
 		const userId = req.session.user;
 		const redirectTo = req.body.redirectTo || req.headers.referer || '/';
-        const { slug, quantity } = req.body;
+		const { slug, quantity } = req.body;
 
-		if (!userId) { throw new Error('User Not authenticated.'); }
+		if (!userId) {
+			throw new Error('User Not authenticated.');
+		}
 
 		const user = await fetchUserById(userId);
 
-		if (!user) { throw new Error('User not found.'); }
+		if (!user) {
+			throw new Error('User not found.');
+		}
 
-		if (!slug || !validator.isSlug(slug)) { throw new Error('Invalid slug.'); }
+		if (!slug || !validator.isSlug(slug)) {
+			throw new Error('Invalid slug.');
+		}
 
 		const parsedQuantity = parseInt(quantity, 10);
 
-		if (isNaN(parsedQuantity) || parsedQuantity < 1) { throw new Error('Invalid quantity.'); }
+		if (isNaN(parsedQuantity) || parsedQuantity < 1) {
+			throw new Error('Invalid quantity.');
+		}
 
-        const sanitizedSlug = slug.trim();
+		const sanitizedSlug = slug.trim();
 
 		const products = await fetchProducts();
 		const product = products.find((p) => p.slug === sanitizedSlug);
 
-		if (!product) { throw new Error('Product not found.'); }
+		if (!product) {
+			throw new Error('Product not found.');
+		}
 
 		const cart = user.cart || [];
 		const existingItem = cart.find((item) => item.slug === slug);
@@ -71,26 +85,38 @@ export const addToCart = async (req, res) => {
 
 		await User.update({ cart }, { where: { id: userId } });
 
-        if (req.headers['test']) {
-            return res.status(200).json({ success: true, message: 'Product added to cart.', user: user.cart });
-        }
+		if (req.headers['test']) {
+			return res
+				.status(200)
+				.json({
+					success: true,
+					message: 'Product added to cart.',
+					user: user.cart
+				});
+		}
 
-        req.flash('successMsg', 'Product added to cart.');
-        req.session.save((err) => {
-            if (err) { console.error('Error saving flash message:', err); }
-            return res.redirect(redirectTo);
-        });
+		req.flash('successMsg', 'Product added to cart.');
+		req.session.save((err) => {
+			if (err) {
+				console.error('Error saving flash message:', err);
+			}
+			return res.redirect(redirectTo);
+		});
 	} catch (error) {
-        if (!req.headers['test']) {
-            const redirectTo = req.body.redirectTo || req.headers.referer || '/';
+		if (!req.headers['test']) {
+			const redirectTo = req.body.redirectTo || req.headers.referer || '/';
 			console.error(error);
-            req.flash('errorMsg', error.message || 'Error when adding to cart.');
-            req.session.save((err) => {
-                if (err) { console.error('Error saving flash message:', err); }
-                return res.redirect(redirectTo);
-            });
+			req.flash('errorMsg', error.message || 'Error when adding to cart.');
+			req.session.save((err) => {
+				if (err) {
+					console.error('Error saving flash message:', err);
+				}
+				return res.redirect(redirectTo);
+			});
 		} else {
-			return res.status(400).json({ error: error.message || 'Error when adding to cart.' });
+			return res
+				.status(400)
+				.json({ error: error.message || 'Error when adding to cart.' });
 		}
 	}
 };
@@ -99,20 +125,29 @@ export const removeFromCart = async (req, res) => {
 	try {
 		const userId = req.session.user;
 		const { slug } = req.params;
-        const sanitizedSlug = slug.trim();
+		const sanitizedSlug = slug.trim();
 
-        const isAjax = req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest';
+		const isAjax =
+			req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest';
 
-		if (!userId) { throw new Error('User Not authenticated.'); }
+		if (!userId) {
+			throw new Error('User Not authenticated.');
+		}
 
-        const user = await fetchUserById(userId);
-        const isInCart = user.cart.some((item) => item.slug === sanitizedSlug)
+		const user = await fetchUserById(userId);
+		const isInCart = user.cart.some((item) => item.slug === sanitizedSlug);
 
-		if (!slug || !validator.isSlug(slug)) { throw new Error('Invalid slug.'); }
+		if (!slug || !validator.isSlug(slug)) {
+			throw new Error('Invalid slug.');
+		}
 
-		if (!user) { throw new Error('User not found.'); }
+		if (!user) {
+			throw new Error('User not found.');
+		}
 
-		if (!isInCart) { throw new Error('Item not found in cart.'); }
+		if (!isInCart) {
+			throw new Error('Item not found in cart.');
+		}
 
 		user.cart = (user.cart || []).filter((item) => item.slug !== sanitizedSlug);
 
@@ -120,25 +155,38 @@ export const removeFromCart = async (req, res) => {
 
 		if (isAjax) return res.status(200).json({ success: true });
 
-        if (req.headers['test']) {
-            return res.status(200).json({ success: true, message: 'Product removed from cart.', user: user.cart });
-        }
+		if (req.headers['test']) {
+			return res
+				.status(200)
+				.json({
+					success: true,
+					message: 'Product removed from cart.',
+					user: user.cart
+				});
+		}
 
 		return res.redirect(req.headers.referer || '/');
 	} catch (error) {
-        if (!req.headers['test']) {
+		if (!req.headers['test']) {
 			console.error(error);
 			req.flash('errorMsg', error.message || 'Error to remove item.');
-            req.session.save((err) => {
-                if (err) { console.error('Error saving flash message:', err); }
-                return res.redirect(req.headers.referer || '/');
-            });
+			req.session.save((err) => {
+				if (err) {
+					console.error('Error saving flash message:', err);
+				}
+				return res.redirect(req.headers.referer || '/');
+			});
 		} else {
-            const isAjax = req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest';
-            if(isAjax) {
-                return res.status(400).json({ error: error.message || 'Error to remove item.' });
-            }
-			return res.status(400).json({ error: error.message || 'Error to remove item.' });
+			const isAjax =
+				req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest';
+			if (isAjax) {
+				return res
+					.status(400)
+					.json({ error: error.message || 'Error to remove item.' });
+			}
+			return res
+				.status(400)
+				.json({ error: error.message || 'Error to remove item.' });
 		}
 	}
 };
@@ -148,17 +196,23 @@ export const updateCartQuantity = async (req, res) => {
 		const userId = req.session.user;
 		const { slug, quantity } = req.body;
 
-        if(!userId) { throw new Error('User Not authenticated.'); }
+		if (!userId) {
+			throw new Error('User Not authenticated.');
+		}
 
-        const user = await fetchUserById(userId);
+		const user = await fetchUserById(userId);
 
-        if (!user) return res.status(404).json({ error: 'User not found.' });
+		if (!user) return res.status(404).json({ error: 'User not found.' });
 
-        const parsedQuantity = parseInt(quantity, 10);
+		const parsedQuantity = parseInt(quantity, 10);
 
-		if (isNaN(parsedQuantity) || parsedQuantity < 1) { throw new Error('Invalid quantity.'); }
+		if (isNaN(parsedQuantity) || parsedQuantity < 1) {
+			throw new Error('Invalid quantity.');
+		}
 
-        if (!slug || !validator.isSlug(slug)) { throw new Error('Invalid slug.'); }
+		if (!slug || !validator.isSlug(slug)) {
+			throw new Error('Invalid slug.');
+		}
 
 		const cart = user.cart.map((item) =>
 			item.slug === slug ? { ...item, quantity: parseInt(quantity) } : item
@@ -166,24 +220,32 @@ export const updateCartQuantity = async (req, res) => {
 
 		await User.update({ cart }, { where: { id: userId } });
 
-        if (req.headers['test']) {
-            return res.status(200).json({ success: true, message: 'quantity updated.', user: user.cart });
-        }
+		if (req.headers['test']) {
+			return res
+				.status(200)
+				.json({ success: true, message: 'quantity updated.', user: user.cart });
+		}
 
 		return res.status(200).json({ success: true });
 	} catch (error) {
-        console.error(error);
-        return res.status(400).json({ error: error.message || 'Failed to update quantity.' });
-    }
+		console.error(error);
+		return res
+			.status(400)
+			.json({ error: error.message || 'Failed to update quantity.' });
+	}
 };
 
 export const checkout = async (req, res) => {
-    if (req.headers['test']) {
-        return res.status(200).json({ success: true, message: 'order completed! ;-)' });
-    }   
-    req.flash('successMsg', 'order completed! ;-)');
-    req.session.save((err) => {
-        if (err) { console.error('Error saving flash message:', err); }
-        return res.redirect('/');
-    });
+	if (req.headers['test']) {
+		return res
+			.status(200)
+			.json({ success: true, message: 'order completed! ;-)' });
+	}
+	req.flash('successMsg', 'order completed! ;-)');
+	req.session.save((err) => {
+		if (err) {
+			console.error('Error saving flash message:', err);
+		}
+		return res.redirect('/');
+	});
 };

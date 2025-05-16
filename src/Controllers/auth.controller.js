@@ -1,4 +1,4 @@
-import User from '../Models/User.js';
+import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
 
@@ -46,45 +46,46 @@ export const signUp = async (req, res) => {
 			maxAge: 3600000 // 1 hour
 		});
 
-		if (req.headers['e2e']) { await user.destroy(); } 
+		if (req.headers['e2e']) {
+			await user.destroy();
+		}
 
-        req.session.user = user.id;
-        req.session.isLoggedIn = true;
+		req.session.user = user.id;
+		req.session.isLoggedIn = true;
 
-        if (req.headers['test']) {
-            await user.destroy();
-            return res
-                .status(200)
-                .json({
-                    success: true,
-                    message: 'User created and removed for test'
-                });
-        }
+		if (req.headers['test']) {
+			await user.destroy();
+			return res.status(200).json({
+				success: true,
+				message: 'User created and removed for test'
+			});
+		}
 
-        req.session.save((err) => {
-            if (err) {
-                console.error('Error saving session:', err);
-                req.flash('errorMsg', 'Error saving session');
-                return res.redirect('/');
-            }
+		req.session.save((err) => {
+			if (err) {
+				console.error('Error saving session:', err);
+				req.flash('errorMsg', 'Error saving session');
+				return res.redirect('/');
+			}
 
-            req.flash('successMsg', 'User registered successfully!');
-            req.session.save((err) => {
-                if (err) {
-                    console.error('Error saving flash message:', err);
-                }
-                return res.redirect('/');
-            });
-        });
-		
+			req.flash('successMsg', 'User registered successfully!');
+			req.session.save((err) => {
+				if (err) {
+					console.error('Error saving flash message:', err);
+				}
+				return res.redirect('/');
+			});
+		});
 	} catch (error) {
 		if (!req.headers['test']) {
 			console.error(error);
 			req.flash('errorMsg', error.message || 'Server error');
-            req.session.save((err) => {
-                if (err) { console.error('Error saving flash message:', err); }
-                return res.redirect('/');
-            });
+			req.session.save((err) => {
+				if (err) {
+					console.error('Error saving flash message:', err);
+				}
+				return res.redirect('/');
+			});
 		} else {
 			return res.status(400).json({ error: error.message || 'Server error' });
 		}
@@ -135,32 +136,33 @@ export const login = async (req, res) => {
 				.status(200)
 				.json({ success: true, message: 'Logged in successfully!' });
 		}
-        // this ensures the page is only loaded when the session is correctly saved
-        req.session.save((err) => {
-            if (err) {
-                console.error('Error saving session:', err);
-                req.flash('errorMsg', 'Error saving session');
-                return res.redirect('/');
-            }
-            
-            req.flash('successMsg', 'Logged in successfully!');
-            req.session.save((err) => {
-                if (err) {
-                    console.error('Error saving flash message:', err);
-                }
-                return res.redirect('/');
-            });
-        });
+		// this ensures the page is only loaded when the session is correctly saved
+		req.session.save((err) => {
+			if (err) {
+				console.error('Error saving session:', err);
+				req.flash('errorMsg', 'Error saving session');
+				return res.redirect('/');
+			}
 
+			req.flash('successMsg', 'Logged in successfully!');
+			req.session.save((err) => {
+				if (err) {
+					console.error('Error saving flash message:', err);
+				}
+				return res.redirect('/');
+			});
+		});
 	} catch (error) {
 		if (!req.headers['test']) {
 			console.error(error);
 
-            req.flash('errorMsg', error.message || 'Server error');
-            req.session.save((err) => {
-                if (err) { console.error('Error saving flash message:', err); }
-                return res.redirect('/');
-            });
+			req.flash('errorMsg', error.message || 'Server error');
+			req.session.save((err) => {
+				if (err) {
+					console.error('Error saving flash message:', err);
+				}
+				return res.redirect('/');
+			});
 		} else {
 			return res.status(400).json({ error: error.message || 'Server error' });
 		}
