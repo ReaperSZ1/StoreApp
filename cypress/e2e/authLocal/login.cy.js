@@ -11,14 +11,25 @@ describe('Login tests', () => {
         cy.visit('/');
         cy.get('#account').click();
         cy.get('#openSignUp').click();
-
+    
         cy.fillSignUpForm('jooj', 'ws4t20177@gmail.com', '123123', '123123');
-
+    
+        cy.intercept('POST', '/api/auth/signup').as('signUpRequest');
+        
         cy.get('#modalSignUp .form-submit-responsive').click();
-
-        cy.get('.msg-responsive', { timeout: 10000 }).should('be.visible').and('contain.text', 'User registered successfully!');
+    
+        cy.wait('@signUpRequest').then((interception) => {
+            cy.log('API Response:', interception.response);
+            console.log('API Response:', interception.response); // Log para o terminal
+        });
+    
+        cy.get('.msg-responsive', { timeout: 10000 })
+          .should('be.visible')
+          .and('contain.text', 'User registered successfully!');
+    
         cy.url().should('include', '/');
     });
+    
 
 	it('should display the Login modal', () => {
 		cy.get('#modalLogin h2.h2-modal-responsive')

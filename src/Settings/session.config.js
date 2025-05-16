@@ -20,7 +20,8 @@ export const getSessionMiddleware = async () => {
 		saveUninitialized: false,
 		cookie: {
 			httpOnly: true,
-			maxAge: 3600000
+			maxAge: 3600000,
+            secure: process.env.NODE_ENV === 'production'
 		},
 		store: store
 	});
