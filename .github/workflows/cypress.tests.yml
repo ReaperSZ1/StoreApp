@@ -12,14 +12,18 @@ jobs:
     runs-on: ubuntu-24.04
     services:
         mysql:
-          image: mysql:5.7 # Escolha a versão desejada
+          image: mysql:8.0.42 
           ports:
             - 3306:3306
           env:
             MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
             MYSQL_DATABASE: ${{ secrets.DB_NAME }}
-          options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-  
+            options: >
+                    --default-authentication-plugin=mysql_native_password 
+                    --health-cmd="mysqladmin ping -h localhost -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }}" 
+                    --health-interval=10s 
+                    --health-timeout=5s 
+                    --health-retries=10
 
     steps:
       - name: Checkout code # Faz o checkout do seu código para o ambiente do runner
@@ -38,14 +42,21 @@ jobs:
 
       - name: Wait for MySQL
         run: |
-          while ! mysqladmin ping -hlocalhost -P3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} --silent; do
-            echo "Waiting for MySQL..."
-            sleep 5
+          for i in {1..10}; do
+            if mysqladmin ping -hlocalhost -P3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} --silent; then
+              echo "MySQL is ready!"
+              break
+            else
+              echo "Waiting for MySQL..."
+              sleep 5
+            fi
           done
 
       - name: Create Database Schema
-        run: mysql -hlocalhost -P3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }}  ${{ secrets.DB_NAME }} < sql/schema.sql
-
+        run: 
+          mysql -hlocalhost -P3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS \`${{ env.DB_NAME }}\`;"
+          mysql -hlocalhost -P3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} ${{ env.DB_NAME }} < sql/schema.sql
+  
       - name: Start local server
         run: npm run start &
         env:
