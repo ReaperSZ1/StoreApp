@@ -73,7 +73,7 @@ jobs:
           MYSQL_URI: ${{ secrets.MYSQL_URI }} 
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          NODE_ENV: production
+          NODE_ENV: development
           DB_HOST: 127.0.0.1 
           DB_USER: root 
           DB_PASS: ${{ secrets.MYSQL_ROOT_PASSWORD }}
