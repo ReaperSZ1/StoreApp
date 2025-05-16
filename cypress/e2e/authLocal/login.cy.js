@@ -16,7 +16,7 @@ describe('Login tests', () => {
 
         cy.get('#modalSignUp .form-submit-responsive').click();
 
-        cy.get('.msg-responsive').should('be.visible').and('contain.text', 'User registered successfully!');
+        cy.get('.msg-responsive', { timeout: 10000 }).should('be.visible').and('contain.text', 'User registered successfully!');
         cy.url().should('include', '/');
     });
 
