@@ -5,6 +5,21 @@ describe('Login tests', () => {
         cy.get('#openLogin').click();
     });
 
+    // this test was created to create a user for tests that will be used in other tests
+    // if user exists will return error, but this is not a problem
+    it('should create a test user', () => {
+        cy.visit('/');
+        cy.get('#account').click();
+        cy.get('#openSignUp').click();
+
+        cy.fillSignUpForm('jooj', 'ws4t20177@gmail.com', '123123', '123123');
+
+        cy.get('#modalSignUp .form-submit-responsive').click();
+
+        cy.get('.msg-responsive').should('be.visible').and('contain.text', 'User registered successfully!');
+        cy.url().should('include', '/');
+    });
+
 	it('should display the Login modal', () => {
 		cy.get('#modalLogin h2.h2-modal-responsive')
 			.should('be.visible')
