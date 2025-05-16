@@ -1,66 +1,82 @@
-name: Cypress Tests 
+name: Cypress Tests
 
 on:
   push:
-    branches: [ "main", "new-features", "CI-CD-Cypress" ] 
+    branches: [ "main", "new-features", "CI-CD-Cypress" ]
   pull_request:
-    branches: [ "main", "new-features", "CI-CD-Cypress" ] 
-  workflow_dispatch: 
+    branches: [ "main", "new-features", "CI-CD-Cypress" ]
+  workflow_dispatch:
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04 # ubuntu-latest geralmente também é uma boa escolha
     services:
-        mysql:
-          image: mysql:8.0
-          ports:
-            - 3306:3306
-          env:
-            MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-            MYSQL_DATABASE: ${{ secrets.DB_NAME }}
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.DB_NAME }}
+        options: >- # Garante que o MySQL esteja saudável antes de prosseguir
+          --health-cmd "mysqladmin ping -h localhost -P 3306 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }}"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
-      - name: Checkout code # Faz o checkout do seu código para o ambiente do runner
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js # Configura o ambiente Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.12.2' 
+          node-version: '20.12.2'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Install Cypress dependencies # Instala as dependências específicas do Cypress
-        run: npx cypress install
+      - name: Install Cypress dependencies 
+        run: npx cypress install 
 
       - name: Wait for MySQL
+        env:
+          # MYSQL_PWD é usado automaticamente pelas ferramentas de cliente mysql
+          MYSQL_PWD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
         run: |
-          for i in {1..4}; do
-            if mysqladmin ping -hlocalhost -P3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} --silent; then
-              echo "MySQL is ready!"
-              break
+          echo "Tentando conectar ao MySQL..."
+          for i in {1..10}; do 
+            if mysqladmin ping -h127.0.0.1 -P3306 -uroot --silent; then
+              echo "MySQL está pronto!"
+              exit 0
             else
-              echo "Waiting for MySQL..."
-              sleep 10
+              echo "Esperando pelo MySQL... (tentativa $i/10)"
+              sleep 5 # Tempo de espera menor, mais tentativas
             fi
           done
+          echo "O MySQL não ficou pronto a tempo."
+          exit 1   
+   
+      - name: Create Database Schema 
+        env:
+          MYSQL_PWD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          DB_NAME_VAR: ${{ secrets.DB_NAME }} 
+        run: |
+          mysql -h127.0.0.1 -P3306 -uroot -e "CREATE DATABASE IF NOT EXISTS \`${DB_NAME_VAR}\`;"
+          echo "Importando schema para o banco de dados ${DB_NAME_VAR}..."
+          mysql -h127.0.0.1 -P3306 -uroot ${DB_NAME_VAR} < sql/schema.sql
+          echo "Importação do schema completa."
 
-      - name: Create Database Schema
-        run: 
-          mysql -hlocalhost -P3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS \`${{ env.DB_NAME }}\`;"
-          mysql -hlocalhost -P3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} ${{ env.DB_NAME }} < sql/schema.sql
-  
       - name: Start local server
         run: npm run start &
         env:
-          MYSQL_URI: ${{ secrets.MYSQL_URI }}
+          MYSQL_URI: ${{ secrets.MYSQL_URI }} 
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          NODE_ENV: ${{ secrets.NODE_ENV }}
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASS: ${{ secrets.DB_PASS }}
+          NODE_ENV: production
+          DB_HOST: 127.0.0.1 
+          DB_USER: root 
+          DB_PASS: ${{ secrets.MYSQL_ROOT_PASSWORD }}
           DB_NAME: ${{ secrets.DB_NAME }}
           FACEBOOK_CLIENT_ID: ${{ secrets.FACEBOOK_CLIENT_ID }}
           FACEBOOK_CLIENT_SECRET: ${{ secrets.FACEBOOK_CLIENT_SECRET }}
@@ -72,7 +88,10 @@ jobs:
           GOOGLE_CALLBACK_SIGNUP_URL: ${{ secrets.GOOGLE_CALLBACK_SIGNUP_URL }}
 
       - name: Wait for server to be ready
-        run: npx wait-on http://localhost:8081
+        run: npx wait-on http://localhost:8081 --timeout 60000 
 
       - name: Cypress run
-        uses: cypress-io/github-action@v6 
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          # record: true # se você usar o Cypress Dashboard
