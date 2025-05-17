@@ -92,4 +92,7 @@ jobs:
         uses: cypress-io/github-action@v6 
         with:
           browser: chrome
-          record: false # Se você quiser usar o Cypress Dashboard, mude para true e configure o projeto.
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+    
