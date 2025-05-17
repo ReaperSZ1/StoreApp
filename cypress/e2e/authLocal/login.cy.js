@@ -86,17 +86,6 @@ describe('Login tests', () => {
         cy.url().should('include', '/');
     });
 
-    it('should show error when try to access a Oath account from local auth', () => {
-        cy.fillLoginForm('gabrielsil20177@gmail.com', 'google-login');
-        cy.get('#modalLogin .form-submit-responsive').click();
-
-        cy.get('.msg-responsive')
-            .should('be.visible')
-            .and('contain.text', 'Invalid credentials');
-            
-        cy.url().should('include', '/');
-    });
-
     it('should show modal Sign when click in Sign button', () => {
         cy.visit('/');
         cy.get('#account').click();

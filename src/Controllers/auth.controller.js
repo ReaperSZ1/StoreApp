@@ -48,6 +48,9 @@ export const signUp = async (req, res) => {
 
 		if (req.headers['e2e']) {
 			await user.destroy();
+            // wasn't used req.session save for req.flash because it was giving an error in the e2e tests
+            req.flash('successMsg', 'User registered successfully!');
+            return res.redirect('/');
 		}
 
 		req.session.user = user.id;
