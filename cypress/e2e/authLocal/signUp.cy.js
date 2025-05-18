@@ -17,7 +17,7 @@ describe('Sign Up tests', () => {
     });
 
     it('should complete sign up form and show success message', () => {
-        cy.fillSignUpForm('John Doe', 'johndoe@example.com', 'password123', 'password123');
+        cy.fillSignUpForm('John Doe', 'johndooe@example.com', 'password123', 'password123');
 
         cy.intercept('POST', '/api/auth/signup', (req) => {
             req.headers['e2e'] = 'true';
@@ -25,9 +25,7 @@ describe('Sign Up tests', () => {
 
         cy.get('#modalSignUp .form-submit-responsive').click();
 
-        cy.wait('@signUpRequest')
-            .its('request.headers.e2e')
-            .should('equal', 'true');
+        cy.wait('@signUpRequest').its('request.headers.e2e').should('equal', 'true');
 
         cy.get('.msg-responsive').should('be.visible').and('contain.text', 'User registered successfully!');
         cy.url().should('include', '/');

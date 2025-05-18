@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 import bcrypt from 'bcrypt';
-import { sequelize } from '../Database/connection.js';
+import { sequelize } from '../database/connection.js';
 
 const User = sequelize.define(
-	'user',
+	'user', 
 	{
 		id: {
 			type: DataTypes.INTEGER,

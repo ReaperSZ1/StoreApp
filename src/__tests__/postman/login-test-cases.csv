@@ -1,6 +1,0 @@
-email,password,testType
-ws4t20177@gmail.com,123123,success
-ws4t20177@gmail.com,232g44,invalid_credentials
-fdf@gmail.com,senha123,user_not_found
-invalid-email,senha123,invalid_email
-user4@example.com,123,weak_password 

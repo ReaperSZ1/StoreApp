@@ -44,6 +44,7 @@ class App {
 	}
 
 	async init() {
+        this.app.set('trust proxy', 1); // Necessário para funcionar com proxy do Render
 		await this.middlewares();
 		this.routes();
 	}
