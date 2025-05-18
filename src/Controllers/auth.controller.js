@@ -55,7 +55,7 @@ export const signUp = async (req, res) => {
         
 		req.session.user = user.id;
 		req.session.isLoggedIn = true;
-        console.log('sessao criada', req.session);
+        console.log('sessao criada', req.session); 
 
 		if (req.headers['test']) {
 			await user.destroy();
@@ -68,7 +68,7 @@ export const signUp = async (req, res) => {
         req.flash('successMsg', 'User registered successfully!');
         req.session.save((err) => {
             if (err) {
-                console.error('Error saving flash message:', err);
+                throw new Error('Error saving flash message:', err);
             }
             return res.redirect('/');
         });
@@ -79,8 +79,8 @@ export const signUp = async (req, res) => {
 			req.flash('errorMsg', error.message || 'Server error');
 			req.session.save((err) => {
 				if (err) {
-					console.error('Error saving flash message:', err);
-				}
+                    throw new Error('Error saving flash message:', err);
+                }
 				return res.redirect('/');
 			});
 		} else {
@@ -127,6 +127,7 @@ export const login = async (req, res) => {
 
 		req.session.user = user.id;
 		req.session.isLoggedIn = true;
+        console.log('sessao criada', req.session); 
 
 		if (req.headers['test']) {
 			return res
@@ -137,7 +138,7 @@ export const login = async (req, res) => {
         req.flash('successMsg', 'Logged in successfully!');
         req.session.save((err) => {
             if (err) {
-                console.error('Error saving flash message:', err);
+                throw new Error('Error saving flash message:', err);
             }
             return res.redirect('/');
         });
@@ -149,7 +150,7 @@ export const login = async (req, res) => {
 			req.flash('errorMsg', error.message || 'Server error');
 			req.session.save((err) => {
 				if (err) {
-					console.error('Error saving flash message:', err);
+                    throw new Error('Error saving flash message:', err);
 				}
 				return res.redirect('/');
 			});
