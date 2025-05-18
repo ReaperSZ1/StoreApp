@@ -6,7 +6,6 @@
 	"scripts": {
 		"start": "concurrently \"npm run tailwind\" \"node src/server.js\"",
 		"tailwind": "npx @tailwindcss/cli -i ./public/tailwind/input.css -o ./public/tailwind/output.css --watch",
-		"build:css": "npx @tailwindcss/cli -i ./public/tailwind/input.css -o ./public/tailwind/output.css --minify",
 		"play": "concurrently \"npm run tailwind\" \"nodemon src/server.js\""
 	},
 	"author": "",
