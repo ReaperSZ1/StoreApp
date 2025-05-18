@@ -72,6 +72,7 @@ jobs:
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           NODE_ENV: development
+          DB_PORT: 3306
           DB_HOST: 127.0.0.1 
           DB_USER: root 
           DB_PASS: ${{ secrets.MYSQL_ROOT_PASSWORD }}
@@ -95,4 +96,19 @@ jobs:
           record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-    
+  deploy:
+    needs: [cypress-run] 
+    runs-on: ubuntu-latest
+
+    env:
+      RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+      SERVICE_ID: ${{ secrets.SERVICE_ID }}
+      
+    steps:
+      - name: Trigger Render deploy
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer $RENDER_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"clearCache":true}' \
+            https://api.render.com/v1/services/$SERVICE_ID/deploys
