@@ -1,4 +1,4 @@
-import User from '../Models/User.js';
+import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
 
@@ -43,48 +43,47 @@ export const signUp = async (req, res) => {
 		res.cookie('authToken', token, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production', // Only send the cookie over secure connections (like HTTPS) in production environments
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
 			maxAge: 3600000 // 1 hour
 		});
 
-		if (req.headers['e2e']) { await user.destroy(); } 
+		if (req.headers['e2e']) {
+			await user.destroy();
+            // wasn't used req.session save for req.flash because it was giving an error in the e2e tests
+            req.flash('successMsg', 'User registered successfully!');
+            return res.redirect('/');
+		}
+        
+		req.session.user = user.id;
+		req.session.isLoggedIn = true;
+        console.log('sessao criada', req.session); 
 
-        req.session.user = user.id;
-        req.session.isLoggedIn = true;
+		if (req.headers['test']) {
+			await user.destroy();
+			return res.status(200).json({
+				success: true,
+				message: 'User created and removed for test'
+			});
+		}
 
-        if (req.headers['test']) {
-            await user.destroy();
-            return res
-                .status(200)
-                .json({
-                    success: true,
-                    message: 'User created and removed for test'
-                });
-        }
-
+        req.flash('successMsg', 'User registered successfully!');
         req.session.save((err) => {
             if (err) {
-                console.error('Error saving session:', err);
-                req.flash('errorMsg', 'Error saving session');
-                return res.redirect('/');
+                throw new Error('Error saving flash message:', err);
             }
-
-            req.flash('successMsg', 'User registered successfully!');
-            req.session.save((err) => {
-                if (err) {
-                    console.error('Error saving flash message:', err);
-                }
-                return res.redirect('/');
-            });
+            return res.redirect('/');
         });
 		
 	} catch (error) {
 		if (!req.headers['test']) {
 			console.error(error);
 			req.flash('errorMsg', error.message || 'Server error');
-            req.session.save((err) => {
-                if (err) { console.error('Error saving flash message:', err); }
-                return res.redirect('/');
-            });
+			req.session.save((err) => {
+				if (err) {
+                    throw new Error('Error saving flash message:', err);
+                }
+				return res.redirect('/');
+			});
 		} else {
 			return res.status(400).json({ error: error.message || 'Server error' });
 		}
@@ -124,43 +123,40 @@ export const login = async (req, res) => {
 		res.cookie('authToken', token, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
 			maxAge: 3600000 // 1 hour
 		});
 
 		req.session.user = user.id;
 		req.session.isLoggedIn = true;
+        console.log('sessao criada', req.session); 
 
 		if (req.headers['test']) {
 			return res
 				.status(200)
 				.json({ success: true, message: 'Logged in successfully!' });
 		}
-        // this ensures the page is only loaded when the session is correctly saved
+		// this ensures the page is only loaded when the session is correctly saved
+        req.flash('successMsg', 'Logged in successfully!');
+        
         req.session.save((err) => {
             if (err) {
-                console.error('Error saving session:', err);
-                req.flash('errorMsg', 'Error saving session');
-                return res.redirect('/');
+                throw new Error('Error saving flash message:', err);
             }
-            
-            req.flash('successMsg', 'Logged in successfully!');
-            req.session.save((err) => {
-                if (err) {
-                    console.error('Error saving flash message:', err);
-                }
-                return res.redirect('/');
-            });
+            return res.redirect('/');
         });
-
+	
 	} catch (error) {
 		if (!req.headers['test']) {
 			console.error(error);
 
-            req.flash('errorMsg', error.message || 'Server error');
-            req.session.save((err) => {
-                if (err) { console.error('Error saving flash message:', err); }
-                return res.redirect('/');
-            });
+			req.flash('errorMsg', error.message || 'Server error');
+			req.session.save((err) => {
+				if (err) {
+                    throw new Error('Error saving flash message:', err);
+				}
+				return res.redirect('/');
+			});
 		} else {
 			return res.status(400).json({ error: error.message || 'Server error' });
 		}

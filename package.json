@@ -6,7 +6,6 @@
 	"scripts": {
 		"start": "concurrently \"npm run tailwind\" \"node src/server.js\"",
 		"tailwind": "npx @tailwindcss/cli -i ./public/tailwind/input.css -o ./public/tailwind/output.css --watch",
-		"build:css": "npx @tailwindcss/cli -i ./public/tailwind/input.css -o ./public/tailwind/output.css --minify",
 		"play": "concurrently \"npm run tailwind\" \"nodemon src/server.js\""
 	},
 	"author": "",
@@ -32,20 +31,21 @@
 		"passport": "^0.7.0",
 		"passport-facebook": "^3.0.0",
 		"passport-google-oauth20": "^2.0.0",
-		"sequelize": "^6.37.7"
+		"sequelize": "^6.37.7",
+        "concurrently": "^9.1.2",
+        "tailwindcss": "^4.0.17",
+		"@tailwindcss/cli": "^4.0.17"
 	},
 	"devDependencies": {
-        "tailwindcss": "^4.0.17",
-        "@parcel/watcher": "^2.5.1",
-		"@tailwindcss/cli": "^4.0.17",
 		"@eslint/js": "^9.21.0",
-		"concurrently": "^9.1.2",
+		"@parcel/watcher": "^2.5.1",
 		"cypress": "^14.3.3",
 		"eslint": "^9.21.0",
 		"eslint-config-prettier": "^10.0.2",
 		"eslint-plugin-prettier": "^5.2.3",
 		"globals": "^16.0.0",
 		"prettier": "^3.5.2",
-		"sucrase": "^3.35.0"
+		"sucrase": "^3.35.0",
+		"wait-on": "^8.0.3"
 	}
 }

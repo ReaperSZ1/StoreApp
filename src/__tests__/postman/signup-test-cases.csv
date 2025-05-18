@@ -1,6 +1,0 @@
-email,password,password2,name,testType
-user1@example.com,senha123,senha123,Usuário Um,success_sign
-user2@example.com,senha123,senha456,joAOoj,password_mismatch
-invalid-email,senha123,senha123,Emuito,invalid_email
-user3@example.com,123,123,Senha Curta,weak_password
-ws4t20177@gmail.com,senha123,senha123,Duplicado,email_exists
