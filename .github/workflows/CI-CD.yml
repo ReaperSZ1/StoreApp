@@ -1,0 +1,114 @@
+name: Cypress Tests 
+
+on:
+  push:
+    branches: [ "main", "new-features", "CI-CD-Cypress" ] 
+  pull_request:
+    branches: [ "main", "new-features", "CI-CD-Cypress" ] 
+  workflow_dispatch: 
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.12.2' 
+        
+      - name: Setup MySQL with mirromutth/mysql-action
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          host port: 3306 # Porta padrão do MySQL no host
+          container port: 3306 # Porta padrão do MySQL no container
+          character set server: 'utf8' # Definindo o charset
+          collation server: 'utf8_general_ci' # Definindo a collation
+          mysql version: '8.0' # Versão do MySQL
+          mysql database: ${{ secrets.DB_NAME }} # Nome do banco de dados
+          mysql root password: ${{ secrets.MYSQL_ROOT_PASSWORD }} # Senha do root
+          mysql user: 'root' # Usuário adicional
+          mysql password: ${{ secrets.MYSQL_ROOT_PASSWORD }} # Senha do usuário adicional
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Cypress dependencies
+        run: npx cypress install
+
+      - name: Wait for MySQL
+        env:
+          MYSQL_PWD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+        run: |
+          echo "Tentando conectar ao MySQL..."
+          for i in {1..10}; do 
+            if mysqladmin ping -h127.0.0.1 -P3306 -uroot --silent; then
+              echo "MySQL está pronto!"
+              exit 0
+            else
+              echo "Esperando pelo MySQL... (tentativa $i/10)"
+              sleep 5
+            fi
+          done
+          echo "O MySQL não ficou pronto a tempo."
+          exit 1   
+
+      - name: Create Database Schema
+        env:
+          MYSQL_PWD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+        run: |
+          mysql -h127.0.0.1 -P3306 -uroot -e "CREATE DATABASE IF NOT EXISTS \`${{ secrets.DB_NAME }}\`;"
+          echo "Importando schema para o banco de dados..."
+          mysql -h127.0.0.1 -P3306 -uroot ${{ secrets.DB_NAME }} < sql/schema.sql
+          echo "Importação do schema completa."
+  
+      - name: Start local server
+        run: npm run start &
+        env:
+          MYSQL_URI: ${{ secrets.MYSQL_URI }} 
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          NODE_ENV: development
+          DB_PORT: 3306
+          DB_HOST: 127.0.0.1 
+          DB_USER: root 
+          DB_PASS: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          FACEBOOK_CLIENT_ID: ${{ secrets.FACEBOOK_CLIENT_ID }}
+          FACEBOOK_CLIENT_SECRET: ${{ secrets.FACEBOOK_CLIENT_SECRET }}
+          FACEBOOK_CALLBACK_LOGIN_URL: ${{ secrets.FACEBOOK_CALLBACK_LOGIN_URL }}
+          FACEBOOK_CALLBACK_SIGNUP_URL: ${{ secrets.FACEBOOK_CALLBACK_SIGNUP_URL }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_CALLBACK_LOGIN_URL: ${{ secrets.GOOGLE_CALLBACK_LOGIN_URL }}
+          GOOGLE_CALLBACK_SIGNUP_URL: ${{ secrets.GOOGLE_CALLBACK_SIGNUP_URL }}
+
+      - name: Wait for server to be ready
+        run: npx wait-on http://localhost:8081 --timeout 60000 
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6 
+        with:
+          browser: chrome
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+  deploy:
+    needs: [cypress-run] 
+    runs-on: ubuntu-latest
+
+    env:
+      RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+      SERVICE_ID: ${{ secrets.SERVICE_ID }}
+      
+    steps:
+      - name: Trigger Render deploy
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer $RENDER_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"clearCache":true}' \
+            https://api.render.com/v1/services/$SERVICE_ID/deploys
