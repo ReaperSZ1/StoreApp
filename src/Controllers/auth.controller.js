@@ -43,6 +43,7 @@ export const signUp = async (req, res) => {
 		res.cookie('authToken', token, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production', // Only send the cookie over secure connections (like HTTPS) in production environments
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
 			maxAge: 3600000 // 1 hour
 		});
 
@@ -122,6 +123,7 @@ export const login = async (req, res) => {
 		res.cookie('authToken', token, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
 			maxAge: 3600000 // 1 hour
 		});
 
@@ -136,14 +138,13 @@ export const login = async (req, res) => {
 		}
 		// this ensures the page is only loaded when the session is correctly saved
         req.flash('successMsg', 'Logged in successfully!');
-        return res.redirect('/');
-
-        // req.session.save((err) => {
-        //     if (err) {
-        //         throw new Error('Error saving flash message:', err);
-        //     }
-        //     return res.redirect('/');
-        // });
+        
+        req.session.save((err) => {
+            if (err) {
+                throw new Error('Error saving flash message:', err);
+            }
+            return res.redirect('/');
+        });
 	
 	} catch (error) {
 		if (!req.headers['test']) {
