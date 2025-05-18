@@ -52,9 +52,10 @@ export const signUp = async (req, res) => {
             req.flash('successMsg', 'User registered successfully!');
             return res.redirect('/');
 		}
-
+        
 		req.session.user = user.id;
 		req.session.isLoggedIn = true;
+        console.log('sessao criada', req.session);
 
 		if (req.headers['test']) {
 			await user.destroy();
@@ -64,21 +65,14 @@ export const signUp = async (req, res) => {
 			});
 		}
 
-		req.session.save((err) => {
-			if (err) {
-				console.error('Error saving session:', err);
-				req.flash('errorMsg', 'Error saving session');
-				return res.redirect('/');
-			}
-
-			req.flash('successMsg', 'User registered successfully!');
-			req.session.save((err) => {
-				if (err) {
-					console.error('Error saving flash message:', err);
-				}
-				return res.redirect('/');
-			});
-		});
+        req.flash('successMsg', 'User registered successfully!');
+        req.session.save((err) => {
+            if (err) {
+                console.error('Error saving flash message:', err);
+            }
+            return res.redirect('/');
+        });
+		
 	} catch (error) {
 		if (!req.headers['test']) {
 			console.error(error);
@@ -140,21 +134,14 @@ export const login = async (req, res) => {
 				.json({ success: true, message: 'Logged in successfully!' });
 		}
 		// this ensures the page is only loaded when the session is correctly saved
-		req.session.save((err) => {
-			if (err) {
-				console.error('Error saving session:', err);
-				req.flash('errorMsg', 'Error saving session');
-				return res.redirect('/');
-			}
-
-			req.flash('successMsg', 'Logged in successfully!');
-			req.session.save((err) => {
-				if (err) {
-					console.error('Error saving flash message:', err);
-				}
-				return res.redirect('/');
-			});
-		});
+        req.flash('successMsg', 'Logged in successfully!');
+        req.session.save((err) => {
+            if (err) {
+                console.error('Error saving flash message:', err);
+            }
+            return res.redirect('/');
+        });
+	
 	} catch (error) {
 		if (!req.headers['test']) {
 			console.error(error);
