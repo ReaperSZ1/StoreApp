@@ -31,14 +31,14 @@ You can access the application hosted on Render at the following link: [https://
 
 ## ⚙️ Installation
 
-## 🐳 Method 1: Installation via Docker
+### 🐳 Method 1: Installation via Docker
 1)  **Install Docker and Docker Compose:**
    - Ensure you have Docker and Docker Compose installed on your system. You can find installation instructions for your operating system on the official Docker website.
 
 2)  **Pull Comand**
    - `docker pull reapersz/storeapp`
 
-# 💾 Method 2: Installation via Git and npm (Manual Setup)
+### 💾 Method 2: Installation via Git and npm (Manual Setup)
 1) Clone the repository:
    - `git clone [REPOSITORY_URL]`
 2) Navigate to the project directory:
