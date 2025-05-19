@@ -2,9 +2,9 @@ name: Cypress Tests
 
 on:
   push:
-    branches: [ "main", "new-features", "CI-CD-Cypress" ] 
+    branches: [ "main", "new-features" ] 
   pull_request:
-    branches: [ "main", "new-features", "CI-CD-Cypress" ] 
+    branches: [ "main", "new-features" ] 
   workflow_dispatch: 
 
 jobs:
