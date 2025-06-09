@@ -4,6 +4,14 @@ The **StoreApp** is a small personal project based on an e-commerce, designed to
 ## 🌐 Access Application
 You can access the application hosted on Render at the following link: [https://storeapp-klm0.onrender.com](https://storeapp-klm0.onrender.com)
 
+## 😀 Features
+##### What the user can do:
+
+- Save their favorite products
+- Add products to the shopping cart
+- Create an account and log in to an existing on
+- View products from the catalog
+
 ## 🛠️ Technologies and Tools
 - 💻**Back-end**: Node.js, Express
 - 🎨**Front-end**: Tailwind
